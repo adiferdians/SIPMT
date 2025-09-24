@@ -1,0 +1,9 @@
+.table-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.judul {
+    display: grid;
+    align-items: end;
+}

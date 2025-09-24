@@ -12,7 +12,11 @@ class AnggotaController extends Controller
      */
     public function index()
     {
-        return view('content.anggota.anggota');
+        $anggota = Anggota::orderByDesc('id')->paginate(10);
+
+        return view('content.anggota.anggota', [
+            'anggota' => $anggota
+        ]);
     }
 
     /**
