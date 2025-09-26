@@ -22,9 +22,9 @@ class AnggotaController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createAnggota()
     {
-        //
+        return view("content.anggota.createAnggota");
     }
 
     /**
@@ -32,7 +32,28 @@ class AnggotaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'nama'   => 'required',
+            'nip'   => 'required',
+            'telepon'   => 'required',
+            'status'   => 'required',
+            'status'   => 'required',
+            'role'   => 'required',
+            'pangkat_golongan'   => 'required',
+            'jk'   => 'required',
+            'jabatan'   => 'required',
+            'email'   => 'required',            
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => [
+                    'message' => 'Validation Vailed!!',
+                    'details' => $validate->errors()->all()
+                ]
+            ], 422);
+        }
     }
 
     /**

@@ -17,7 +17,7 @@ class AnggotaFactory extends Factory
     public function definition(): array
     {
         return [
-            'name' => $this->faker->name(),
+            'nama' => $this->faker->name(),
             'nip' => $this->faker->text(8),
             'telpon' => $this->faker->randomNumber(7, true),
             'status' => $this->faker->text(5),
