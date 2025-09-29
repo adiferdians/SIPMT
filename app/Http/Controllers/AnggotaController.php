@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class AnggotaController extends Controller
 {
@@ -37,13 +40,14 @@ class AnggotaController extends Controller
             'nip'   => 'required',
             'telepon'   => 'required',
             'status'   => 'required',
-            'status'   => 'required',
             'role'   => 'required',
-            'pangkat_golongan'   => 'required',
-            'jk'   => 'required',
+            'pangkat'   => 'required',
+            // 'jk'   => 'required',
             'jabatan'   => 'required',
-            'email'   => 'required',            
+            'email'   => 'required',
         ]);
+
+        // dd($request->all());
 
         if ($validate->fails()) {
             return response()->json([
@@ -53,6 +57,32 @@ class AnggotaController extends Controller
                     'details' => $validate->errors()->all()
                 ]
             ], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $data = [
+                'nama' => $request->nama,
+                'nip' => $request->nip,
+                'telepon' => $request->telepon,
+                'status' => $request->status,
+                'role' => $request->role,
+                'pangkat_golongan' => $request->pangkat,
+                'jk' => "Laki-Laki",
+                'email' => $request->email,
+                'jabatan' => $request->jabatan,
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            $request->id ? Anggota::where('id', $request->id)->update($data) : Anggota::insert($data);
+            DB::commit();
+
+            return response()->json(['success' => true, 'message' => 'Data berhasil diinputkan', 'data' => $data], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['success' => false, 'messages' => $e->getMessage()], 400);
         }
     }
 

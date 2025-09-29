@@ -30,16 +30,22 @@
                                      <th>NIP</th>
                                      <th>Telepon</th>
                                      <th>Status</th>
+                                     <th style="display: flex; justify-content: center;">Action</th>
                                  </tr>
                              </thead>
                              <tbody>
                                  @foreach($anggota as $item)
                                  <tr>
-                                     <td>{{ $item->id }}</td>
-                                     <td class="font-weight-bold">{{$item->name}}</td>
-                                     <td>{{$item->telpon}}</td>
+                                     <td class="font-weight-bold">{{$item->nama}}</td>
+                                     <td class="font-weight-bold">{{$item->nip}}</td>
+                                     <td>{{$item->telepon}}</td>
                                      <td class="font-weight-medium">
                                          <div class="badge badge-success">{{$item->status}}</div>
+                                     </td>
+                                     <td style="display: flex; justify-content: center;">
+                                         <button type="button" class="btn btn-outline-info"><i class="mdi mdi-pencil"></i></button>
+                                         <button type="button" class="btn btn-outline-secondary"><i class="mdi mdi-book-open-variant"></i></button>
+                                         <button type="button" class="btn btn-outline-danger"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
                                  </tr>
                                  @endforeach
@@ -55,7 +61,7 @@
 
  <script>
      $('#addAnggota').click(function() {
-        console.log("sapoi");
+         console.log("sapoi");
          axios.get('/createAnggota')
              .then(function(response) {
                  $('.modal-title').html("Tambahkan Anggota");

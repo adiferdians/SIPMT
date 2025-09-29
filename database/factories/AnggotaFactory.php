@@ -18,11 +18,11 @@ class AnggotaFactory extends Factory
     {
         return [
             'nama' => $this->faker->name(),
-            'nip' => $this->faker->text(8),
-            'telpon' => $this->faker->randomNumber(7, true),
-            'status' => $this->faker->text(5),
-            'role' => $this->faker->text(5),
-            'jk' => $this->faker->text(5),
+            'nip' => $this->faker->unique()->numerify('##################'), // Menghasilkan 18 digit angka unik untuk NIP
+            'telepon' => $this->faker->phoneNumber(), // Menghasilkan format nomor telepon yang lebih realistis
+            'status' => $this->faker->text(5), // Tidak perlu diubah jika sudah sesuai
+            'role' => $this->faker->randomElement(['admin', 'user', 'moderator']), // Memilih dari daftar peran (role) yang sudah ditentukan
+            'jk' => $this->faker->randomElement(['Laki-laki', 'Perempuan']),
             'pangkat_golongan' => $this->faker->text(5),
             'jabatan' => $this->faker->text(5),
             'email' => $this->faker->unique()->safeEmail(),

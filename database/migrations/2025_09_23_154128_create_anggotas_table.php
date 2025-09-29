@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('nip');
-            $table->string('telpon');
+            $table->string('telepon');
             $table->string('status');
-            $table->string('role')->default('pns');
+            $table->string('role');
             $table->string('jk');
             $table->string('pangkat_golongan');
             $table->string('jabatan');

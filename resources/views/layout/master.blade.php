@@ -15,7 +15,8 @@
     <!-- Plugin css for this page -->
     <link rel="stylesheet" type="text/css" href="assets/js/select.dataTables.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>    
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <!-- End plugin css for this page -->
     <!-- inject:css -->
     <link rel="stylesheet" href="assets/css/style.css">

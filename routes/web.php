@@ -20,4 +20,4 @@ use App\Http\Controllers\AnggotaController;
     Route::get('/risalah', [RisalahController::class, 'index']);
     Route::get('/anggota', [AnggotaController::class, 'index']);
     Route::get('/createAnggota', [AnggotaController::class, 'createAnggota']);
-    Route::get('/storeAnggota', [AnggotaController::class, 'storeAnggota']);
+    Route::post('/storeAnggota', [AnggotaController::class, 'store']);

@@ -3,44 +3,67 @@
                           <div class="card">
                               <div class="card-body">
                                   <div class="form-group">
-                                      <label for="exampleInputUsername1">Username</label>
-                                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                                      <label for="nama">Nama</label>
+                                      <input type="text" class="form-control" id="nama" placeholder="Nama" value="Adi Ferdian">
                                   </div>
                                   <div class="form-group">
-                                      <label for="exampleInputEmail1">Email address</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                      <label for="nip">NIP</label>
+                                      <input type="email" class="form-control" id="nip" placeholder="NIP" value="199608022025061004">
                                   </div>
                                   <div class="form-group">
-                                      <label for="exampleInputPassword1">Password</label>
-                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                      <label for="Telepon">Telepon</label>
+                                      <input type="text" class="form-control" id="telepon" placeholder="Telepon" value="085943290055">
                                   </div>
                                   <div class="form-group">
-                                      <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                                      <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
+                                      <label for="email">Email</label>
+                                      <input type="email" class="form-control" id="email" placeholder="Email" value="adiferdian7@gmail.com">
                                   </div>
+
                               </div>
                           </div>
                           <div class="card">
                               <div class="card-body">
                                   <div class="form-group">
-                                      <label for="exampleInputUsername1">Username</label>
-                                      <input type="text" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                                      <label for="Pangkat">Pangkat</label>
+                                      <input type="text" class="form-control" id="pangkat" placeholder="Pangkat" value="III/a">
                                   </div>
                                   <div class="form-group">
-                                      <label for="exampleInputEmail1">Email address</label>
-                                      <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Email">
+                                      <label for="jabatan">Jabatan</label>
+                                      <input type="text" class="form-control" id="jabatan" placeholder="Jabatan" value="Penata Muda">
                                   </div>
-                                  <div class="form-group">
-                                      <label for="exampleInputPassword1">Password</label>
-                                      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                                  <div class="form-group" style="display: flex;">
+                                      <div class="col-md-6 grid-margin separasi">
+                                          <label for="status">Status</label>
+                                          <select class="form-select" id="status">
+                                              <option value="aktif">Aktif</option>
+                                              <option value="inactive">Tidak Aktif</option>
+                                          </select>
+                                      </div>
+                                      <div class="col-md-6 grid-margin separasi">
+                                          <label for="role">Role</label>
+                                          <select class="form-select" id="role">
+                                              <option value="admin">Admin</option>
+                                              <option value="anggota">Anggota</option>
+                                          </select>
+                                      </div>
                                   </div>
-                                  <div class="form-group">
-                                      <label for="exampleInputConfirmPassword1">Confirm Password</label>
-                                      <input type="password" class="form-control" id="exampleInputConfirmPassword1" placeholder="Password">
+                                  <div style="display: flex;">
+                                      <div class="form-group col-md-6 grid-margin separasi">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="laki" checked>
+                                          <label class="form-check-label" for="laki">
+                                              Laki-Laki
+                                          </label>
+                                      </div>
+                                      <div class="form-group col-md-6 grid-margin separasi">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="perempuan">
+                                          <label class="form-check-label" for="perempuan">
+                                              Perempuan
+                                          </label>
+                                      </div>
                                   </div>
                               </div>
                           </div>
-                      </div>    
+                      </div>
                       <div class="btn-modal">
                           <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
                           <button class="btn btn-warning">Cancel</button>
@@ -51,33 +74,29 @@
                       $('#store').click(function() {
                           console.log("sapi");
 
-                          const companyName = $('#compName').val();
-                          const address = $('#address').val();
-                          const pic = $('#pic').val();
-                          const picContact = $('#picContact').val();
-                          const contact = $('#contact').val();
-                          const service = $('#service').val();
+                          const nama = $('#nama').val();
+                          const nip = $('#nip').val();
+                          const telepon = $('#telepon').val();
+                          const status = $('#status').val();
+                          const role = $('#role').val();
+                          const jk = $('#jk').val();
 
-                          const projName = $('#projName').val();
-                          const startDate = $('#startDate').val();
-                          const certStandard = $('#certStandard').val();
-                          const certBody = $('#certBody').val();
-                          const certPrice = $('#certPrice').val();
-                          const certStandard_2 = $('#certStandard_2').val();
-                          const certBody_2 = $('#certBody_2').val();
-                          const certPrice_2 = $('#certPrice_2').val();
-                          const certStandard_3 = $('#certStandard_3').val();
-                          const certBody_3 = $('#certBody_3').val();
-                          const certPrice_3 = $('#certPrice_3').val();
-                          const certStandard_4 = $('#certStandard_4').val();
+                          const pangkat = $('#pangkat').val();
+                          const jabatan = $('#jabatan').val();
+                          const email = $('#email').val();
 
-                          axios.post('/client/send', {
-                              companyName,
-                              address,
-                              pic,
-                              picContact,
-                              contact,
-                              service,
+                          console.log(nama, nip, telepon, status, jk);
+                          
+                          axios.post('/storeAnggota', {
+                              nama,
+                              nip,
+                              telepon,
+                              email,
+                              status,
+                              role,
+                              jk, 
+                              jabatan,
+                              pangkat
                           }).then((response) => {
                               Swal.fire({
                                   title: 'Success...',
