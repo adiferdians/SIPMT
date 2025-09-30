@@ -1,0 +1,23 @@
+.table-title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.judul {
+    display: grid;
+    align-items: end;
+}
+
+.btn-modal {
+    display: flex;
+    justify-content: center;
+}
+
+.separasi{
+    padding-right: 10px;
+}
+
+.title-card {
+    background-color: darkgrey;
+    color: white;
+}

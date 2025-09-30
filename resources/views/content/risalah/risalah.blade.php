@@ -6,8 +6,13 @@
      <div class="row">
          <div class="col-md-12 grid-margin stretch-card">
              <div class="card">
-                 <div class="card-body">
-                     <h3 class="font-weight-bold">Perisalah</h3>
+                 <div class="card-body table-title">
+                    <div class="judul">
+                        <h3 class="font-weight-bold">Risalah</h3>
+                    </div>
+                    <div>
+                        <button type="button" class="btn btn-primary">+</button>
+                    </div>
                  </div>
              </div>
          </div>

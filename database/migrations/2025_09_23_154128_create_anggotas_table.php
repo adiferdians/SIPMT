@@ -13,6 +13,17 @@ return new class extends Migration
     {
         Schema::create('anggotas', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('nip');
+            $table->string('telepon');
+            $table->string('status');
+            $table->string('role');
+            $table->string('jk');
+            $table->string('pangkat_golongan');
+            $table->string('jabatan');
+            $table->string('email')->unique();
+            $table->string('password');
+            $table->rememberToken();
             $table->timestamps();
         });
     }

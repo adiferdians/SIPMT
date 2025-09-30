@@ -1,13 +1,19 @@
  @extends('layout.master')
- @section('content')
  @section('Anggota', 'active')
  @section('title', 'Anggota Risalah')
+ @section('content')
+
  <div class="content-wrapper">
-          <div class="row">
+     <div class="row">
          <div class="col-md-12 grid-margin stretch-card">
-             <div class="card">
-                 <div class="card-body">
-                     <h3 class="font-weight-bold">Data Anggota</h3>
+             <div class="card title-card">
+                 <div class="card-body table-title">
+                     <div class="judul">
+                         <h3 class="font-weight-bold">Data Anggota</h3>
+                     </div>
+                     <div>
+                         <button type="button" id="addAnggota" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
+                     </div>
                  </div>
              </div>
          </div>
@@ -20,76 +26,120 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
-                                     <th>Product</th>
-                                     <th>Price</th>
-                                     <th>Date</th>
+                                     <th>Nama</th>
+                                     <th>NIP</th>
+                                     <th>Telepon</th>
                                      <th>Status</th>
+                                     <th style="display: flex; justify-content: center;">Action</th>
                                  </tr>
                              </thead>
                              <tbody>
+                                 @foreach($anggota as $item)
                                  <tr>
-                                     <td>Search Engine Marketing</td>
-                                     <td class="font-weight-bold">$362</td>
-                                     <td>21 Sep 2018</td>
+                                     <td class="font-weight-bold">{{$item->nama}}</td>
+                                     <td class="font-weight-bold">{{$item->nip}}</td>
+                                     <td>{{$item->telepon}}</td>
                                      <td class="font-weight-medium">
-                                         <div class="badge badge-success">Completed</div>
+                                         <div class="badge badge-success">{{$item->status}}</div>
+                                     </td>
+                                     <td style="display: flex; justify-content: center;">
+                                         <button type="button" class="btn btn-outline-info" onclick="editAnggota({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
+                                         <button type="button" class="btn btn-outline-secondary" onclick="viewAnggota({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
+                                         <button type="button" class="btn btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
                                  </tr>
-                                 <tr>
-                                     <td>Search Engine Optimization</td>
-                                     <td class="font-weight-bold">$116</td>
-                                     <td>13 Jun 2018</td>
-                                     <td class="font-weight-medium">
-                                         <div class="badge badge-success">Completed</div>
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                     <td>Display Advertising</td>
-                                     <td class="font-weight-bold">$551</td>
-                                     <td>28 Sep 2018</td>
-                                     <td class="font-weight-medium">
-                                         <div class="badge badge-warning">Pending</div>
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                     <td>Pay Per Click Advertising</td>
-                                     <td class="font-weight-bold">$523</td>
-                                     <td>30 Jun 2018</td>
-                                     <td class="font-weight-medium">
-                                         <div class="badge badge-warning">Pending</div>
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                     <td>E-Mail Marketing</td>
-                                     <td class="font-weight-bold">$781</td>
-                                     <td>01 Nov 2018</td>
-                                     <td class="font-weight-medium">
-                                         <div class="badge badge-danger">Cancelled</div>
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                     <td>Referral Marketing</td>
-                                     <td class="font-weight-bold">$283</td>
-                                     <td>20 Mar 2018</td>
-                                     <td class="font-weight-medium">
-                                         <div class="badge badge-warning">Pending</div>
-                                     </td>
-                                 </tr>
-                                 <tr>
-                                     <td>Social media marketing</td>
-                                     <td class="font-weight-bold">$897</td>
-                                     <td>26 Oct 2018</td>
-                                     <td class="font-weight-medium">
-                                         <div class="badge badge-success">Completed</div>
-                                     </td>
-                                 </tr>
+                                 @endforeach
                              </tbody>
                          </table>
+                         {{ $anggota->links() }}
                      </div>
                  </div>
              </div>
          </div>
      </div>
  </div>
+
+ <script>
+     $('#addAnggota').click(function() {
+         console.log("sapoi");
+         axios.get('/createAnggota')
+             .then(function(response) {
+                 $('.modal-title').html("Tambahkan Anggota");
+                 $(".modal-dialog");
+                 $('.modal-body').html(response.data);
+                 $('#myModal').modal('show');
+             })
+             .catch(function(error) {
+                 console.log(error);
+             });
+     })
+
+     function viewAnggota(id) {
+         axios.get('/viewAnggota/' + id)
+             .then(function(response) {
+                 $('.modal-title').html("Data Anggota");
+                 $(".modal-dialog");
+                 $('.modal-body').html(response.data);
+                 $('#myModal').modal('show');
+             })
+             .catch(function(error) {
+                 console.log(error);
+             });
+     }
+
+     function editAnggota(id) {
+         axios.get('/editAnggota/' + id)
+             .then(function(response) {
+                 $('.modal-title').html("Data Anggota");
+                 $(".modal-dialog");
+                 $('.modal-body').html(response.data);
+                 $('#myModal').modal('show');
+             })
+             .catch(function(error) {
+                 console.log(error);
+             });
+     }
+
+     function deleteAnggota(id) {
+         Swal.fire({
+             title: 'Are you sure?',
+             text: "The deleted data cannot be recovered!",
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonText: 'Delete',
+             cancelButtonText: 'Cancle',
+             reverseButtons: true
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 axios.post('deleteAnggota/' + id)
+                     .then(() => {
+                         Swal.fire({
+                             title: 'Success',
+                             position: 'top-end',
+                             icon: 'success',
+                             text: 'Data deleted successfuly!',
+                             showConfirmButton: false,
+                             width: '400px',
+                             timer: 3000
+                         });
+                         setTimeout(() => {
+                             location.reload();
+                         }, 1600);
+                     })
+                     .catch((err) => {
+                         Swal.fire({
+                             title: 'Error',
+                             position: 'top-end',
+                             icon: 'error',
+                             text: err,
+                             showConfirmButton: false,
+                             width: '400px',
+                             timer: 3000
+                         });
+                     });
+             }
+         });
+     }
+ </script>
 
  @endsection
