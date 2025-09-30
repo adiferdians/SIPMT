@@ -49,13 +49,13 @@
                                   </div>
                                   <div style="display: flex;">
                                       <div class="form-group col-md-6 grid-margin separasi">
-                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="laki" checked>
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="laki" value="L">
                                           <label class="form-check-label" for="laki">
                                               Laki-Laki
                                           </label>
                                       </div>
                                       <div class="form-group col-md-6 grid-margin separasi">
-                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="perempuan">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="perempuan" value="P">
                                           <label class="form-check-label" for="perempuan">
                                               Perempuan
                                           </label>
@@ -71,22 +71,18 @@
                   </div>
 
                   <script>
-                      $('#store').click(function() {
-                          console.log("sapi");
 
+                      $('#store').click(function() {
                           const nama = $('#nama').val();
                           const nip = $('#nip').val();
                           const telepon = $('#telepon').val();
                           const status = $('#status').val();
                           const role = $('#role').val();
-                          const jk = $('#jk').val();
-
+                          const jk = $('input[name="flexRadioDefault"]:checked').val();
                           const pangkat = $('#pangkat').val();
                           const jabatan = $('#jabatan').val();
                           const email = $('#email').val();
 
-                          console.log(nama, nip, telepon, status, jk);
-                          
                           axios.post('/storeAnggota', {
                               nama,
                               nip,
@@ -110,11 +106,13 @@
                                   location.reload();
                               })
                           }).catch((err) => {
+                            console.log(err);
+                            
                               Swal.fire({
                                   title: 'Error',
                                   position: 'top-end',
                                   icon: 'error',
-                                  text: err.response.data.error.details,
+                                  text: err.response.data.messages,
                                   showConfirmButton: false,
                                   width: '400px',
                                   timer: 3000

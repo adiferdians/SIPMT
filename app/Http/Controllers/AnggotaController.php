@@ -42,12 +42,10 @@ class AnggotaController extends Controller
             'status'   => 'required',
             'role'   => 'required',
             'pangkat'   => 'required',
-            // 'jk'   => 'required',
+            'jk'   => 'required',
             'jabatan'   => 'required',
             'email'   => 'required',
         ]);
-
-        // dd($request->all());
 
         if ($validate->fails()) {
             return response()->json([
@@ -58,7 +56,7 @@ class AnggotaController extends Controller
                 ]
             ], 422);
         }
-
+// dd($request->all());
         DB::beginTransaction();
         try {
             $data = [
@@ -68,7 +66,7 @@ class AnggotaController extends Controller
                 'status' => $request->status,
                 'role' => $request->role,
                 'pangkat_golongan' => $request->pangkat,
-                'jk' => "Laki-Laki",
+                'jk' => $request->jk,
                 'email' => $request->email,
                 'jabatan' => $request->jabatan,
                 'created_at' => Carbon::now()->toDateTimeString(),
@@ -107,14 +105,6 @@ class AnggotaController extends Controller
         return view('content.anggota.updateAnggota', [
             'anggota' => $anggota
         ]);
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Anggota $anggota)
-    {
-        //
     }
 
     /**

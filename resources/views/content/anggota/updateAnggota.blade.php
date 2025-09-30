@@ -2,6 +2,7 @@
                       <div class="col-md-6 grid-margin stretch-card">
                           <div class="card">
                               <div class="card-body">
+                                  <input type="text" id="idAnggota" value="{{$anggota[0]->id}}" hidden>
                                   <div class="form-group">
                                       <label for="nama">Nama</label>
                                       <input type="text" class="form-control" id="nama" placeholder="Nama" value="{{$anggota[0]->nama}}">
@@ -34,27 +35,27 @@
                                       <div class="col-md-6 grid-margin separasi">
                                           <label for="status">Status</label>
                                           <select class="form-select" id="status">
-                                              <option value="aktif">Aktif</option>
-                                              <option value="inactive">Tidak Aktif</option>
+                                              <option value="aktif" {{$anggota[0]->status=="aktif" ? "selected" : ""}}>Aktif</option>
+                                              <option value="inactive" {{$anggota[0]->status=="inactive" ? "selected" : ""}}>Tidak Aktif</option>
                                           </select>
                                       </div>
                                       <div class="col-md-6 grid-margin separasi">
                                           <label for="role">Role</label>
                                           <select class="form-select" id="role">
-                                              <option value="admin">Admin</option>
-                                              <option value="anggota">Anggota</option>
+                                              <option value="admin" {{$anggota[0]->role=="admin" ? "selected" : ""}}>Admin</option>
+                                              <option value="anggota" {{$anggota[0]->role=="anggota" ? "selected" : ""}}>Anggota</option>
                                           </select>
                                       </div>
                                   </div>
                                   <div style="display: flex;">
                                       <div class="form-group col-md-6 grid-margin separasi">
-                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="laki" checked>
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="laki" value="L" {{$anggota[0]->jk=="L" ? "checked" : ""}}>
                                           <label class="form-check-label" for="laki">
                                               Laki-Laki
                                           </label>
                                       </div>
                                       <div class="form-group col-md-6 grid-margin separasi">
-                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="perempuan">
+                                          <input class="form-check-input" type="radio" name="flexRadioDefault" id="perempuan" value="P" {{$anggota[0]->jk=="P" ? "checked" : ""}}>
                                           <label class="form-check-label" for="perempuan">
                                               Perempuan
                                           </label>
@@ -71,29 +72,26 @@
 
                   <script>
                       $('#store').click(function() {
-                          console.log("sapi");
-
+                          const id = $('#idAnggota').val();
                           const nama = $('#nama').val();
                           const nip = $('#nip').val();
                           const telepon = $('#telepon').val();
                           const status = $('#status').val();
                           const role = $('#role').val();
-                          const jk = $('#jk').val();
-
+                          const jk = $('input[name="flexRadioDefault"]:checked').val();
                           const pangkat = $('#pangkat').val();
                           const jabatan = $('#jabatan').val();
                           const email = $('#email').val();
 
-                          console.log(nama, nip, telepon, status, jk);
-                          
-                          axios.post('/storeAnggota', {
+                          axios.post('/storeAnggota/' + id, {
+                              id,
                               nama,
                               nip,
                               telepon,
                               email,
                               status,
                               role,
-                              jk, 
+                              jk,
                               jabatan,
                               pangkat
                           }).then((response) => {
