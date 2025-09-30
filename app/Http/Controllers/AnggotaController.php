@@ -89,17 +89,24 @@ class AnggotaController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Anggota $anggota)
+    public function showAnggota($id)
     {
-        //
+        $anggota = Anggota::where('id', $id)->get();
+        // dd($anggota);
+        return view('content.anggota.viewAnggota', [
+            'anggota' => $anggota
+        ]);
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Anggota $anggota)
+    public function editAnggota($id)
     {
-        //
+        $anggota = Anggota::where('id', $id)->get();
+        return view('content.anggota.updateAnggota', [
+            'anggota' => $anggota
+        ]);
     }
 
     /**
@@ -113,8 +120,9 @@ class AnggotaController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Anggota $anggota)
+    public function destroyAnggota($id)
     {
-        //
+        $data = new Anggota();
+        $data->where('id', $id)->delete();
     }
 }
