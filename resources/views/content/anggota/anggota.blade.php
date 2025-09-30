@@ -61,7 +61,6 @@
 
  <script>
      $('#addAnggota').click(function() {
-         console.log("sapoi");
          axios.get('/createAnggota')
              .then(function(response) {
                  $('.modal-title').html("Tambahkan Anggota");

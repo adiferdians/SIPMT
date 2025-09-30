@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Risalah;
 use Illuminate\Http\Request;
-
+use Carbon\Carbon;
 class RisalahController extends Controller
 {
     /**
@@ -12,7 +12,11 @@ class RisalahController extends Controller
      */
     public function index()
     {
-        return view('content.risalah.risalah');
+        Carbon::setLocale('id');
+        $risalah = Risalah::orderByDesc('id')->paginate(10);
+        return view('content.risalah.risalah', [
+            'risalah' => $risalah
+        ]);
     }
 
     /**
@@ -34,9 +38,12 @@ class RisalahController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Risalah $risalah)
+    public function showRisalah($id)
     {
-        //
+        $risalah = Risalah::where('id', $id)->get();
+        return view('content.risalah.viewRisalah', [
+            'risalah' => $risalah
+        ]);
     }
 
     /**
@@ -58,8 +65,9 @@ class RisalahController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Risalah $risalah)
+    public function destroyRisalah($id)
     {
-        //
+        $data = new Risalah();
+        $data->where('id', $id)->delete();
     }
 }

@@ -90,7 +90,6 @@ class AnggotaController extends Controller
     public function showAnggota($id)
     {
         $anggota = Anggota::where('id', $id)->get();
-        // dd($anggota);
         return view('content.anggota.viewAnggota', [
             'anggota' => $anggota
         ]);
