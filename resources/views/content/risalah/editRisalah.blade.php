@@ -4,19 +4,19 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="unit_kerja">Unit Kerja</label>
-                    <input type="text" class="form-control" id="unit_kerja" placeholder="Unit Kerja">
+                    <input type="text" class="form-control" id="unit_kerja" placeholder="Unit Kerja" value="{{$risalah[0]->unit_kerja}}">
                 </div>
                 <div class="form-group split">
                     <div class="col-md-6 grid-margin separasi">
                         <div class="form-group">
                             <label for="tgl">Tanggal</label>
-                            <input type="date" class="form-control" id="tgl">
+                            <input type="date" class="form-control" id="tgl" value="{{$risalah[0]->tgl}}">
                         </div>
                     </div>
                     <div class="col-md-6 grid-margin separasi">
                         <div class="form-group">
                             <label for="jam">Jam</label>
-                            <input type="time" class="form-control" id="jam">
+                            <input type="time" class="form-control" id="jam" value="{{$risalah[0]->jam}}">
                         </div>
                     </div>
                 </div>

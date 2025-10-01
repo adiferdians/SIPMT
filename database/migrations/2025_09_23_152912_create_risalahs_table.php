@@ -18,14 +18,13 @@ return new class extends Migration
             $table->string('jam');
             $table->string('tempat');
             $table->string('perekam_1');
-            $table->string('perekam_2');
-            $table->string('transkrip');
-            $table->string('editor');
+            $table->string('perekam_2')->nullable();
+            $table->string('transkrip')->nullable();
+            $table->string('editor')->nullable();
             $table->string('rapat');
-            $table->string('agenda');
-            $table->text('keterangan');
-            $table->text('status');
-            $table->text('masa_sidang');
+            $table->text('agenda');
+            $table->string('status')->default('Belum Terlaksana')->nullable();
+            $table->string('masa_sidang');
             $table->timestamps();
         });
     }

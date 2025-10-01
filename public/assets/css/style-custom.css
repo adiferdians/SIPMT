@@ -34,3 +34,21 @@
 .center {
     text-align: center;
 }
+
+.dropdown-text{
+    color: white; 
+    padding: 12px;
+    font-weight: bold;
+}
+
+.dropdown-text:hover{
+    color: black; 
+}
+
+.table-text{
+    font-weight: 500;
+}
+
+.th-text{
+    font-weight: bold;
+}

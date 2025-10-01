@@ -25,32 +25,41 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
-                                     <th>Tanggal</th>
-                                     <th>Jam</th>
-                                     <th>Perekam</th>
-                                     <th>Rapat</th>
-                                     <th class="center">Status</th>
-                                     <th class="center">Aksi</th>
+                                     <th>
+                                         <h4 class="th-text">TANGGAL</h4>
+                                     </th>
+                                     <th>
+                                         <h4 class="th-text">JAM</h4>
+                                     </th>
+                                     <th>
+                                         <h4 class="th-text">PEREKAM</h4>
+                                     </th>
+                                     <th>
+                                         <h4 class="th-text">RAPAT</h4>
+                                     </th>
+                                     <th class="center">
+                                         <h4 class="th-text">STATUS</h4>
+                                     </th>
                                  </tr>
                              </thead>
                              <tbody>
                                  @foreach($risalah as $item)
                                  <tr>
-                                     <td>{{ \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName }},
+                                     <td class="table-text">{{ \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName }},
                                          {{ \Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM') }}
                                      </td>
-                                     <td class="font-weight-bold">{{$item->jam}}</td>
-                                     <td class="font-weight-bold">{{$item->perekam_1}}</td>
-                                     <td class="font-weight-bold">{{$item->rapat}}</td>
-                                     <td class="font-weight-bold center">
+                                     <td class="table-text">{{$item->jam}}</td>
+                                     <td class="table-text">{{$item->perekam_1}}</td>
+                                     <td class="table-text">{{$item->rapat}}</td>
+                                     <td class="center table-text">
                                          <button type="button" class="btn 
                                          {{$item->status == 'Risalah OK' ? 'btn-success' : 
                                             ($item->status == 'Pengeditan' ? 'btn-info' : 
                                             ($item->status == 'Transkripsi' ? 'btn-warning' : 
                                             ($item->status == 'Perekaman' ? 'btn-primary' : 
                                             'btn-secondary')))
-                                            }} dropdown-toggle"
-                                             type="button" style="color: white; padding: 12px;" data-bs-toggle="dropdown" aria-expanded="false">{{$item->status}}
+                                            }} dropdown-toggle dropdown-text"
+                                             type="button" data-bs-toggle="dropdown" aria-expanded="false">{{$item->status}}
                                          </button>
                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuSplitButton1">
                                              <a class="dropdown-item center" href="#">Belum Terlaksana</a>
@@ -68,7 +77,7 @@
                                          <button type="button" class="btn btn-outline-info"
                                              onclick="editRisalah({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
                                          <button type="button" class="btn btn-outline-secondary"
-                                             onclick="viewRislah({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
+                                             onclick="viewRisalah({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
                                          <button type="button" class="btn btn-outline-danger"
                                              onclick="deleteRisalah({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
@@ -99,7 +108,7 @@
              });
      })
 
-     function viewRislah(id) {
+     function viewRisalah(id) {
          axios.get('/viewRisalah/' + id)
              .then(function(response) {
                  $('.modal-title').html("Data Risalah");
@@ -110,6 +119,69 @@
              .catch(function(error) {
                  console.log(error);
              });
+     }
+
+     function editRisalah(id) {
+         axios.get('/editRisalah/' + id)
+             .then(function(response) {
+                 $('.modal-title').html("Data Risalah");
+                 $(".modal-dialog");
+                 $('.modal-body').html(response.data);
+                 $('#myModal').modal('show');
+             })
+             .catch(function(error) {
+                 console.log(error);
+             });
+     }
+
+     function ediddtRisalah() {
+         const id = $('#id').val();
+         const unit_kerja = $('#unit_kerja').val();
+         const tgl = $('#tgl').val();
+         const jam = $('#jam').val();
+         const tempat = $('#tempat').val();
+         const perekam_1 = $('#perekam_1').val();
+         const perekam_2 = $('#perekam_2').val();
+         const transkrip = $('#transkrip').val();
+         const editor = $('#editor').val();
+         const rapat = $('#rapat').val();
+         const agenda = $('#agenda').val();
+
+         axios.post('/storeRisalah/' + id, {
+             unit_kerja,
+             tgl,
+             jam,
+             tempat,
+             perekam_1,
+             perekam_2,
+             transkrip,
+             editor,
+             rapat,
+             agenda
+         }).then((response) => {
+             Swal.fire({
+                 title: 'Success...',
+                 position: 'top-end',
+                 icon: 'success',
+                 text: 'Success! Data added successfully.',
+                 showConfirmButton: false,
+                 width: '400px',
+                 timer: 3000
+             }).then((response) => {
+                 location.reload();
+             })
+         }).catch((err) => {
+             console.log(err);
+             Swal.fire({
+                 title: 'Error',
+                 position: 'top-end',
+                 icon: 'error',
+                 text: err.response.data.error.details,
+                 showConfirmButton: false,
+                 width: '400px',
+                 timer: 3000
+             })
+         })
      }
 
      function deleteRisalah(id) {

@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Anggota;
 use App\Models\Risalah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class RisalahController extends Controller
 {
@@ -36,7 +38,51 @@ class RisalahController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'unit_kerja'   => 'required',
+            'tgl'   => 'required',
+            'jam'   => 'required',
+            'tempat'   => 'required',
+            'perekam_1'   => 'required',
+            'rapat'   => 'required',
+            'agenda'   => 'required',
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => [
+                    'message' => 'Validation Vailed!!',
+                    'details' => $validate->errors()->all()
+                ]
+            ], 422);
+        }
+        DB::beginTransaction();
+        try {
+            $data = [
+                'unit_kerja' => $request->unit_kerja,
+                'tgl' => $request->tgl,
+                'jam' => $request->jam,
+                'tempat' => $request->tempat,
+                'perekam_1' => $request->perekam_1,
+                'perekam_2' => $request->perekam_2,
+                'editor' => $request->editor,
+                'rapat' => $request->rapat,
+                'agenda' => $request->agenda,
+                'status' => $request->status ? $request->status : "Belum Terlaksana",
+                'created_at' => Carbon::now()->toDateTimeString(),
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            $request->id ? Risalah::where('id', $request->id)->update($data) : Risalah::insert($data);
+            DB::commit();
+
+            return response()->json(['success' => true, 'message' => 'Data berhasil diinputkan', 'data' => $data], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['success' => false, 'messages' => $e->getMessage()], 400);
+        }
     }
 
     /**
@@ -53,9 +99,14 @@ class RisalahController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Risalah $risalah)
+    public function editRisalah($id)
     {
-        //
+        $anggota = Anggota::where('id', $id)->get();
+        $risalah = Risalah::where('id', $id)->get();
+        return view('content.risalah.editRisalah', [
+            'anggota' => $anggota, 
+            'risalah' => $risalah
+        ]);
     }
 
     /**
