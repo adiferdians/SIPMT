@@ -21,3 +21,16 @@
     background-color: darkgrey;
     color: white;
 }
+
+.split {
+    display: flex;
+    margin: 0;
+}
+
+.modal-header{
+    background-color: darkgrey;
+}
+
+.center {
+    text-align: center;
+}

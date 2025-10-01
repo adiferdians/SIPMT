@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Anggota;
 use App\Models\Risalah;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
+
 class RisalahController extends Controller
 {
     /**
@@ -12,7 +14,6 @@ class RisalahController extends Controller
      */
     public function index()
     {
-        Carbon::setLocale('id');
         $risalah = Risalah::orderByDesc('id')->paginate(10);
         return view('content.risalah.risalah', [
             'risalah' => $risalah
@@ -22,9 +23,12 @@ class RisalahController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function createRisalah()
     {
-        //
+        $anggota = Anggota::orderBy('nama')->get();
+        return view('content.risalah.createRisalah', [
+            'anggota' => $anggota
+        ]);
     }
 
     /**

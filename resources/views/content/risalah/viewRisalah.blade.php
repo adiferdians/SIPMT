@@ -49,10 +49,6 @@
                                               <td>{{$risalah[0]->rapat}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Keterangan</td>
-                                              <td>{{$risalah[0]->keterangan}}</td>
-                                          </tr>
-                                          <tr>
                                               <td>Status</td>
                                               <td>{{$risalah[0]->status}}</td>
                                           </tr>

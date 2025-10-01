@@ -22,14 +22,14 @@ class RisalahFactory extends Factory
             'tgl' => $this->faker->date,
             'jam' => $this->faker->time('H:i'),
             'tempat' => $this->faker->city,
-            'perekam_1' => $this->faker->name('male'), // Mengutamakan nama pria
+            'perekam_1' => $this->faker->name('male'),
             'perekam_2' => $this->faker->name('male'),
             'transkrip' => $this->faker->randomElement(['Ada', 'Tidak Ada']),
             'editor' => $this->faker->name('male'),
-            'rapat' => $this->faker->words(3, true),
+            'rapat' => $this->faker->words(1, true),
             'agenda' => $this->faker->paragraph,
             'keterangan' => $this->faker->sentence(1),
-            'status' => $this->faker->randomElement(['Perekaman', 'Transkrip', 'Edit', 'Selesai']),
+            'status' => $this->faker->randomElement(['Perekaman', 'Transkripsi', 'Pengeditan', 'Risalah OK', 'Belum Terlaksana']),
             'created_at' => now(),
             'updated_at' => now(),
         ];

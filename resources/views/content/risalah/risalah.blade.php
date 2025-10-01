@@ -27,9 +27,10 @@
                                  <tr>
                                      <th>Tanggal</th>
                                      <th>Jam</th>
-                                     <th>Perekam 1</th>
+                                     <th>Perekam</th>
                                      <th>Rapat</th>
-                                     <th>Status</th>
+                                     <th class="center">Status</th>
+                                     <th class="center">Aksi</th>
                                  </tr>
                              </thead>
                              <tbody>
@@ -41,11 +42,28 @@
                                      <td class="font-weight-bold">{{$item->jam}}</td>
                                      <td class="font-weight-bold">{{$item->perekam_1}}</td>
                                      <td class="font-weight-bold">{{$item->rapat}}</td>
-                                     <td class="font-weight-medium">
-                                         <div class="badge badge-success">{{$item->status}}</div>
+                                     <td class="font-weight-bold center">
+                                         <button type="button" class="btn 
+                                         {{$item->status == 'Risalah OK' ? 'btn-success' : 
+                                            ($item->status == 'Pengeditan' ? 'btn-info' : 
+                                            ($item->status == 'Transkripsi' ? 'btn-warning' : 
+                                            ($item->status == 'Perekaman' ? 'btn-primary' : 
+                                            'btn-secondary')))
+                                            }} dropdown-toggle"
+                                             type="button" style="color: white; padding: 12px;" data-bs-toggle="dropdown" aria-expanded="false">{{$item->status}}
+                                         </button>
+                                         <div class="dropdown-menu" aria-labelledby="dropdownMenuSplitButton1">
+                                             <a class="dropdown-item center" href="#">Belum Terlaksana</a>
+                                             <div class="dropdown-divider"></div>
+                                             <a class="dropdown-item center" href="#">Perekaman</a>
+                                             <div class="dropdown-divider"></div>
+                                             <a class="dropdown-item center" href="#">Transkripsi</a>
+                                             <div class="dropdown-divider"></div>
+                                             <a class="dropdown-item center" href="#">Pengeditan</a>
+                                             <div class="dropdown-divider"></div>
+                                             <a class="dropdown-item center" href="#">Risalah OK</a>
+                                         </div>
                                      </td>
-                                     <td>
-
                                      <td style="display: flex; justify-content: center;">
                                          <button type="button" class="btn btn-outline-info"
                                              onclick="editRisalah({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
@@ -68,6 +86,19 @@
 
 
  <script>
+     $('#addRisalah').click(function() {
+         axios.get('/createRisalah')
+             .then(function(response) {
+                 $('.modal-title').html("Tambahkan Risalah");
+                 $(".modal-dialog");
+                 $('.modal-body').html(response.data);
+                 $('#myModal').modal('show');
+             })
+             .catch(function(error) {
+                 console.log(error);
+             });
+     })
+
      function viewRislah(id) {
          axios.get('/viewRisalah/' + id)
              .then(function(response) {
@@ -80,7 +111,6 @@
                  console.log(error);
              });
      }
-
 
      function deleteRisalah(id) {
          Swal.fire({

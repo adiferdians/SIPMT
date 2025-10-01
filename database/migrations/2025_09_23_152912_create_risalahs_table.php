@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('agenda');
             $table->text('keterangan');
             $table->text('status');
+            $table->text('masa_sidang');
             $table->timestamps();
         });
     }
