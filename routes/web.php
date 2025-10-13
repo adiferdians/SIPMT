@@ -26,6 +26,7 @@ Route::get('/editAnggota/{id}', [AnggotaController::class, 'editAnggota']);
 Route::post('deleteAnggota/{id}', [AnggotaController::class, 'destroyAnggota']);
 
 Route::get('/risalah', [RisalahController::class, 'index']);
+Route::post('/risalah/changeStatus/{id}', [RisalahController::class, 'changeStatus']);
 Route::get('/createRisalah', [RisalahController::class, 'createRisalah']);
 Route::post('/storeRisalah', [RisalahController::class, 'store']);
 Route::post('/storeRisalah/{id}', [RisalahController::class, 'store']);

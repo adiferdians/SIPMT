@@ -62,15 +62,15 @@
                                              type="button" data-bs-toggle="dropdown" aria-expanded="false">{{$item->status}}
                                          </button>
                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuSplitButton1">
-                                             <a class="dropdown-item center" href="#">Belum Terlaksana</a>
+                                             <a class="dropdown-item center" onclick="changeStatus('Belum Terlaksana', '{{$item->id}}')">Belum Terlaksana</a>
                                              <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" href="#">Perekaman</a>
+                                             <a class="dropdown-item center" onclick="changeStatus('Perekaman', '{{$item->id}}')">Perekaman</a>
                                              <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" href="#">Transkripsi</a>
+                                             <a class="dropdown-item center" onclick="changeStatus('Transkripsi', '{{$item->id}}')">Transkripsi</a>
                                              <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" href="#">Pengeditan</a>
+                                             <a class="dropdown-item center" onclick="changeStatus('Pengeditan', '{{$item->id}}')">Pengeditan</a>
                                              <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" href="#">Risalah OK</a>
+                                             <a class="dropdown-item center" onclick="changeStatus('Risalah OK', '{{$item->id}}')">Risalah OK</a>
                                          </div>
                                      </td>
                                      <td style="display: flex; justify-content: center;">
@@ -134,60 +134,53 @@
              });
      }
 
-     function ediddtRisalah() {
-         const id = $('#id').val();
-         const unit_kerja = $('#unit_kerja').val();
-         const tgl = $('#tgl').val();
-         const jam = $('#jam').val();
-         const tempat = $('#tempat').val();
-         const perekam_1 = $('#perekam_1').val();
-         const perekam_2 = $('#perekam_2').val();
-         const transkrip = $('#transkrip').val();
-         const editor = $('#editor').val();
-         const rapat = $('#rapat').val();
-         const agenda = $('#agenda').val();
-
-         axios.post('/storeRisalah/' + id, {
-             unit_kerja,
-             tgl,
-             jam,
-             tempat,
-             perekam_1,
-             perekam_2,
-             transkrip,
-             editor,
-             rapat,
-             agenda
-         }).then((response) => {
-             Swal.fire({
-                 title: 'Success...',
-                 position: 'top-end',
-                 icon: 'success',
-                 text: 'Success! Data added successfully.',
-                 showConfirmButton: false,
-                 width: '400px',
-                 timer: 3000
-             }).then((response) => {
-                 location.reload();
-             })
-         }).catch((err) => {
-             console.log(err);
-             Swal.fire({
-                 title: 'Error',
-                 position: 'top-end',
-                 icon: 'error',
-                 text: err.response.data.error.details,
-                 showConfirmButton: false,
-                 width: '400px',
-                 timer: 3000
-             })
+     function changeStatus(status, id) {
+        console.log(status, id);
+        
+         Swal.fire({
+             title: 'Ubah status Risalah?',
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             confirmButtonText: 'Ubah'
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 if (result.isConfirmed) {
+                     axios.post('/risalah/changeStatus/' + id, {
+                             status,
+                         }).then(() => {
+                             Swal.fire({
+                                 title: 'Success',
+                                 position: 'top-end',
+                                 icon: 'success',
+                                 text: 'Status Risalah Diubah!',
+                                 showConfirmButton: false,
+                                 timer: 1500
+                             });
+                             setTimeout(() => {
+                                 location.reload();
+                             }, 1600);
+                         })
+                         .catch((err) => {
+                             Swal.fire({
+                                 title: 'Error',
+                                 position: 'top-end',
+                                 icon: 'error',
+                                 text: err,
+                                 showConfirmButton: false,
+                                 timer: 1500
+                             });
+                         });
+                 }
+             }
          })
-     }
+     };
 
      function deleteRisalah(id) {
          Swal.fire({
-             title: 'Are you sure?',
-             text: "The deleted data cannot be recovered!",
+             title: 'Apa anda yakin?',
+             text: "Data yang dihapus tidak dapat dipulihkan!",
              icon: 'warning',
              showCancelButton: true,
              confirmButtonText: 'Delete',
@@ -201,7 +194,7 @@
                              title: 'Success',
                              position: 'top-end',
                              icon: 'success',
-                             text: 'Data deleted successfuly!',
+                             text: 'Data berhasil dihapus!',
                              showConfirmButton: false,
                              width: '400px',
                              timer: 3000

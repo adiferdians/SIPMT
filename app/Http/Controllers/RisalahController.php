@@ -66,6 +66,7 @@ class RisalahController extends Controller
                 'tempat' => $request->tempat,
                 'perekam_1' => $request->perekam_1,
                 'perekam_2' => $request->perekam_2,
+                'transkrip' => $request->transkrip,
                 'editor' => $request->editor,
                 'rapat' => $request->rapat,
                 'agenda' => $request->agenda,
@@ -101,7 +102,7 @@ class RisalahController extends Controller
      */
     public function editRisalah($id)
     {
-        $anggota = Anggota::where('id', $id)->get();
+        $anggota = Anggota::orderBy('nama')->get();
         $risalah = Risalah::where('id', $id)->get();
         return view('content.risalah.editRisalah', [
             'anggota' => $anggota, 
@@ -110,11 +111,40 @@ class RisalahController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified status in storage.
      */
-    public function update(Request $request, Risalah $risalah)
+    public function changeStatus(Request $request, $id)
     {
-        //
+        $validate = Validator::make($request->all(), [
+            'status'   => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => [
+                    'message' => 'Validation Vailed!!',
+                    'details' => $validate->errors()->all()
+                ]
+            ], 422);
+        }
+        
+        DB::beginTransaction();
+        try {
+            $data = [
+                'status' => $request->status,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            Risalah::where('id', $id)->update($data);
+            DB::commit();
+
+            return response()->json(['success' => true, 'message' => 'Status berhasil diubah', 'data' => $data], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['success' => false, 'messages' => $e->getMessage()], 400);
+        }
     }
 
     /**
