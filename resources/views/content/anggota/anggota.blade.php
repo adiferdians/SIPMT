@@ -40,7 +40,14 @@
                                      <td class="font-weight-bold">{{$item->nip}}</td>
                                      <td>{{$item->telepon}}</td>
                                      <td class="font-weight-medium">
-                                         <div class="badge badge-success">{{$item->status}}</div>
+                                         <!-- <div class="badge badge-success">{{$item->status}}</div> -->
+                                         <div class="flipswitch">
+                                             <input checked="" id="fs" class="flipswitch-cb" name="flipswitch" type="checkbox">
+                                             <label for="fs" class="flipswitch-label">
+                                                 <div class="flipswitch-inner"></div>
+                                                 <div class="flipswitch-switch"></div>
+                                             </label>
+                                         </div>
                                      </td>
                                      <td style="display: flex; justify-content: center;">
                                          <button type="button" class="btn btn-outline-info" onclick="editAnggota({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
@@ -61,7 +68,6 @@
 
  <script>
      $('#addAnggota').click(function() {
-         console.log("sapoi");
          axios.get('/createAnggota')
              .then(function(response) {
                  $('.modal-title').html("Tambahkan Anggota");

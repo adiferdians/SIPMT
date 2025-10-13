@@ -13,6 +13,18 @@ return new class extends Migration
     {
         Schema::create('risalahs', function (Blueprint $table) {
             $table->id();
+            $table->string('unit_kerja');
+            $table->string('tgl');
+            $table->string('jam');
+            $table->string('tempat');
+            $table->string('perekam_1');
+            $table->string('perekam_2')->nullable();
+            $table->string('transkrip')->nullable();
+            $table->string('editor')->nullable();
+            $table->string('rapat');
+            $table->text('agenda');
+            $table->string('status')->default('Belum Terlaksana')->nullable();
+            $table->string('masa_sidang');
             $table->timestamps();
         });
     }
