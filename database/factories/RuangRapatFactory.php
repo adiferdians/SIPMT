@@ -17,7 +17,10 @@ class RuangRapatFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'nama' => $this->faker->name(),
+            'lantai' => $this->faker->numberBetween(1, 4),
+            'created_at' => now(),
+            'updated_at' => now(),
         ];
     }
 }

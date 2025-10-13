@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RisalahController;
 use App\Http\Controllers\AnggotaController;
+use App\Http\Controllers\RuangRapatController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,4 +33,11 @@ Route::post('/storeRisalah', [RisalahController::class, 'store']);
 Route::post('/storeRisalah/{id}', [RisalahController::class, 'store']);
 Route::get('/viewRisalah/{id}', [RisalahController::class, 'showRisalah']);
 Route::get('/editRisalah/{id}', [RisalahController::class, 'editRisalah']);
-Route::post('deleteRisalah/{id}', [RisalahController::class, 'destroyRisalah']);
+Route::post('/deleteRisalah/{id}', [RisalahController::class, 'destroyRisalah']);
+
+Route::get('/ruang-rapat', [RuangRapatController::class, 'index']);
+Route::get('/create-ruang-rapat', [RuangRapatController::class, 'createRuangRapat']);
+Route::post('/store-ruang-rapat', [RuangRapatController::class, 'storeRuangRapat']);
+Route::post('/store-ruang-rapat/{id}', [RuangRapatController::class, 'storeRuangRapat']);
+Route::get('/edit-ruang-rapat/{id}', [RuangRapatController::class, 'editRuangRapat']);
+Route::post('/delete-ruang-rapat/{id}', [RuangRapatController::class, 'destroyRuangRapat']);
