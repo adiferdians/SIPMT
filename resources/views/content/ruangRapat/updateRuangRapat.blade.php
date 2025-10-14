@@ -30,7 +30,7 @@
                           const nama = $('#nama').val();
                           const lantai = $('#lantai').val();
 
-                          axios.post('/store-ruang-rapat/' + id, {
+                          axios.post('/store-ruang-rapat', {
                               id,
                               nama,
                               lantai,

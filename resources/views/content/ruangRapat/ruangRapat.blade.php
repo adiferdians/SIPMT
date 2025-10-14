@@ -1,5 +1,6 @@
  @extends('layout.master')
- @section('Anggota', 'active')
+ @section('Pendukung', 'active')
+ @section('Ruang', 'active')
  @section('title', 'Ruang Rapat')
  @section('content')
 
@@ -58,7 +59,7 @@
      $('#addAnggota').click(function() {
          axios.get('/create-ruang-rapat')
              .then(function(response) {
-                 $('.modal-title').html("Tambahkan Anggota");
+                 $('.modal-title').html("Tambahkan Ruang Rapat");
                  $(".modal-dialog");
                  $('.modal-body').html(response.data);
                  $('#myModal').modal('show');
@@ -100,15 +101,15 @@
              text: "Data Yang Dihapus Tidak Dapat di Pulihkan!",
              icon: 'warning',
              showCancelButton: true,
-             confirmButtonText: 'Delete',
-             cancelButtonText: 'Cancle',
+             confirmButtonText: 'Hapus',
+             cancelButtonText: 'Batal',
              reverseButtons: true
          }).then((result) => {
              if (result.isConfirmed) {
                  axios.post('delete-ruang-rapat/' + id)
                      .then(() => {
                          Swal.fire({
-                             title: 'Success',
+                             title: 'Berhasil',
                              position: 'top-end',
                              icon: 'success',
                              text: 'Data berhasil dihapus!',

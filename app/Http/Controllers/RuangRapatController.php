@@ -24,7 +24,7 @@ class RuangRapatController extends Controller
         return view("content.ruangRapat.createRuangRapat");
     }
 
-    public function storeRuangRapat(Request $request, $id)
+    public function storeRuangRapat(Request $request)
     {
 
         $validate = Validator::make($request->all(), [

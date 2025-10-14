@@ -38,6 +38,6 @@ Route::post('/deleteRisalah/{id}', [RisalahController::class, 'destroyRisalah'])
 Route::get('/ruang-rapat', [RuangRapatController::class, 'index']);
 Route::get('/create-ruang-rapat', [RuangRapatController::class, 'createRuangRapat']);
 Route::post('/store-ruang-rapat', [RuangRapatController::class, 'storeRuangRapat']);
-Route::post('/store-ruang-rapat/{id}', [RuangRapatController::class, 'storeRuangRapat']);
+// Route::post('/store-ruang-rapat/{id}', [RuangRapatController::class, 'storeRuangRapat']);
 Route::get('/edit-ruang-rapat/{id}', [RuangRapatController::class, 'editRuangRapat']);
 Route::post('/delete-ruang-rapat/{id}', [RuangRapatController::class, 'destroyRuangRapat']);
