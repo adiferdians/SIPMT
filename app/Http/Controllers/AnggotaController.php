@@ -56,7 +56,7 @@ class AnggotaController extends Controller
                 ]
             ], 422);
         }
-// dd($request->all());
+        
         DB::beginTransaction();
         try {
             $data = [

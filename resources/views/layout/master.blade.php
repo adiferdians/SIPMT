@@ -67,19 +67,19 @@
                             <span class="menu-title">Dashboard</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @yield('Rislah')">
                         <a class="nav-link" href="/risalah">
                             <i class="ti-book menu-icon"></i>
                             <span class="menu-title">Risalah</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @yield('Anggota')">
                         <a class="nav-link" href="/anggota">
                             <i class="ti-user menu-icon"></i>
                             <span class="menu-title">Anggota</span>
                         </a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item @yield('Pendukung')">
                         <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                             <i class="icon-columns menu-icon"></i>
                             <span class="menu-title">Data Pendukung</span>
@@ -87,8 +87,8 @@
                         </a>
                         <div class="collapse" id="form-elements">
                             <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Unit Kerja</a></li>
-                                <li class="nav-item"><a class="nav-link" href="pages/forms/basic_elements.html">Ruang Rapat</a></li>
+                                <li class="nav-item @yield('Unit')"><a class="nav-link" href="/unit-kerja">Unit Kerja</a></li>
+                                <li class="nav-item @yield('Ruang')"><a class="nav-link" href="/ruang-rapat">Ruang Rapat</a></li>
                             </ul>
                         </div>
                     </li>
