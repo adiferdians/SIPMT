@@ -6,7 +6,12 @@
                     <label for="unit_kerja">Unit Kerja</label>
                     <input type="text" id="id" value="{{$risalah[0]->id}}" hidden>
                     <input type="text" id="status" value="{{$risalah[0]->status}}" hidden>
-                    <input type="text" class="form-control" id="unit_kerja" placeholder="Unit Kerja" value="{{$risalah[0]->unit_kerja}}">
+                    <select class="form-select" id="unit_kerja">
+                        <option disabled selected>Pilih Unit Kerja</option>
+                        @foreach ($unit as $item)
+                        <option value="{{ $item->nama }}" {{$risalah[0]->unit_kerja == $item->nama ? "selected" : ""}}>{{ $item->nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group split">
                     <div class="col-md-6 grid-margin separasi">
@@ -25,9 +30,10 @@
                 <div class="form-group">
                     <label for="tempat">Tempat</label>
                     <select class="form-select" id="tempat">
-                        <option value="">Pilih Tempat</option>
-                        <option value="Ruang A">Ruang A</option>
-                        <option value="Ruang B" selected>Ruang B</option>
+                        <option disabled selected>Pilih Ruang Rapat</option>
+                        @foreach ($ruang as $item)
+                        <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group split">
@@ -151,5 +157,4 @@
             })
         })
     })
-
 </script>

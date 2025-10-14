@@ -50,7 +50,28 @@
                                           </tr>
                                           <tr>
                                               <td>Status</td>
-                                              <td>{{$risalah[0]->status}}</td>
+                                              <td>
+                                                  <button class="btn
+                                                        @switch($risalah[0]->status)
+                                                            @case('Risalah OK')
+                                                                btn-success
+                                                                @break
+                                                            @case('Pengeditan')
+                                                                btn-info
+                                                                @break
+                                                            @case('Transkripsi')
+                                                                btn-warning
+                                                                @break
+                                                            @case('Perekaman')
+                                                                btn-primary
+                                                                @break
+                                                            @default
+                                                                btn-secondary
+                                                        @endswitch
+                                                         view-btn">
+                                                      {{ $risalah[0]->status }}
+                                                  </button>
+                                              </td>
                                           </tr>
                                           <tr>
                                               <td>Agenda</td>
@@ -62,7 +83,7 @@
                           </div>
                       </div>
                   </div>
-                  <div class="btn-modal">
+                  <div class=" btn-modal">
                       <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
                       <button class="btn btn-warning">Cancel</button>
                   </div>

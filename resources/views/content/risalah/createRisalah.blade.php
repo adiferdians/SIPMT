@@ -4,7 +4,12 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="unit_kerja">Unit Kerja</label>
-                    <input type="text" class="form-control" id="unit_kerja" placeholder="Unit Kerja">
+                    <select class="form-select" id="unit_kerja">
+                        <option disabled selected>Pilih Unit Kerja</option>
+                        @foreach ($unit as $item)
+                        <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                        @endforeach
+                    </select>
                 </div>
                 <div class="form-group split">
                     <div class="col-md-6 grid-margin separasi">
@@ -21,11 +26,12 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label for="tempat">Tempat</label>
+                    <label for="tempat">Ruang Rapat</label>
                     <select class="form-select" id="tempat">
-                        <option value="">Pilih Tempat</option>
-                        <option value="Ruang A">Ruang A</option>
-                        <option value="Ruang B">Ruang B</option>
+                        <option disabled selected>Pilih Ruang Rapat</option>
+                        @foreach ($ruang as $item)
+                        <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                        @endforeach
                     </select>
                 </div>
                 <div class="form-group split">
@@ -146,5 +152,4 @@
             })
         })
     })
-
 </script>
