@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RisalahController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\RuangRapatController;
+use App\Http\Controllers\UnitKerjaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,6 +39,11 @@ Route::post('/deleteRisalah/{id}', [RisalahController::class, 'destroyRisalah'])
 Route::get('/ruang-rapat', [RuangRapatController::class, 'index']);
 Route::get('/create-ruang-rapat', [RuangRapatController::class, 'createRuangRapat']);
 Route::post('/store-ruang-rapat', [RuangRapatController::class, 'storeRuangRapat']);
-// Route::post('/store-ruang-rapat/{id}', [RuangRapatController::class, 'storeRuangRapat']);
 Route::get('/edit-ruang-rapat/{id}', [RuangRapatController::class, 'editRuangRapat']);
 Route::post('/delete-ruang-rapat/{id}', [RuangRapatController::class, 'destroyRuangRapat']);
+
+Route::get('/unit-kerja', [UnitKerjaController::class, 'index']);
+Route::get('/create-unit-kerja', [UnitKerjaController::class, 'createUnitKerja']);
+Route::post('/store-unit-kerja', [UnitKerjaController::class, 'storeUnitKerja']);
+Route::get('/edit-unit-kerja/{id}', [UnitKerjaController::class, 'editUnitKerja']);
+Route::post('/delete-unit-kerja/{id}', [UnitKerjaController::class, 'destroyUnitKerja']);

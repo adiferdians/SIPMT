@@ -1,6 +1,7 @@
  @extends('layout.master')
- @section('Anggota', 'active')
- @section('title', 'Anggota Risalah')
+ @section('Pendukung', 'active')
+ @section('unit', 'active')
+ @section('title', 'Ruang Rapat')
  @section('content')
 
  <div class="content-wrapper">
@@ -9,7 +10,7 @@
              <div class="card title-card">
                  <div class="card-body table-title">
                      <div class="judul">
-                         <h3 class="font-weight-bold">Data Anggota</h3>
+                         <h3 class="font-weight-bold">Data Unit Kerja</h3>
                      </div>
                      <div>
                          <button type="button" id="addAnggota" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
@@ -26,39 +27,27 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
+                                     <th>No</th>
                                      <th>Nama</th>
-                                     <th>NIP</th>
-                                     <th>Telepon</th>
-                                     <th>Status</th>
+                                     <th>Deskripsi</th>
                                      <th style="display: flex; justify-content: center;">Action</th>
                                  </tr>
                              </thead>
                              <tbody>
-                                 @foreach($anggota as $item)
+                                 @foreach($unit as $item)
                                  <tr>
+                                     <td class="font-weight-bold">{{$item->id}}</td>
                                      <td class="font-weight-bold">{{$item->nama}}</td>
-                                     <td class="font-weight-bold">{{$item->nip}}</td>
-                                     <td>{{$item->telepon}}</td>
-                                     <td class="font-weight-medium">
-                                         <!-- <div class="badge badge-success">{{$item->status}}</div> -->
-                                         <div class="flipswitch">
-                                             <input checked="" id="fs" class="flipswitch-cb" name="flipswitch" type="checkbox">
-                                             <label for="fs" class="flipswitch-label">
-                                                 <div class="flipswitch-inner"></div>
-                                                 <div class="flipswitch-switch"></div>
-                                             </label>
-                                         </div>
-                                     </td>
+                                     <td class="font-weight-bold">{{$item->deskripsi}}</td>
                                      <td style="display: flex; justify-content: center;">
-                                         <button type="button" class="btn btn-outline-info" onclick="editAnggota({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
-                                         <button type="button" class="btn btn-outline-secondary" onclick="viewAnggota({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
+                                         <button type="button" class="btn btn-outline-info" onclick="editRuangRapat({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
                                          <button type="button" class="btn btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
                                  </tr>
                                  @endforeach
                              </tbody>
                          </table>
-                         {{ $anggota->links() }}
+                         {{ $unit->links() }}
                      </div>
                  </div>
              </div>
@@ -68,9 +57,9 @@
 
  <script>
      $('#addAnggota').click(function() {
-         axios.get('/createAnggota')
+         axios.get('/create-unit-kerja')
              .then(function(response) {
-                 $('.modal-title').html("Tambahkan Anggota");
+                 $('.modal-title').html("Tambahkan Unit Kerja");
                  $(".modal-dialog");
                  $('.modal-body').html(response.data);
                  $('#myModal').modal('show');
@@ -80,23 +69,10 @@
              });
      })
 
-     function viewAnggota(id) {
-         axios.get('/viewAnggota/' + id)
+     function editRuangRapat(id) {
+         axios.get('/edit-unit-kerja/' + id)
              .then(function(response) {
-                 $('.modal-title').html("Data Anggota");
-                 $(".modal-dialog");
-                 $('.modal-body').html(response.data);
-                 $('#myModal').modal('show');
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     }
-
-     function editAnggota(id) {
-         axios.get('/editAnggota/' + id)
-             .then(function(response) {
-                 $('.modal-title').html("Data Anggota");
+                 $('.modal-title').html("Data Unit Kerja");
                  $(".modal-dialog");
                  $('.modal-body').html(response.data);
                  $('#myModal').modal('show');
@@ -108,22 +84,22 @@
 
      function deleteAnggota(id) {
          Swal.fire({
-             title: 'Are you sure?',
-             text: "The deleted data cannot be recovered!",
+             title: 'Apakah Anda Yakin?',
+             text: "Data Yang Dihapus Tidak Dapat di Pulihkan!",
              icon: 'warning',
              showCancelButton: true,
-             confirmButtonText: 'Delete',
-             cancelButtonText: 'Cancle',
+             confirmButtonText: 'Hapus',
+             cancelButtonText: 'Batal',
              reverseButtons: true
          }).then((result) => {
              if (result.isConfirmed) {
-                 axios.post('deleteAnggota/' + id)
+                 axios.post('delete-unit-kerja/' + id)
                      .then(() => {
                          Swal.fire({
-                             title: 'Success',
+                             title: 'Berhasil',
                              position: 'top-end',
                              icon: 'success',
-                             text: 'Data deleted successfuly!',
+                             text: 'Data berhasil dihapus!',
                              showConfirmButton: false,
                              width: '400px',
                              timer: 3000
