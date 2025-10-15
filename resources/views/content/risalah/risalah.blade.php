@@ -11,6 +11,7 @@
                          <h3 class="font-weight-bold">Data Risalah</h3>
                      </div>
                      <div>
+                         <button type="button" id="exportRisalah" class="btn btn-success export"><i class="mdi mdi-file-excel"></i> Export Data</button>
                          <button type="button" id="addRisalah" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
                      </div>
                  </div>
@@ -108,6 +109,19 @@
              });
      })
 
+     $('#exportRisalah').click(function() {
+         axios.get('/exportRisalah')
+             .then(function(response) {
+                 $('.modal-title').html("Export Data Risalah");
+                 $(".modal-dialog");
+                 $('.modal-body').html(response.data);
+                 $('#myModal').modal('show');
+             })
+             .catch(function(error) {
+                 console.log(error);
+             });
+     })
+
      function viewRisalah(id) {
          axios.get('/viewRisalah/' + id)
              .then(function(response) {
@@ -135,8 +149,8 @@
      }
 
      function changeStatus(status, id) {
-        console.log(status, id);
-        
+         console.log(status, id);
+
          Swal.fire({
              title: 'Ubah status Risalah?',
              icon: 'warning',

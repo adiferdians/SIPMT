@@ -32,7 +32,7 @@
                     <select class="form-select" id="tempat">
                         <option disabled selected>Pilih Ruang Rapat</option>
                         @foreach ($ruang as $item)
-                        <option value="{{ $item->nama }}">{{ $item->nama }}</option>
+                        <option value="{{ $item->nama }}" {{$item->nama == $risalah[0]->tempat ? "selected" : ""}}>{{ $item->nama }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -94,7 +94,7 @@
                 </div>
                 <div class="form-group">
                     <label for="agenda">Agenda</label>
-                    <textarea class="form-control" id="agenda" rows="8" placeholder="Agenda">{{ $risalah[0]->agenda }}</textarea>
+                    <div id="agenda">{!! $risalah[0]->agenda !!}</div>
                 </div>
             </div>
         </div>
@@ -106,6 +106,9 @@
 </div>
 
 <script>
+    var quill = new Quill('#agenda', {
+        theme: 'snow'
+    });
     $('#store').click(function() {
         const id = $('#id').val();
         const unit_kerja = $('#unit_kerja').val();
@@ -118,7 +121,7 @@
         const transkrip = $('#transkrip').val();
         const editor = $('#editor').val();
         const rapat = $('#rapat').val();
-        const agenda = $('#agenda').val();
+        const agenda = quill.root.innerHTML;
 
         axios.post('/storeRisalah/' + id, {
             unit_kerja,
