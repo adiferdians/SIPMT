@@ -13,6 +13,6 @@ class RisalahSeeder extends Seeder
      */
     public function run(): void
     {
-        Risalah::factory()->count(20)->create();
+        Risalah::factory()->count(120)->create();
     }
 }

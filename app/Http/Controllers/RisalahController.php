@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use App\Exports\RisalahExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class RisalahController extends Controller
 {
@@ -18,7 +20,7 @@ class RisalahController extends Controller
      */
     public function index()
     {
-        $risalah = Risalah::orderByDesc('id')->paginate(10);
+        $risalah = Risalah::orderByDesc('tgl')->paginate(10);
         return view('content.risalah.risalah', [
             'risalah' => $risalah
         ]);
@@ -165,5 +167,25 @@ class RisalahController extends Controller
     {
         $data = new Risalah();
         $data->where('id', $id)->delete();
+    }
+
+    public function export()
+    {
+        return view('content.risalah.exportRisalah');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $request->validate([
+            'start' => 'required|date',
+            'end'   => 'required|date|after_or_equal:start',
+        ]);
+
+        $startDate = $request->start;
+        $endDate = $request->end;
+
+        $fileName = 'risalah_' . $startDate . '_sampai_' . $endDate . '.xlsx';
+
+        return Excel::download(new RisalahExport($startDate, $endDate), $fileName);
     }
 }
