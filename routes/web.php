@@ -36,7 +36,7 @@ Route::get('/viewRisalah/{id}', [RisalahController::class, 'showRisalah']);
 Route::get('/editRisalah/{id}', [RisalahController::class, 'editRisalah']);
 Route::post('/deleteRisalah/{id}', [RisalahController::class, 'destroyRisalah']);
 Route::get('/exportRisalah', [RisalahController::class, 'export']);
-Route::get('/getExport', [RisalahController::class, 'exportExcel'])->name('risalah.export');
+Route::post('/getExport', [RisalahController::class, 'exportExcel'])->name('risalah.export');
 
 Route::get('/ruang-rapat', [RuangRapatController::class, 'index']);
 Route::get('/create-ruang-rapat', [RuangRapatController::class, 'createRuangRapat']);
