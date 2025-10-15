@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Anggota;
 use App\Models\Risalah;
+use App\Models\UnitKerja;
+use App\Models\RuangRapat;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
@@ -28,8 +30,12 @@ class RisalahController extends Controller
     public function createRisalah()
     {
         $anggota = Anggota::orderBy('nama')->get();
+        $unit = UnitKerja::orderBy('nama')->get();
+        $ruang = RuangRapat::orderBy('nama')->get();
         return view('content.risalah.createRisalah', [
-            'anggota' => $anggota
+            'anggota' => $anggota,
+            'unit' => $unit,
+            'ruang' => $ruang,
         ]);
     }
 
@@ -92,6 +98,7 @@ class RisalahController extends Controller
     public function showRisalah($id)
     {
         $risalah = Risalah::where('id', $id)->get();
+
         return view('content.risalah.viewRisalah', [
             'risalah' => $risalah
         ]);
@@ -104,9 +111,13 @@ class RisalahController extends Controller
     {
         $anggota = Anggota::orderBy('nama')->get();
         $risalah = Risalah::where('id', $id)->get();
+        $unit = UnitKerja::orderBy('nama')->get();
+        $ruang = RuangRapat::orderBy('nama')->get();
         return view('content.risalah.editRisalah', [
-            'anggota' => $anggota, 
-            'risalah' => $risalah
+            'anggota' => $anggota,
+            'risalah' => $risalah,
+            'unit' => $unit,
+            'ruang' => $ruang,
         ]);
     }
 
@@ -128,7 +139,7 @@ class RisalahController extends Controller
                 ]
             ], 422);
         }
-        
+
         DB::beginTransaction();
         try {
             $data = [
