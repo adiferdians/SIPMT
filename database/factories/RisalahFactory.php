@@ -27,7 +27,7 @@ class RisalahFactory extends Factory
             'tempat' => RuangRapat::inRandomOrder()->value('nama'),
             'perekam_1' => Anggota::inRandomOrder()->value('nama'),
             'perekam_2' => Anggota::inRandomOrder()->value('nama'),
-            'transkrip' => $this->faker->randomElement(['Ada', 'Tidak Ada']),
+            'transkrip' => Anggota::inRandomOrder()->value('nama'),
             'editor' => Anggota::inRandomOrder()->value('nama'),
             'rapat' => $this->faker->words(1, true),
             'agenda' => $this->faker->paragraph,

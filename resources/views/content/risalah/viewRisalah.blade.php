@@ -74,8 +74,8 @@
                                               </td>
                                           </tr>
                                           <tr>
-                                              <td>Agenda</td>
-                                              <td style="white-space: normal; word-wrap: break-word;">{{$risalah[0]->agenda}}</td>
+                                              <td style="display: grid;">Agenda</td>
+                                              <td style="white-space: normal; word-wrap: break-word;">{!! $risalah[0]->agenda !!}</td>
                                           </tr>
                                       </tbody>
                                   </table>

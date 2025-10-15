@@ -24,76 +24,60 @@
                   </div>
 
                   <script>
-                      $('#store').click(function(e) {
+                      $('#store').on('click', function(e) {
                           e.preventDefault();
 
                           const start = $('#start').val();
                           const end = $('#end').val();
-                          const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+                          const csrf = $('meta[name="csrf-token"]').attr('content');
 
                           if (!start || !end) {
-                              Swal.fire('Error', 'Tanggal mulai dan selesai wajib diisi.', 'error');
-                              return;
+                              return Swal.fire('Error', 'Tanggal mulai dan selesai wajib diisi.', 'error');
                           }
 
                           axios.post('/getExport', {
-                              start,
-                              end
-                          }, {
-                              headers: {
-                                  'X-CSRF-TOKEN': csrfToken 
-                              },
-                              responseType: 'blob'
-                          }).then((response) => {
-                              const disposition = response.headers['content-disposition'];
-                              let filename = 'laporan.xlsx'; // Nama default jika header tidak ditemukan
-                              if (disposition) {
-                                  const filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
-                                  const matches = filenameRegex.exec(disposition);
-                                  if (matches != null && matches[1]) {
-                                      filename = matches[1].replace(/['"]/g, '');
-                                  }
-                              }
+                                  start,
+                                  end
+                              }, {
+                                  headers: {
+                                      'X-CSRF-TOKEN': csrf
+                                  },
+                                  responseType: 'blob'
+                              })
+                              .then(({
+                                  data,
+                                  headers
+                              }) => {
+                                  const filename = headers['content-disposition']?.match(/filename="?([^"]+)"?/)?.[1] || 'laporan.xlsx';
+                                  const url = URL.createObjectURL(new Blob([data]));
+                                  $('<a>')
+                                      .attr({
+                                          href: url,
+                                          download: filename
+                                      })
+                                      .appendTo('body')[0].click();
+                                  URL.revokeObjectURL(url);
 
-                              // 2. Buat URL sementara untuk data biner (blob)
-                              const blob = new Blob([response.data], {
-                                  type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+                                  Swal.fire({
+                                      title: 'Berhasil',
+                                      icon: 'success',
+                                      text: 'Data berhasil diexport!',
+                                      position: 'top-end',
+                                      showConfirmButton: false,
+                                      width: 400,
+                                      timer: 3000
+                                  });
+                              })
+                              .catch(() => {
+                                  Swal.fire({
+                                      title: 'Error',
+                                      icon: 'error',
+                                      text: 'Export gagal',
+                                      position: 'top-end',
+                                      showConfirmButton: false,
+                                      width: 400,
+                                      timer: 3000
+                                  });
                               });
-                              const url = window.URL.createObjectURL(blob);
-
-                              // 3. Buat elemen link tersembunyi
-                              const a = document.createElement('a');
-                              a.style.display = 'none';
-                              a.href = url;
-                              a.download = filename; // Atur nama file unduhan
-                              document.body.appendChild(a);
-
-                              // 4. Klik link tersebut secara otomatis untuk memulai unduhan
-                              a.click();
-
-                              // 5. Hapus elemen dan URL setelah selesai
-                              window.URL.revokeObjectURL(url);
-                              a.remove();
-                              Swal.fire({
-                                  title: 'Berhasil...',
-                                  position: 'top-end',
-                                  icon: 'success',
-                                  text: 'Berhasil! Data Berhasil Diexport.',
-                                  showConfirmButton: false,
-                                  width: '400px',
-                                  timer: 3000
-                              })
-                          }).catch((err) => {
-                              console.log(err);
-                              Swal.fire({
-                                  title: 'Error',
-                                  position: 'top-end',
-                                  icon: 'error',
-                                  text: "Export Gagal",
-                                  showConfirmButton: false,
-                                  width: '400px',
-                                  timer: 3000
-                              })
-                          })
-                      })
+                      });
                   </script>

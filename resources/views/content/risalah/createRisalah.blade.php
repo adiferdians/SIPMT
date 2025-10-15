@@ -92,7 +92,7 @@
                 </div>
                 <div class="form-group">
                     <label for="agenda">Agenda</label>
-                    <textarea class="form-control" id="agenda" rows="8" placeholder="Agenda"></textarea>
+                    <div id="agenda"></div>
                 </div>
             </div>
         </div>
@@ -104,6 +104,10 @@
 </div>
 
 <script>
+    var quill = new Quill('#agenda', {
+        theme: 'snow'
+    });
+
     $('#store').click(function() {
         const unit_kerja = $('#unit_kerja').val();
         const tgl = $('#tgl').val();
@@ -114,7 +118,7 @@
         const transkrip = $('#transkrip').val();
         const editor = $('#editor').val();
         const rapat = $('#rapat').val();
-        const agenda = $('#agenda').val();
+        const agenda = quill.root.innerHTML;
 
         axios.post('/storeRisalah', {
             unit_kerja,
