@@ -19,6 +19,8 @@ use App\Http\Controllers\UnitKerjaController;
 */
 
 Route::get('/', [IndexController::class, 'index']);
+
+
 Route::get('/anggota', [AnggotaController::class, 'index']);
 Route::get('/createAnggota', [AnggotaController::class, 'createAnggota']);
 Route::post('/storeAnggota', [AnggotaController::class, 'store']);
