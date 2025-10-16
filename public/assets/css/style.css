@@ -22264,12 +22264,12 @@ code {
   opacity: 0.5;
   font-size: 0.75rem;
 }
-.card.card-tale {
-  background: #7DA0FA;
+.card.card-success {
+  background: #8ecc9b;
   color: #ffffff;
 }
-.card.card-tale:hover {
-  background: #96b2fb;
+.card.card-success:hover {
+  background: #a8f2b8;
 }
 .card.card-dark-blue {
   background: #4747A1;
@@ -22278,12 +22278,12 @@ code {
 .card.card-dark-blue:hover {
   background: #5050b2;
 }
-.card.card-light-blue {
-  background: #7978E9;
+.card.card-warning {
+  background: #f7cc7f;
   color: #ffffff;
 }
-.card.card-light-blue:hover {
-  background: #8f8eed;
+.card.card-warning:hover {
+  background: #ffe383;
 }
 .card.card-light-danger {
   background: #F3797E;
