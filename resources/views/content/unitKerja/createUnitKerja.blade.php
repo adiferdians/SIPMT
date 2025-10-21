@@ -4,7 +4,7 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="nama">Nama Unit Kerja</label>
-                                      <input type="text" class="form-control" id="nama" placeholder="Nama Unit Kerja" >
+                                      <input type="text" class="form-control" id="nama" placeholder="Nama Unit Kerja">
                                   </div>
                               </div>
                           </div>
@@ -19,11 +19,14 @@
                       </div>
                       <div class="btn-modal">
                           <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
-                          <button class="btn btn-warning">Cancel</button>
+                          <button class="btn btn-warning" id="cancle">Cancel</button>
                       </div>
                   </div>
 
                   <script>
+                      $('#cancle').click(function() {
+                          $('#myModal').modal('hide');
+                      })
 
                       $('#store').click(function() {
                           const nama = $('#nama').val();
@@ -45,8 +48,8 @@
                                   location.reload();
                               })
                           }).catch((err) => {
-                            console.log(err);
-                            
+                              console.log(err);
+
                               Swal.fire({
                                   title: 'Error',
                                   position: 'top-end',

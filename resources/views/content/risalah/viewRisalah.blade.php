@@ -85,14 +85,16 @@
                   </div>
                   <div class=" btn-modal">
                       <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
-                      <button class="btn btn-warning">Cancel</button>
+                      <button class="btn btn-warning" id="cancle">Cancel</button>
                   </div>
                   </div>
 
                   <script>
-                      $('#store').click(function() {
-                          console.log("sapi");
+                      $('#cancle').click(function() {
+                          $('#myModal').modal('hide');
+                      })
 
+                      $('#store').click(function() {
                           const nama = $('#nama').val();
                           const nip = $('#nip').val();
                           const telepon = $('#telepon').val();

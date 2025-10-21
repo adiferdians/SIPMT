@@ -99,7 +99,7 @@
     </div>
     <div class="btn-modal">
         <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
-        <button class="btn btn-warning">Cancel</button>
+        <button class="btn btn-warning" id="cancle">Cancel</button>
     </div>
 </div>
 
@@ -107,6 +107,10 @@
     var quill = new Quill('#agenda', {
         theme: 'snow'
     });
+
+    $('#cancle').click(function() {
+        $('#myModal').modal('hide');
+    })
 
     $('#store').click(function() {
         const unit_kerja = $('#unit_kerja').val();
