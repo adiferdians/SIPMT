@@ -40,10 +40,18 @@
                                      <td class="font-weight-bold">{{$item->nip}}</td>
                                      <td>{{$item->telepon}}</td>
                                      <td class="font-weight-medium">
-                                         <!-- <div class="badge badge-success">{{$item->status}}</div> -->
+                                         @php
+                                         $uniqueId = 'fs' . $item->id;
+                                         $isChecked = (strtolower($item->status) === 'aktif');
+                                         @endphp
                                          <div class="flipswitch">
-                                             <input checked="" id="fs" class="flipswitch-cb" name="flipswitch" type="checkbox">
-                                             <label for="fs" class="flipswitch-label">
+                                             <input
+                                                 id="{{ $uniqueId }}"
+                                                 class="flipswitch-cb"
+                                                 name="flipswitch{{$item->id}}"
+                                                 type="checkbox"
+                                                 {{ $isChecked ? 'checked' : '' }}>
+                                             <label for="{{ $uniqueId }}" class="flipswitch-label">
                                                  <div class="flipswitch-inner"></div>
                                                  <div class="flipswitch-switch"></div>
                                              </label>
@@ -146,6 +154,58 @@
              }
          });
      }
+
+     $('.flipswitch-cb').on('change', function() {
+         const $switchElement = $(this);
+
+         const newIsChecked = $switchElement.is(':checked');
+         const id = $switchElement.attr('id');
+         const memberId = id.replace('fs', '');
+         const newStatus = newIsChecked ? 'aktif' : 'cuti';
+
+         const oldIsChecked = !newIsChecked;
+
+         Swal.fire({
+             title: 'Apakah anda yakin akan merubah status Karyawan?',
+             icon: 'warning',
+             showCancelButton: true,
+             confirmButtonColor: '#3085d6',
+             cancelButtonColor: '#d33',
+             cancelButtonText: 'Batal',
+             confirmButtonText: 'Ubah'
+         }).then((result) => {
+             if (result.isConfirmed) {
+                 axios.post('/ubahStatustoreAnggota/' + memberId, {
+                         status: newStatus,
+                         _token: '{{ csrf_token() }}' 
+                     })
+                     .then(() => {
+                         Swal.fire({
+                             title: 'Success',
+                             position: 'top-end',
+                             icon: 'success',
+                             text: 'Status Telah diubah!',
+                             showConfirmButton: false,
+                             timer: 1500
+                         });
+                     })
+                     .catch((err) => {
+                         Swal.fire({
+                             title: 'Error',
+                             position: 'top-end',
+                             icon: 'error',
+                             text: 'Terjadi kesalahan saat memperbarui status.',
+                             showConfirmButton: false,
+                             timer: 1500
+                         });
+
+                         $switchElement.prop('checked', oldIsChecked);
+                     });
+             } else {
+                 $switchElement.prop('checked', oldIsChecked);
+             }
+         });
+     });
  </script>
 
  @endsection

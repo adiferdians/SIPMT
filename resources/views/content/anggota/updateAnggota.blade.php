@@ -66,7 +66,7 @@
                       </div>
                       <div class="btn-modal">
                           <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
-                          <button class="btn btn-warning">Cancel</button>
+                          <button class="btn btn-warning" id="cancle">Cancel</button>
                       </div>
                   </div>
 
@@ -117,5 +117,9 @@
                                   timer: 3000
                               })
                           })
+                      })
+
+                      $('#cancle').click(function() {
+                          $('#myModal').modal('hide');
                       })
                   </script>
