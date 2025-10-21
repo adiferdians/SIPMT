@@ -56,7 +56,7 @@ class AnggotaController extends Controller
                 ]
             ], 422);
         }
-        
+
         DB::beginTransaction();
         try {
             $data = [
@@ -104,6 +104,40 @@ class AnggotaController extends Controller
         return view('content.anggota.updateAnggota', [
             'anggota' => $anggota
         ]);
+    }
+
+    public function ubahStatus(Request $request, $id)
+    {
+        $validate = Validator::make($request->all(), [
+            'status'   => 'required'
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => [
+                    'message' => 'Validation Vailed!!',
+                    'details' => $validate->errors()->all()
+                ]
+            ], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $data = [
+                'status' => $request->status,
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            Anggota::where('id', $id)->update($data);
+            DB::commit();
+
+            return response()->json(['success' => true, 'message' => 'Status berhasil diubah', 'data' => $data], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['success' => false, 'messages' => $e->getMessage()], 400);
+        }
     }
 
     /**

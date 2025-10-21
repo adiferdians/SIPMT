@@ -108,8 +108,8 @@
 .flipswitch-inner:after {
     content: "CUTI";
     padding-right: 5px;
-    background-color: #ebebeb;
-    color: #888888;
+    background-color: #ff0e0e;
+    color: #ffffff;
     text-align: right;
 }
 

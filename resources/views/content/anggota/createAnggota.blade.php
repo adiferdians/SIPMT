@@ -4,19 +4,19 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="nama">Nama</label>
-                                      <input type="text" class="form-control" id="nama" placeholder="Nama" value="Adi Ferdian">
+                                      <input type="text" class="form-control" id="nama" placeholder="Nama">
                                   </div>
                                   <div class="form-group">
                                       <label for="nip">NIP</label>
-                                      <input type="email" class="form-control" id="nip" placeholder="NIP" value="199608022025061004">
+                                      <input type="email" class="form-control" id="nip" placeholder="NIP">
                                   </div>
                                   <div class="form-group">
                                       <label for="Telepon">Telepon</label>
-                                      <input type="text" class="form-control" id="telepon" placeholder="Telepon" value="085943290055">
+                                      <input type="text" class="form-control" id="telepon" placeholder="Telepon">
                                   </div>
                                   <div class="form-group">
                                       <label for="email">Email</label>
-                                      <input type="email" class="form-control" id="email" placeholder="Email" value="adiferdian7@gmail.com">
+                                      <input type="email" class="form-control" id="email" placeholder="Email">
                                   </div>
 
                               </div>
@@ -25,11 +25,11 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="Pangkat">Pangkat</label>
-                                      <input type="text" class="form-control" id="pangkat" placeholder="Pangkat" value="III/a">
+                                      <input type="text" class="form-control" id="pangkat" placeholder="Pangkat">
                                   </div>
                                   <div class="form-group">
                                       <label for="jabatan">Jabatan</label>
-                                      <input type="text" class="form-control" id="jabatan" placeholder="Jabatan" value="Penata Muda">
+                                      <input type="text" class="form-control" id="jabatan" placeholder="Jabatan">
                                   </div>
                                   <div class="form-group" style="display: flex;">
                                       <div class="col-md-6 grid-margin separasi">
@@ -66,12 +66,11 @@
                       </div>
                       <div class="btn-modal">
                           <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
-                          <button class="btn btn-warning">Cancel</button>
+                          <button class="btn btn-warning" id="cancle">Cancel</button>
                       </div>
                   </div>
 
                   <script>
-
                       $('#store').click(function() {
                           const nama = $('#nama').val();
                           const nip = $('#nip').val();
@@ -90,7 +89,7 @@
                               email,
                               status,
                               role,
-                              jk, 
+                              jk,
                               jabatan,
                               pangkat
                           }).then((response) => {
@@ -106,8 +105,8 @@
                                   location.reload();
                               })
                           }).catch((err) => {
-                            console.log(err);
-                            
+                              console.log(err);
+
                               Swal.fire({
                                   title: 'Error',
                                   position: 'top-end',
@@ -118,5 +117,9 @@
                                   timer: 3000
                               })
                           })
+                      })
+
+                      $('#cancle').click(function() {
+                          $('#myModal').modal('hide');
                       })
                   </script>

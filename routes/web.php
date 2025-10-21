@@ -25,6 +25,7 @@ Route::get('/anggota', [AnggotaController::class, 'index']);
 Route::get('/createAnggota', [AnggotaController::class, 'createAnggota']);
 Route::post('/storeAnggota', [AnggotaController::class, 'store']);
 Route::post('/storeAnggota/{id}', [AnggotaController::class, 'store']);
+Route::post('/ubahStatustoreAnggota/{id}', [AnggotaController::class, 'ubahStatus']);
 Route::get('/viewAnggota/{id}', [AnggotaController::class, 'showAnggota']);
 Route::get('/editAnggota/{id}', [AnggotaController::class, 'editAnggota']);
 Route::post('deleteAnggota/{id}', [AnggotaController::class, 'destroyAnggota']);
