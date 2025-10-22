@@ -45,13 +45,13 @@
                 <ul class="navbar-nav navbar-nav-right">
                     <li class="nav-item nav-profile dropdown">
                         <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" id="profileDropdown">
-                            <img src="assets/images/faces/face28.jpg" alt="profile" />
+                            <img src="assets/images/faces/user.png" alt="profile" />
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
-                            <a class="dropdown-item">
-                                <i class="ti-settings text-primary" id="sapi"></i> Settings </a>
-                            <a class="dropdown-item">
-                                <i class="ti-power-off text-primary" id="logout"></i> Logout </a>
+                            <a class="dropdown-item" id="seting">
+                                <i class="ti-settings text-primary"></i> Settings </a>
+                            <a class="dropdown-item" id="logout">
+                                <i class="ti-power-off text-primary"></i> Logout </a>
                         </div>
                     </li>
                 </ul>
@@ -130,7 +130,7 @@
         <!-- page-body-wrapper ends -->
     </div>
     <script>
-        $('#logout').click(function() {
+        $('#seting').click(function() {
             console.log("sapi");
         });
     

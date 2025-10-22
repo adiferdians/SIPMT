@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Login</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    
+
     <link rel="stylesheet" href="assets/css/style-custom.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -18,8 +18,8 @@
     <div class="page">
         <div class="container">
             <div class="left">
-                <div class="login">Log In</div>
-                <div class="eula">Selamat pagi, silahkan Log In untuk mengakses aplikasi.</div>
+                <div class="login">SIPMT</div>
+                <div class="eula">Sistem Informasi Penjadwalan dan Management Tugas Perisalah DPD RI.</div>
             </div>
             <div class="right">
                 <svg viewBox="0 0 320 300">

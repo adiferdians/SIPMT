@@ -207,6 +207,7 @@ body {
   font-size: 14px;
   line-height: 1.5;
   margin: 40px;
+  text-align: justify;
 }
 .right {
   background: #474A59;
