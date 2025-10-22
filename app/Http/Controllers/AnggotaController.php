@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AnggotaController extends Controller
 {
@@ -69,6 +70,7 @@ class AnggotaController extends Controller
                 'jk' => $request->jk,
                 'email' => $request->email,
                 'jabatan' => $request->jabatan,
+                'password' => Hash::make('dpd123'),
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),
             ];

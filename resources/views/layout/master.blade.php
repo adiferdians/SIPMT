@@ -49,9 +49,9 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
                             <a class="dropdown-item">
-                                <i class="ti-settings text-primary"></i> Settings </a>
+                                <i class="ti-settings text-primary" id="sapi"></i> Settings </a>
                             <a class="dropdown-item">
-                                <i class="ti-power-off text-primary"></i> Logout </a>
+                                <i class="ti-power-off text-primary" id="logout"></i> Logout </a>
                         </div>
                     </li>
                 </ul>
@@ -67,7 +67,7 @@
             <nav class="sidebar sidebar-offcanvas" id="sidebar">
                 <ul class="nav">
                     <li class="nav-item @yield('Dashboard')">
-                        <a class="nav-link" href="/">
+                        <a class="nav-link" href="/dashboard">
                             <i class="icon-grid menu-icon"></i>
                             <span class="menu-title">Dashboard</span>
                         </a>
@@ -129,8 +129,44 @@
         </div>
         <!-- page-body-wrapper ends -->
     </div>
+    <script>
+        $('#logout').click(function() {
+            console.log("sapi");
+        });
+    
+        
+        $('#logout').click(function() {
+            console.log("sapi");
+    
+            Swal.fire({
+                title: 'Apa anda yakin ingin keluar?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Keluar',
+                cancelButtonText: 'Batal',
+                reverseButtons: true
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.get('/logout')
+                        .then(response => {
+                            window.location.href = '/l051n';
+                        })
+                        .catch(error => {
+                            console.log(error.response.data);
+                        });
+    
+                } else if (
+                    result.dismiss === Swal.DismissReason.cancel
+                ) {
+                    Swal.fire(
+                        'Batal',
+                        'error'
+                    )
+                }
+            })
+        })
+    </script>
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="assets/js/template.js"></script>
 </body>
-
 </html>
