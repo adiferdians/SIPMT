@@ -1,3 +1,7 @@
+.export{
+  color: white;
+}
+
 .ql-toolbar, .ql-container { 
   position: relative !important;
 }

@@ -30,7 +30,9 @@
                                      <th>NIP</th>
                                      <th>Telepon</th>
                                      <th>Status</th>
+                                     @if (session('role') === 'admin')
                                      <th style="display: flex; justify-content: center;">Action</th>
+                                     @endif
                                  </tr>
                              </thead>
                              <tbody>
@@ -39,6 +41,7 @@
                                      <td class="font-weight-bold">{{$item->nama}}</td>
                                      <td class="font-weight-bold">{{$item->nip}}</td>
                                      <td>{{$item->telepon}}</td>
+                                     @if (session('role') === 'admin')
                                      <td class="font-weight-medium">
                                          @php
                                          $uniqueId = 'fs' . $item->id;
@@ -57,10 +60,30 @@
                                              </label>
                                          </div>
                                      </td>
+                                     @else
+                                     <td>
+                                         <button class="btn
+                                            @switch($item->status)
+                                                @case('aktif')
+                                                    btn-info
+                                                    @break
+                                                @case('cuti')
+                                                    btn-danger
+                                                    @break
+                                            @endswitch
+                                            view-btn">
+                                             {{ $item->status }}
+                                         </button>
+                                     </td>
+                                     @endif
                                      <td style="display: flex; justify-content: center;">
+                                         @if (session('role') === 'admin')
                                          <button type="button" class="btn btn-outline-info" onclick="editAnggota({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
+                                         @endif
                                          <button type="button" class="btn btn-outline-secondary" onclick="viewAnggota({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
+                                         @if (session('role') === 'admin')
                                          <button type="button" class="btn btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
+                                         @endif
                                      </td>
                                  </tr>
                                  @endforeach
@@ -177,7 +200,7 @@
              if (result.isConfirmed) {
                  axios.post('/ubahStatustoreAnggota/' + memberId, {
                          status: newStatus,
-                         _token: '{{ csrf_token() }}' 
+                         _token: '{{ csrf_token() }}'
                      })
                      .then(() => {
                          Swal.fire({
