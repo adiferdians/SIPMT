@@ -22265,18 +22265,18 @@ code {
   font-size: 0.75rem;
 }
 .card.card-success {
-  background: #8ecc9b;
+  background: #74a67e;
   color: #ffffff;
 }
 .card.card-success:hover {
-  background: #a8f2b8;
+  background: #85c092;
 }
 .card.card-dark-blue {
   background: #4747A1;
   color: #ffffff;
 }
 .card.card-dark-blue:hover {
-  background: #5050b2;
+  background: #6161d8;
 }
 .card.card-warning {
   background: #f7cc7f;
@@ -24127,7 +24127,7 @@ table.dataTable tbody td.select-checkbox:after {
   border-radius: 8px;
 }
 .sidebar .nav .nav-item.active > .nav-link {
-  background: #4B49AC;
+  background: #6b9e31;
   position: relative;
 }
 .sidebar .nav .nav-item.active > .nav-link i,
@@ -24152,7 +24152,7 @@ table.dataTable tbody td.select-checkbox:after {
   margin-top: 0.2rem;
 }
 .sidebar .nav:not(.sub-menu) > .nav-item:hover > .nav-link, .sidebar .nav:not(.sub-menu) > .nav-item:hover[aria-expanded=true] {
-  background: #4B49AC;
+  background: #6b9e31;
   color: #fff;
 }
 .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link {
@@ -24160,7 +24160,7 @@ table.dataTable tbody td.select-checkbox:after {
 }
 .sidebar .nav:not(.sub-menu) > .nav-item > .nav-link[aria-expanded=true] {
   border-radius: 8px 8px 0 0;
-  background: #4B49AC;
+  background: #6b9e31;
   color: #fff;
 }
 .sidebar .nav:not(.sub-menu) > .nav-item.active {
@@ -24171,7 +24171,7 @@ table.dataTable tbody td.select-checkbox:after {
   margin-top: 0;
   list-style: none;
   padding: 0.25rem 0 0 3.07rem;
-  background: #4B49AC;
+  background: #6b9e31;
   padding-bottom: 12px;
 }
 .sidebar .nav.sub-menu .nav-item {
@@ -25203,7 +25203,7 @@ table.dataTable tbody td.select-checkbox:after {
     display: none;
   }
   .sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link:hover .menu-title {
-    background: #4B49AC;
+    background: #6b9e31;
   }
   .sidebar-dark.sidebar-icon-only .sidebar .nav .nav-item.hover-open .nav-link:hover .menu-title {
     background: #232227;

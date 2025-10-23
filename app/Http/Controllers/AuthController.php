@@ -24,10 +24,21 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            $user = Auth::user();
+
+            session([
+                'nama' => $user->nama,
+                'role' => $user->role,
+            ]);
+            // dd(session('nama'), session('role'));
 
             return response()->json([
                 'OUT_STAT' => true,
                 'MESSAGE' => 'Login berhasil!',
+                'USER' => [
+                    'name' => session('nama'),
+                    'role' => session('role'),
+                ],
             ]);
         }
 

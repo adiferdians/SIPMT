@@ -197,8 +197,8 @@
              text: "Data yang dihapus tidak dapat dipulihkan!",
              icon: 'warning',
              showCancelButton: true,
-             confirmButtonText: 'Delete',
-             cancelButtonText: 'Cancle',
+             confirmButtonText: 'Hapus',
+             cancelButtonText: 'Batal',
              reverseButtons: true
          }).then((result) => {
              if (result.isConfirmed) {

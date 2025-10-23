@@ -120,8 +120,8 @@
              text: "The deleted data cannot be recovered!",
              icon: 'warning',
              showCancelButton: true,
-             confirmButtonText: 'Delete',
-             cancelButtonText: 'Cancle',
+             confirmButtonText: 'Hapus',
+             cancelButtonText: 'Batal',
              reverseButtons: true
          }).then((result) => {
              if (result.isConfirmed) {

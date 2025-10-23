@@ -18,7 +18,7 @@
     <link rel="stylesheet" href="assets/vendors/mdi/css/materialdesignicons.min.css">
     <!-- endinject -->
     <!-- Plugin css for this page -->
-    <link rel="stylesheet" type="text/css" href="assets/js/select.dataTables.min.css">
+    <!-- <link rel="stylesheet" type="text/css" href="assets/js/select.dataTables.min.css"> -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -32,11 +32,10 @@
 
 <body>
     <div class="container-scroller">
-        <!-- partial:partials/_navbar.html -->
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-                <a class="navbar-brand brand-logo me-5" href="index.html"><img src="assets/images/logo.svg" class="me-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.svg" alt="logo" /></a>
+                <a class="navbar-brand brand-logo me-5" href="index.html"><img src="assets/images/logo.png" class="me-2" alt="logo" /></a>
+                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.png" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <button class="navbar-toggler navbar-toggler align-self-center" type="button" data-toggle="minimize">
@@ -133,11 +132,11 @@
         $('#seting').click(function() {
             console.log("sapi");
         });
-    
-        
+
+
         $('#logout').click(function() {
             console.log("sapi");
-    
+
             Swal.fire({
                 title: 'Apa anda yakin ingin keluar?',
                 icon: 'warning',
@@ -154,7 +153,7 @@
                         .catch(error => {
                             console.log(error.response.data);
                         });
-    
+
                 } else if (
                     result.dismiss === Swal.DismissReason.cancel
                 ) {
@@ -169,4 +168,5 @@
     <script src="assets/vendors/js/vendor.bundle.base.js"></script>
     <script src="assets/js/template.js"></script>
 </body>
+
 </html>
