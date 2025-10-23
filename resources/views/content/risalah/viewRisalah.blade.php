@@ -84,62 +84,12 @@
                       </div>
                   </div>
                   <div class=" btn-modal">
-                      <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
-                      <button class="btn btn-warning" id="cancle">Cancel</button>
+                      <button class="btn btn-secondary" id="cancle">Tutup</button>
                   </div>
                   </div>
 
                   <script>
                       $('#cancle').click(function() {
                           $('#myModal').modal('hide');
-                      })
-
-                      $('#store').click(function() {
-                          const nama = $('#nama').val();
-                          const nip = $('#nip').val();
-                          const telepon = $('#telepon').val();
-                          const status = $('#status').val();
-                          const role = $('#role').val();
-                          const jk = $('#jk').val();
-
-                          const pangkat = $('#pangkat').val();
-                          const jabatan = $('#jabatan').val();
-                          const email = $('#email').val();
-
-                          console.log(nama, nip, telepon, status, jk);
-
-                          axios.post('/storerisalah', {
-                              nama,
-                              nip,
-                              telepon,
-                              email,
-                              status,
-                              role,
-                              jk,
-                              jabatan,
-                              pangkat
-                          }).then((response) => {
-                              Swal.fire({
-                                  title: 'Success...',
-                                  position: 'top-end',
-                                  icon: 'success',
-                                  text: 'Success! Data added successfully.',
-                                  showConfirmButton: false,
-                                  width: '400px',
-                                  timer: 3000
-                              }).then((response) => {
-                                  location.reload();
-                              })
-                          }).catch((err) => {
-                              Swal.fire({
-                                  title: 'Error',
-                                  position: 'top-end',
-                                  icon: 'error',
-                                  text: err.response.data.error.details,
-                                  showConfirmButton: false,
-                                  width: '400px',
-                                  timer: 3000
-                              })
-                          })
                       })
                   </script>

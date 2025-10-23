@@ -18,8 +18,8 @@
                           </div>
                       </div>
                       <div class="btn-modal">
-                          <button type="submit" id="store" class="btn btn-primary me-2">Submit</button>
-                          <button class="btn btn-warning" id="cancle">Cancel</button>
+                          <button type="submit" id="store" class="btn btn-primary me-2">Kirim</button>
+                          <button class="btn btn-warning" id="cancle">Batal</button>
                       </div>
                   </div>
 
