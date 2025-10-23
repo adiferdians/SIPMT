@@ -71,7 +71,7 @@
                                                     btn-danger
                                                     @break
                                             @endswitch
-                                            view-btn">
+                                            view-btn statusA">
                                              {{ $item->status }}
                                          </button>
                                      </td>

@@ -1,9 +1,15 @@
-.export{
-  color: white;
+.statusA {
+    width: 80px;
+    border-radius: 7px;
 }
 
-.ql-toolbar, .ql-container { 
-  position: relative !important;
+.export {
+    color: white;
+}
+
+.ql-toolbar,
+.ql-container {
+    position: relative !important;
 }
 
 .form-group label {
@@ -16,7 +22,7 @@
 }
 
 select.form-select {
-  outline: 2px solid #636363;;
+    outline: 2px solid #636363;
 }
 
 .table-title {
@@ -155,4 +161,3 @@ select.form-select {
 .flipswitch-cb:checked + .flipswitch-label .flipswitch-switch {
     right: 0;
 }
-
