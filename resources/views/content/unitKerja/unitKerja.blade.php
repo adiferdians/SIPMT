@@ -1,7 +1,7 @@
  @extends('layout.master')
  @section('Pendukung', 'active')
  @section('unit', 'active')
- @section('title', 'Ruang Rapat')
+ @section('title', 'Unit Kerja')
  @section('content')
 
  <div class="content-wrapper">

@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Anggota; // Pastikan Anda mengimpor Model Anggota Anda
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -27,10 +28,10 @@ class AuthController extends Controller
             $user = Auth::user();
 
             session([
+                'id' => $user->id,
                 'nama' => $user->nama,
                 'role' => $user->role,
             ]);
-            // dd(session('nama'), session('role'));
 
             return response()->json([
                 'OUT_STAT' => true,

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIPMT</title>
+    <title>SIPMT @yield('title')</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -132,13 +132,11 @@
     </div>
     <script>
         $('#seting').click(function() {
-            console.log("sapi");
+            $(location).attr('href', '/ubahPassword');
         });
 
 
         $('#logout').click(function() {
-            console.log("sapi");
-
             Swal.fire({
                 title: 'Apa anda yakin ingin keluar?',
                 icon: 'warning',

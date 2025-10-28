@@ -56,6 +56,10 @@
     </div>
 </body>
 <script>
+    $(function() {
+        $('#email').focus();
+    });
+
     $('#submit').on('click', function(e) {
         e.preventDefault(); // 🔒 Mencegah form reload
 

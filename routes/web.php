@@ -21,7 +21,9 @@ use App\Http\Controllers\UnitKerjaController;
 
 
 
-Route::get('/l051n', [AuthController::class, 'index'])->name('login');
+Route::get('/{path?}', [AuthController::class, 'index'])
+    ->where('path', 'l051n|')
+    ->name('login');
 Route::post('/auth', [AuthController::class, 'auth']);
 Route::get('/logout', [AuthController::class, 'logout']);
 
@@ -36,6 +38,9 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/viewAnggota/{id}', [AnggotaController::class, 'showAnggota']);
     Route::get('/editAnggota/{id}', [AnggotaController::class, 'editAnggota']);
     Route::post('deleteAnggota/{id}', [AnggotaController::class, 'destroyAnggota']);
+
+    Route::get('/ubahPassword', [AnggotaController::class, 'ubahPassword']);
+    Route::post('/kirimPassword', [AnggotaController::class, 'kirimPassword']);
 
     Route::get('/risalah', [RisalahController::class, 'index']);
     Route::post('/risalah/changeStatus/{id}', [RisalahController::class, 'changeStatus']);

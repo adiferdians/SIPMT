@@ -1,7 +1,7 @@
 @extends('layout.master')
 @section('content')
 @section('Dashboard', 'active')
-@section('title', 'Certificate')
+@section('title', 'Dashboard')
 
 <!-- partial -->
 <div class="content-wrapper">

@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class AnggotaController extends Controller
 {
@@ -135,6 +136,60 @@ class AnggotaController extends Controller
             DB::commit();
 
             return response()->json(['success' => true, 'message' => 'Status berhasil diubah', 'data' => $data], 201);
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            return response()->json(['success' => false, 'messages' => $e->getMessage()], 400);
+        }
+    }
+
+    public function ubahPassword()
+    {
+        $anggota = Anggota::orderByDesc('id')->get();
+        return view('content.anggota.ubahPassword', [
+            'anggota' => $anggota
+        ]);
+    }
+
+    public function kirimPassword(Request $request)
+    {
+        $id = Session::get('id');
+        $anggota = Anggota::where('id', $id)->first();
+
+        $validate = Validator::make($request->all(), [
+            'passwordLama' => [
+                'required',
+                function ($attribute, $value, $fail) use ($anggota) {
+                    if (!Hash::check($value, $anggota->password)) {
+                        $fail('Password lama tidak sesuai.');
+                    }
+                },
+            ],
+            'passwordBaru' => 'required|min:6',
+            'passwordKonfirmasi' => 'required|min:6|same:passwordBaru',
+        ]);
+
+        if ($validate->fails()) {
+            return response()->json([
+                'success' => false,
+                'error' => [
+                    'message' => 'Validation Vailed!!',
+                    'details' => $validate->errors()->all()
+                ]
+            ], 422);
+        }
+
+        DB::beginTransaction();
+        try {
+            $data = [
+                'password' => Hash::make($request->passwordBaru),
+                'updated_at' => Carbon::now()->toDateTimeString(),
+            ];
+
+            Anggota::where('id', $id)->update($data);
+            DB::commit();
+
+            return response()->json(['success' => true, 'message' => 'Password anda berhasil diubah', 'data' => $data], 201);
         } catch (\Exception $e) {
             DB::rollback();
 

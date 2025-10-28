@@ -17,7 +17,7 @@
                     <div class="col-md-6 grid-margin separasi">
                         <div class="form-group">
                             <label for="tgl">Tanggal</label>
-                            <input type="date" class="form-control" id="tgl" value="{{$risalah[0]->tgl}}">
+                            <input type="date" class="form-control" id="tgl" value="{{ date('Y-m-d', strtotime($risalah[0]->tgl)) }}">
                         </div>
                     </div>
                     <div class="col-md-6 grid-margin separasi">
