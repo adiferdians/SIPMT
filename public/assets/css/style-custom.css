@@ -1,3 +1,14 @@
+.txt-bold {
+    font-weight: bold;
+}
+
+.tugas {
+    max-width:200px; 
+    white-space:nowrap; 
+    overflow:hidden; 
+    text-overflow:ellipsis;
+}
+
 .statusA {
     width: 80px;
     border-radius: 7px;
@@ -32,7 +43,7 @@ select.form-select {
 
 .judul {
     display: grid;
-    align-items: end;
+    align-items: center;
 }
 
 .btn-modal {

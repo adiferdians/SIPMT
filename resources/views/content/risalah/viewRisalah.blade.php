@@ -5,27 +5,30 @@
                                   <table class="table">
                                       <tbody>
                                           <tr>
-                                              <td>Unit</td>
+                                              <td class="txt-bold">Unit</td>
                                               <td>{{$risalah[0]->unit_kerja}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Tanggal</td>
-                                              <td>{{$risalah[0]->tgl}}</td>
+                                              <td  class="txt-bold">Tanggal</td>
+                                              <td>
+                                                  {{ \Carbon\Carbon::parse($risalah[0]->tgl)->locale('id')->dayName }},
+                                                  {{ \Carbon\Carbon::parse($risalah[0]->tgl)->locale('id')->isoFormat('DD MMM YYYY') }}
+                                              </td>
                                           </tr>
                                           <tr>
-                                              <td>Jam</td>
+                                              <td  class="txt-bold">Jam</td>
                                               <td>{{$risalah[0]->jam}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Tempat</td>
+                                              <td  class="txt-bold">Tempat</td>
                                               <td>{{$risalah[0]->tempat}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Perekam 1</td>
+                                              <td  class="txt-bold">Perekam 1</td>
                                               <td>{{$risalah[0]->perekam_1}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Perekam 2</td>
+                                              <td  class="txt-bold">Perekam 2</td>
                                               <td>{{$risalah[0]->perekam_2}}</td>
                                           </tr>
                                       </tbody>
@@ -37,19 +40,19 @@
                                   <table class="table">
                                       <tbody>
                                           <tr>
-                                              <td>Transkrip</td>
+                                              <td class="txt-bold">Transkrip</td>
                                               <td>{{$risalah[0]->transkrip}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Editor</td>
+                                              <td class="txt-bold">Editor</td>
                                               <td>{{$risalah[0]->editor}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Rapat</td>
+                                              <td class="txt-bold">Rapat</td>
                                               <td>{{$risalah[0]->rapat}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Status</td>
+                                              <td class="txt-bold">Status</td>
                                               <td>
                                                   <button class="btn
                                                         @switch($risalah[0]->status)
@@ -74,7 +77,7 @@
                                               </td>
                                           </tr>
                                           <tr>
-                                              <td style="display: grid;">Agenda</td>
+                                              <td style="display: grid;"  class="txt-bold">Agenda</td>
                                               <td style="white-space: normal; word-wrap: break-word;">{!! $risalah[0]->agenda !!}</td>
                                           </tr>
                                       </tbody>

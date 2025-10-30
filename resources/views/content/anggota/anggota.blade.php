@@ -26,13 +26,10 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
-                                     <th>Nama</th>
-                                     <th>NIP</th>
-                                     <th>Telepon</th>
-                                     <th>Status</th>
-                                     @if (session('role') === 'admin')
-                                     <th style="display: flex; justify-content: center;">Action</th>
-                                     @endif
+                                     <th><h5 class="th-text">Nama</h5></th>
+                                     <th><h5 class="th-text">NIP</h5></th>
+                                     <th><h5 class="th-text">Telepon</h5></th>
+                                     <th><h5 class="th-text">Status</h5></th>
                                  </tr>
                              </thead>
                              <tbody>

@@ -20,6 +20,33 @@
      </div>
      <div class="row">
          <div class="col-md-12 grid-margin stretch-card">
+             <div class="card title-card" style="background-color: #cfcfcf;">
+                 <div class="card-body table-title" style="padding: 10px 20px 0px 20px;">
+                     <div class="judul">
+                         <h3 class="font-weight-bold">Filter Data</h3>
+                     </div>
+                     <form method="GET" action="{{ route('risalah.index') }}" class="mb-3 d-flex gap-2 align-items-center">
+                         <input type="text" name="search" value="{{ request('search') }}"
+                             class="form-control" placeholder="Cari rapat atau perekam..." style="max-width: 250px;">
+
+                         <select name="status" class="form-select" style="max-width: 180px;">
+                             <option value="">-- Semua Status --</option>
+                             <option value="Belum Terlaksana" {{ request('status')=='Belum Terlaksana' ? 'selected' : '' }}>Belum Terlaksana</option>
+                             <option value="Perekaman" {{ request('status')=='Perekaman' ? 'selected' : '' }}>Perekaman</option>
+                             <option value="Transkripsi" {{ request('status')=='Transkripsi' ? 'selected' : '' }}>Transkripsi</option>
+                             <option value="Pengeditan" {{ request('status')=='Pengeditan' ? 'selected' : '' }}>Pengeditan</option>
+                             <option value="Risalah OK" {{ request('status')=='Risalah OK' ? 'selected' : '' }}>Risalah OK</option>
+                         </select>
+
+                         <button type="submit" class="btn btn-primary">Filter</button>
+                         <a href="{{ route('risalah.index') }}" class="btn btn-warning">Reset</a>
+                     </form>
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="row">
+         <div class="col-md-12 grid-margin stretch-card">
              <div class="card">
                  <div class="card-body">
                      <div class="table-responsive">
@@ -27,19 +54,19 @@
                              <thead>
                                  <tr>
                                      <th>
-                                         <h4 class="th-text">TANGGAL</h4>
+                                         <h5 class="th-text">TANGGAL</h5>
                                      </th>
                                      <th>
-                                         <h4 class="th-text">JAM</h4>
+                                         <h5 class="th-text">JAM</h5>
                                      </th>
                                      <th>
-                                         <h4 class="th-text">PEREKAM</h4>
+                                         <h5 class="th-text">PEREKAM</h5>
                                      </th>
                                      <th>
-                                         <h4 class="th-text">RAPAT</h4>
+                                         <h5 class="th-text">RAPAT</h5>
                                      </th>
                                      <th class="center">
-                                         <h4 class="th-text">STATUS</h4>
+                                         <h5 class="th-text">STATUS</h5>
                                      </th>
                                  </tr>
                              </thead>

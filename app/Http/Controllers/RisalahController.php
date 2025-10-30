@@ -18,20 +18,46 @@ class RisalahController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $risalah = Risalah::orderByDesc('tgl')->paginate(10);
+        // Mulai query dasar
+        $query = Risalah::query();
+
+        // 🔍 Filter berdasarkan kata kunci pencarian
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('rapat', 'like', "%{$search}%")
+                    ->orWhere('perekam_1', 'like', "%{$search}%")
+                    ->orWhere('tgl', 'like', "%{$search}%");
+            });
+        }
+
+        // 🎯 Filter berdasarkan status (jika dipilih)
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        // ⏰ Urutkan dari tanggal terbaru ke terlama dan paginasi
+        $risalah = $query->orderByDesc('tgl')
+            ->paginate(10)
+            ->withQueryString(); // penting agar pagination tetap mempertahankan filter
+
+        // 🔁 Kirim ke view
         return view('content.risalah.risalah', [
             'risalah' => $risalah
         ]);
     }
+
 
     /**
      * Show the form for creating a new resource.
      */
     public function createRisalah()
     {
-        $anggota = Anggota::orderBy('nama')->get();
+        $anggota = Anggota::where('status', 'aktif')
+            ->orderBy('nama')
+            ->get();
         $unit = UnitKerja::orderBy('nama')->get();
         $ruang = RuangRapat::orderBy('nama')->get();
         return view('content.risalah.createRisalah', [
@@ -111,7 +137,9 @@ class RisalahController extends Controller
      */
     public function editRisalah($id)
     {
-        $anggota = Anggota::orderBy('nama')->get();
+        $anggota = Anggota::where('status', 'aktif')
+            ->orderBy('nama')
+            ->get();
         $risalah = Risalah::where('id', $id)->get();
         $unit = UnitKerja::orderBy('nama')->get();
         $ruang = RuangRapat::orderBy('nama')->get();
