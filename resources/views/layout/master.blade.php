@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIPMT @yield('title')</title>
+    <title>SIPMT - @yield('title')</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -81,6 +81,12 @@
                         <a class="nav-link" href="/anggota">
                             <i class="ti-user menu-icon"></i>
                             <span class="menu-title">Anggota</span>
+                        </a>
+                    </li>
+                    <li class="nav-item @yield('Laporan')">
+                        <a class="nav-link" href="/laporan-harian">
+                            <i class="icon-paper menu-icon"></i>
+                            <span class="menu-title">Laporan Harian</span>
                         </a>
                     </li>
                     @if (session('role') === 'admin')

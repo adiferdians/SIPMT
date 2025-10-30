@@ -5,23 +5,23 @@
                                   <table class="table">
                                       <tbody>
                                           <tr>
-                                              <td>Nama</td>
+                                              <td class="txt-bold">Nama</td>
                                               <td>{{$anggota[0]->nama}}</td>
                                           </tr>
                                           <tr>
-                                              <td>NIP</td>
+                                              <td class="txt-bold">NIP</td>
                                               <td>{{$anggota[0]->nip}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Telepon</td>
+                                              <td class="txt-bold">Telepon</td>
                                               <td>{{$anggota[0]->telepon}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Email</td>
+                                              <td class="txt-bold">Email</td>
                                               <td>{{$anggota[0]->email}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Jenis Kelamin</td>
+                                              <td class="txt-bold">Jenis Kelamin</td>
                                               <td>{{$anggota[0]->jk}}</td>
                                           </tr>
                                       </tbody>
@@ -33,19 +33,19 @@
                                   <table class="table">
                                       <tbody>
                                           <tr>
-                                              <td>Pangkat</td>
+                                              <td class="txt-bold">Pangkat</td>
                                               <td>{{$anggota[0]->pangkat_golongan}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Jabatan</td>
+                                              <td class="txt-bold">Jabatan</td>
                                               <td>{{$anggota[0]->jabatan}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Status</td>
+                                              <td class="txt-bold">Status</td>
                                               <td>{{$anggota[0]->status}}</td>
                                           </tr>
                                           <tr>
-                                              <td>Role</td>
+                                              <td class="txt-bold">Role</td>
                                               <td>{{$anggota[0]->role}}</td>
                                           </tr>
                                       </tbody>

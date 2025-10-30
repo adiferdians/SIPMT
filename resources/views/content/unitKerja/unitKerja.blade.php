@@ -27,10 +27,9 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
-                                     <th>No</th>
-                                     <th>Nama</th>
-                                     <th>Deskripsi</th>
-                                     <th style="display: flex; justify-content: center;">Action</th>
+                                     <th><h5 class="th-text">No</h5></th>
+                                     <th><h5 class="th-text">Nama</h5></th>
+                                     <th><h5 class="th-text">Deskripsi</h5></th>
                                  </tr>
                              </thead>
                              <tbody>
