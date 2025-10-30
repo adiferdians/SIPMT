@@ -31,7 +31,7 @@ class RisalahFactory extends Factory
             'editor' => Anggota::inRandomOrder()->value('nama'),
             'rapat' => $this->faker->words(1, true),
             'agenda' => $this->faker->paragraph,
-            'status' => $this->faker->randomElement(['Perekaman', 'Transkripsi', 'Pengeditan', 'Risalah OK', 'Belum Terlaksana']),
+            'status' => $this->faker->randomElement(['Perekaman', 'Transkripsi', 'Risalah Sementara', 'Risalah Validasi', 'Belum Terlaksana']),
             'created_at' => now(),
             'updated_at' => now(),
         ];

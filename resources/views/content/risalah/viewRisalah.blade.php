@@ -5,7 +5,7 @@
                                   <table class="table">
                                       <tbody>
                                           <tr>
-                                              <td class="txt-bold">Unit</td>
+                                              <td class="txt-bold">Unit Kerja</td>
                                               <td>{{$risalah[0]->unit_kerja}}</td>
                                           </tr>
                                           <tr>
@@ -56,10 +56,10 @@
                                               <td>
                                                   <button class="btn
                                                         @switch($risalah[0]->status)
-                                                            @case('Risalah OK')
+                                                            @case('Risalah Validasi')
                                                                 btn-success
                                                                 @break
-                                                            @case('Pengeditan')
+                                                            @case('Risalah Sementara')
                                                                 btn-info
                                                                 @break
                                                             @case('Transkripsi')

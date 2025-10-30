@@ -53,17 +53,19 @@ class RisalahController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function createRisalah()
+    public function createRisalah(Request $request)
     {
         $anggota = Anggota::where('status', 'aktif')
             ->orderBy('nama')
             ->get();
         $unit = UnitKerja::orderBy('nama')->get();
         $ruang = RuangRapat::orderBy('nama')->get();
+        $date = $request->tgl_agenda;
         return view('content.risalah.createRisalah', [
             'anggota' => $anggota,
             'unit' => $unit,
             'ruang' => $ruang,
+            'tanggal' => $date
         ]);
     }
 

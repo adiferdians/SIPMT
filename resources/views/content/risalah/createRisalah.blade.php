@@ -15,7 +15,7 @@
                     <div class="col-md-6 grid-margin separasi">
                         <div class="form-group">
                             <label for="tgl">Tanggal</label>
-                            <input type="date" class="form-control" id="tgl">
+                            <input type="date" class="form-control" id="tgl" value="{{ $tanggal ?? '' }}">
                         </div>
                     </div>
                     <div class="col-md-6 grid-margin separasi">

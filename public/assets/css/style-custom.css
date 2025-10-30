@@ -1,12 +1,22 @@
+.btn-share {
+    margin: -17px;
+    border-radius: 5px;
+    padding: 15px !important;
+}
+.btn-risalah {
+    margin: 2px;
+    padding: 15px;
+    border-radius: 5px;
+}
 .txt-bold {
     font-weight: bold;
 }
 
 .tugas {
-    max-width:200px; 
-    white-space:nowrap; 
-    overflow:hidden; 
-    text-overflow:ellipsis;
+    max-width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .statusA {
@@ -172,3 +182,5 @@ select.form-select {
 .flipswitch-cb:checked + .flipswitch-label .flipswitch-switch {
     right: 0;
 }
+
+/* calender css */

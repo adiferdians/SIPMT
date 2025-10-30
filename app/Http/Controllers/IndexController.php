@@ -6,39 +6,66 @@ use Illuminate\Http\Request;
 use App\Models\Anggota;
 use App\Models\Risalah;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Carbon;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $cuaca = $this->getWeather();
-        // dd($cuaca);
+        $risalah = Risalah::all();
         $cuti = Anggota::where('status', 'cuti')->count();
         $anggota = Anggota::count();
-        $akanDatang = Risalah::where('status', 'Belum Terlaksana')->count();
+        $akanDatang = Risalah::whereDate('tgl', '=', Carbon::today())->count();
         $dalamProses = Risalah::whereIn('status', ['Perekaman', 'Pengeditan', 'Transkripsi'])->count();
-        $selesai = Risalah::where('status', 'Risalah OK')->count();
+        $selesai = Risalah::where('status', 'Risalah OK')
+            ->where('tgl', '>=', Carbon::now()->subDays(30))
+            ->count();
         return view('index', [
+            'risalah' => $risalah,
             'cuti' => $cuti,
             'anggota' => $anggota,
             'akanDatang' => $akanDatang,
             'dalamProses' => $dalamProses,
             'selesai' => $selesai,
-            'cuaca' => $cuaca,
         ]);
     }
 
-    public function getWeather()
+    public function getAgenda(Request $request)
     {
-        $apiKey = env('OPEN_WEATHER_MAP_KEY');
-        $cityName = 'Jakarta';
+        $data = Risalah::whereBetween('tgl', [$request->start, $request->end])->get();
+        $events = [];
 
-        $response = Http::get("https://api.openweathermap.org/data/2.5/weather?q={$cityName}&appid={$apiKey}&units=metric");
+        foreach ($data as $risalah) {
 
-        if ($response->successful()) {
-            return $response->json();
+            // 2. Tentukan warna berdasarkan status (sesuai kartu statistik Anda)
+            $color = '#777777'; // Warna default (abu-abu)
+            $textColor = '#fff'; // Teks putih
+
+            if ($risalah->status == 'Belum Terlaksana') {
+                // Biru (dari card-dark-blue)
+                $color = '#0d6efd';
+            } elseif (in_array($risalah->status, ['Perekaman', 'Risalah Sementara', 'Transkripsi'])) {
+                // Kuning (dari card-warning)
+                $color = '#ffc107';
+                $textColor = '#000'; // Teks hitam agar terbaca di kuning
+            } elseif ($risalah->status == 'Risalah Validasi') {
+                // Hijau (dari card-success)
+                $color = '#198754';
+            }
+
+            $events[] = [
+                // TAMBAHKAN 'id' DI SINI
+                'id'    => $risalah->id,
+
+                'title' => $risalah->rapat, // Asumsi nama kolom
+                'start' => $risalah->tgl, // Asumsi nama kolom
+
+                'backgroundColor' => $color,
+                'borderColor' => $color,
+                'textColor' => $textColor
+            ];
         }
 
-        return null;
+        return response()->json($events);
     }
 }

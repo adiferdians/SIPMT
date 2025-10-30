@@ -30,6 +30,7 @@ Route::get('/logout', [AuthController::class, 'logout']);
 
 Route::middleware(['auth'])->group(function () {
     Route::get('/dashboard', [IndexController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/agenda', [IndexController::class, 'getAgenda'])->name('kalender.agenda');
 
     Route::get('/anggota', [AnggotaController::class, 'index']);
     Route::get('/createAnggota', [AnggotaController::class, 'createAnggota']);
@@ -46,6 +47,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/risalah', [RisalahController::class, 'index'])->name('risalah.index');
     Route::post('/risalah/changeStatus/{id}', [RisalahController::class, 'changeStatus']);
     Route::get('/createRisalah', [RisalahController::class, 'createRisalah']);
+    Route::get('/createRisalah/{date}', [RisalahController::class, 'createRisalah']);
     Route::post('/storeRisalah', [RisalahController::class, 'store']);
     Route::post('/storeRisalah/{id}', [RisalahController::class, 'store']);
     Route::get('/viewRisalah/{id}', [RisalahController::class, 'showRisalah']);

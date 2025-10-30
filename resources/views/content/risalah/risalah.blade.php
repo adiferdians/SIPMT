@@ -34,8 +34,8 @@
                              <option value="Belum Terlaksana" {{ request('status')=='Belum Terlaksana' ? 'selected' : '' }}>Belum Terlaksana</option>
                              <option value="Perekaman" {{ request('status')=='Perekaman' ? 'selected' : '' }}>Perekaman</option>
                              <option value="Transkripsi" {{ request('status')=='Transkripsi' ? 'selected' : '' }}>Transkripsi</option>
-                             <option value="Pengeditan" {{ request('status')=='Pengeditan' ? 'selected' : '' }}>Pengeditan</option>
-                             <option value="Risalah OK" {{ request('status')=='Risalah OK' ? 'selected' : '' }}>Risalah OK</option>
+                             <option value="Risalah Sementara" {{ request('status')=='Risalah Sementara' ? 'selected' : '' }}>Risalah Sementara</option>
+                             <option value="Risalah Validasi" {{ request('status')=='Risalah Validasi' ? 'selected' : '' }}>Risalah Validasi</option>
                          </select>
 
                          <button type="submit" class="btn btn-primary">Filter</button>
@@ -53,6 +53,7 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
+                                     <th></th>
                                      <th>
                                          <h5 class="th-text">TANGGAL</h5>
                                      </th>
@@ -65,6 +66,9 @@
                                      <th>
                                          <h5 class="th-text">RAPAT</h5>
                                      </th>
+                                     <th>
+                                         <h5 class="th-text">UNIT KERJA</h5>
+                                     </th>
                                      <th class="center">
                                          <h5 class="th-text">STATUS</h5>
                                      </th>
@@ -73,16 +77,57 @@
                              <tbody>
                                  @foreach($risalah as $item)
                                  <tr>
+                                     <td style="display: grid; justify-content: center;">
+                                         <div>
+                                             <button type="button" class="btn btn-risalah btn-outline-info"
+                                                 onclick="editRisalah({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
+                                             <button type="button" class="btn btn-risalah btn-outline-secondary"
+                                                 onclick="viewRisalah({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
+                                         </div>
+                                         <div>
+                                             <button type="button" class="btn btn-risalah btn-outline-danger"
+                                                 onclick="deleteRisalah({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
+                                             <a href="whatsapp://send?text={{ 
+                                                    urlencode(
+                                                        'Teman-teman, menginformasikan kegiatan Perekaman ' . $item->rapat . " pada:\n\n" .
+                                                        'Hari/Tgl   : ' . \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName . 
+                                                        ', ' . \Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM YYYY') . "\n" .
+                                                        'Perekam    : ' . $item->perekam_1 . 
+                                                        (isset($item->perekam_2) ? ' & ' . $item->perekam_2 : '') . "\n" .
+                                                        'Pukul      : ' . $item->jam . ' WIB s.d. Selesai.' . "\n" .
+                                                        'Tempat     : Ruang Rapat ' . $item->tempat . ' Gd.B lt.3' . "\n\n" .
+                                                        'Agenda     : ' . "\n" . $item->agenda
+                                                    )
+                                                    }}"
+                                                 data-action="share/whatsapp/share"
+                                                 target="_blank"
+                                                 class="btn-risalah btn-outline-success mx-1"
+                                                 style="text-decoration: none;">
+
+                                                 {{-- Tombol di dalamnya --}}
+                                                 <button type="button" class="btn btn-share btn-outline-success" style="padding: 10px;">
+                                                     <i class="mdi mdi-share"></i>
+                                                 </button>
+                                             </a>
+                                         </div>
+                                     </td>
                                      <td class="table-text">{{ \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName }},
                                          {{ \Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM') }}
                                      </td>
                                      <td class="table-text">{{$item->jam}}</td>
-                                     <td class="table-text">{{$item->perekam_1}}</td>
+                                     <td class="table-text">
+                                         @if ($item->perekam_2)
+                                         {{$item->perekam_1}} & <br> {{$item->perekam_2}}
+                                         @else
+                                         {{$item->perekam_1}}
+                                         @endif
+                                     </td>
                                      <td class="table-text">{{$item->rapat}}</td>
+                                     <td>{{$item->unit_kerja}}</td>
                                      <td class="center table-text">
                                          <button type="button" class="btn 
-                                         {{$item->status == 'Risalah OK' ? 'btn-success' : 
-                                            ($item->status == 'Pengeditan' ? 'btn-info' : 
+                                         {{$item->status == 'Risalah Validasi' ? 'btn-success' : 
+                                            ($item->status == 'Risalah Sementara' ? 'btn-info' : 
                                             ($item->status == 'Transkripsi' ? 'btn-warning' : 
                                             ($item->status == 'Perekaman' ? 'btn-primary' : 
                                             'btn-secondary')))
@@ -96,18 +141,10 @@
                                              <div class="dropdown-divider"></div>
                                              <a class="dropdown-item center" onclick="changeStatus('Transkripsi', '{{$item->id}}')">Transkripsi</a>
                                              <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" onclick="changeStatus('Pengeditan', '{{$item->id}}')">Pengeditan</a>
+                                             <a class="dropdown-item center" onclick="changeStatus('Risalah Sementara', '{{$item->id}}')">Risalah Sementara</a>
                                              <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" onclick="changeStatus('Risalah OK', '{{$item->id}}')">Risalah OK</a>
+                                             <a class="dropdown-item center" onclick="changeStatus('Risalah Validasi', '{{$item->id}}')">Risalah Validasi</a>
                                          </div>
-                                     </td>
-                                     <td style="display: flex; justify-content: center;">
-                                         <button type="button" class="btn btn-outline-info"
-                                             onclick="editRisalah({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
-                                         <button type="button" class="btn btn-outline-secondary"
-                                             onclick="viewRisalah({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
-                                         <button type="button" class="btn btn-outline-danger"
-                                             onclick="deleteRisalah({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
                                  </tr>
                                  @endforeach
