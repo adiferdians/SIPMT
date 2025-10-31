@@ -29,6 +29,7 @@
                                  <tr>
                                      <th><h5 class="th-text">No</h5></th>
                                      <th><h5 class="th-text">Nama</h5></th>
+                                     <th><h5 class="th-text">Gedung</h5></th>
                                      <th><h5 class="th-text">Lantai</h5></th>
                                  </tr>
                              </thead>
@@ -37,6 +38,7 @@
                                  <tr>
                                      <td class="font-weight-bold">{{$item->id}}</td>
                                      <td class="font-weight-bold">{{$item->nama}}</td>
+                                     <td class="font-weight-bold">{{$item->gedung}}</td>
                                      <td class="font-weight-bold">{{$item->lantai}}</td>
                                      <td style="display: flex; justify-content: center;">
                                          <button type="button" class="btn btn-outline-info" onclick="editRuangRapat({{$item->id}})"><i class="mdi mdi-pencil"></i></button>

@@ -5,15 +5,6 @@
 
 <div class="content-wrapper">
     <div class="row">
-        <div class="col-md-12 grid-margin">
-            <div class="row">
-                <div class="col-12 col-xl-8 mb-4 mb-xl-0">
-                    <h3 class="font-weight-bold">Selamat Datang {{ session('nama') ?? 'Tamu' }}!</h3>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
         <div class="col-md-6 grid-margin stretch-card">
             <div class="card">
                 <div class="card-body">
@@ -57,7 +48,7 @@
                         <div class="card-body">
                             <p class="mb-4">Risalah Terselesaikan</p>
                             <p class="fs-30 mb-2">{{$selesai}} Risalah</p>
-                            <p>Dalam Durasi 30 Hari Terakhir</p>
+                            <p>Dalam 30 Hari Terakhir</p>
                         </div>
                     </div>
                 </div>

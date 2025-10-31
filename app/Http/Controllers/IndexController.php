@@ -16,8 +16,8 @@ class IndexController extends Controller
         $cuti = Anggota::where('status', 'cuti')->count();
         $anggota = Anggota::count();
         $akanDatang = Risalah::whereDate('tgl', '=', Carbon::today())->count();
-        $dalamProses = Risalah::whereIn('status', ['Perekaman', 'Pengeditan', 'Transkripsi'])->count();
-        $selesai = Risalah::where('status', 'Risalah OK')
+        $dalamProses = Risalah::whereIn('status', ['Perekaman', 'Rislah Sementara', 'Transkripsi'])->count();
+        $selesai = Risalah::where('status', 'Risalah Validasi')
             ->where('tgl', '>=', Carbon::now()->subDays(30))
             ->count();
         return view('index', [

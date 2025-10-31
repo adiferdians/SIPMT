@@ -21,18 +21,22 @@
                     <div class="col-md-6 grid-margin separasi">
                         <div class="form-group">
                             <label for="jam">Jam</label>
-                            <input type="time" class="form-control" id="jam">
+                            <input type="time" class="form-control" id="jam" step="300">
                         </div>
                     </div>
                 </div>
                 <div class="form-group">
                     <label for="tempat">Ruang Rapat</label>
-                    <select class="form-select" id="tempat">
-                        <option disabled selected>Pilih Ruang Rapat</option>
+                    <input class="form-control"
+                        list="gedung_options"
+                        id="tempat"
+                        placeholder="Pilih atau ketik Lokasi...">
+
+                    <datalist id="gedung_options">
                         @foreach ($ruang as $item)
-                        <option value="{{ $item->nama }}">{{ $item->nama }}</option>
-                        @endforeach
-                    </select>
+                        <option value="{{ $item->nama }}">
+                            @endforeach
+                    </datalist>
                 </div>
                 <div class="form-group split">
                     <div class="col-md-6 grid-margin separasi">
@@ -160,4 +164,29 @@
             })
         })
     })
+
+    $('#jam').on('change', function() {
+        let time = $(this).val();
+
+        if (time) {
+            let [hour, minute] = time.split(':').map(Number);
+
+            // Bulatkan menit ke kelipatan 5 terdekat
+            let roundedMinute = Math.round(minute / 5) * 5;
+            if (roundedMinute === 60) {
+                roundedMinute = 0;
+                hour = (hour + 1) % 24;
+            }
+
+            // Format ulang jam 24 jam
+            let formattedHour = hour.toString().padStart(2, '0');
+            let formattedMinute = roundedMinute.toString().padStart(2, '0');
+
+            // Update nilai input agar selalu format 24 jam
+            $(this).val(`${formattedHour}:${formattedMinute}`);
+        }
+    });
+
+    // Jika ingin memaksa tampilan awal juga 24 jam
+    $('#jam').attr('inputmode', 'numeric'); // bantu agar input numerik
 </script>

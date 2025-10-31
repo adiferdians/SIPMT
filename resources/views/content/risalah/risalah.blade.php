@@ -95,7 +95,7 @@
                                                         'Perekam    : ' . $item->perekam_1 . 
                                                         (isset($item->perekam_2) ? ' & ' . $item->perekam_2 : '') . "\n" .
                                                         'Pukul      : ' . $item->jam . ' WIB s.d. Selesai.' . "\n" .
-                                                        'Tempat     : Ruang Rapat ' . $item->tempat . ' Gd.B lt.3' . "\n\n" .
+                                                        'Tempat     : Ruang Rapat ' . $item->tempat . ' Gd.'. $item->nama_gedung . "\n\n" .
                                                         'Agenda     : ' . "\n" . $item->agenda
                                                     )
                                                     }}"

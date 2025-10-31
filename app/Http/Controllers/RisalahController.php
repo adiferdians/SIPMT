@@ -23,7 +23,6 @@ class RisalahController extends Controller
         // Mulai query dasar
         $query = Risalah::query();
 
-        // 🔍 Filter berdasarkan kata kunci pencarian
         if ($request->filled('search')) {
             $search = $request->search;
             $query->where(function ($q) use ($search) {
@@ -33,17 +32,14 @@ class RisalahController extends Controller
             });
         }
 
-        // 🎯 Filter berdasarkan status (jika dipilih)
         if ($request->filled('status')) {
             $query->where('status', $request->status);
         }
 
-        // ⏰ Urutkan dari tanggal terbaru ke terlama dan paginasi
         $risalah = $query->orderByDesc('tgl')
             ->paginate(10)
-            ->withQueryString(); // penting agar pagination tetap mempertahankan filter
+            ->withQueryString();
 
-        // 🔁 Kirim ke view
         return view('content.risalah.risalah', [
             'risalah' => $risalah
         ]);

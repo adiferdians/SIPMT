@@ -29,7 +29,7 @@ class RuangRapatController extends Controller
 
         $validate = Validator::make($request->all(), [
             'nama'   => 'required',
-            'lantai'   => 'required',
+            'gedung'   => 'required',
         ]);
 
         if ($validate->fails()) {
@@ -46,6 +46,7 @@ class RuangRapatController extends Controller
         try {
             $data = [
                 'nama' => $request->nama,
+                'gedung' => $request->gedung,
                 'lantai' => $request->lantai,
                 'created_at' => Carbon::now()->toDateTimeString(),
                 'updated_at' => Carbon::now()->toDateTimeString(),

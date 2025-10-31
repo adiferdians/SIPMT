@@ -1,5 +1,5 @@
                   <div>
-                      <div class="col-md-6 grid-margin stretch-card">
+                      <div class="col-md-4 grid-margin stretch-card">
                           <div class="card">
                               <div class="card-body">
                                   <div class="form-group">
@@ -14,6 +14,25 @@
                                   <div class="form-group">
                                       <label for="Pangkat">Lantai</label>
                                       <input type="text" class="form-control" id="lantai" placeholder="Lantai" value="{{$ruang[0]->lantai}}">
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="card">
+                              <div class="card-body">
+                                  <div class="form-group">
+                                      <label for="tempat">Lokasi</label>
+                                      <input
+                                          class="form-control"
+                                          list="gedung_options"
+                                          id="gedung"
+                                          placeholder="Pilih atau ketik gedung..."
+                                          value="{{$ruang[0]->gedung}}">
+
+                                      <datalist id="gedung_options">
+                                          <option value="A">
+                                          <option value="B">
+                                          <option value="MPR/DPD RI">
+                                      </datalist>
                                   </div>
                               </div>
                           </div>
@@ -32,11 +51,13 @@
                       $('#store').click(function() {
                           const id = $('#id').val();
                           const nama = $('#nama').val();
+                          const gedung = $('#gedung').val();
                           const lantai = $('#lantai').val();
 
                           axios.post('/store-ruang-rapat', {
                               id,
                               nama,
+                              gedung,
                               lantai,
                           }).then((response) => {
                               Swal.fire({

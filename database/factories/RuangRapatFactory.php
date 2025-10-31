@@ -18,6 +18,7 @@ class RuangRapatFactory extends Factory
     {
         return [
             'nama' => $this->faker->name(),
+            'gedung' => $this->faker->randomElement(['A', 'B']),
             'lantai' => $this->faker->numberBetween(1, 4),
             'created_at' => now(),
             'updated_at' => now(),
