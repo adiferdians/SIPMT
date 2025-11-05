@@ -49,7 +49,7 @@
                     <input type="email" id="email">
                     <label for="password">Password</label>
                     <input type="password" id="password">
-                    <input type="submit" id="submit" value="Submit">
+                    <input type="submit" class="submit" id="submit" value="Submit">
                 </div>
             </div>
         </div>
@@ -66,7 +66,6 @@
         const email = $('#email').val();
         const password = $('#password').val();
 
-        // 🔍 Ambil CSRF token dengan aman
         const csrfTokenMeta = document.querySelector('meta[name="csrf-token"]');
         const csrfToken = csrfTokenMeta ? csrfTokenMeta.getAttribute('content') : null;
 
@@ -80,6 +79,8 @@
             });
             return;
         }
+
+        $('#submit').prop('disabled', true).val('Loging In...');
 
         axios.post(
                 '/auth', {

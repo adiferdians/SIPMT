@@ -35,6 +35,8 @@
                               return Swal.fire('Error', 'Tanggal mulai dan selesai wajib diisi.', 'error');
                           }
 
+                          $('#store').prop('disabled', true).text('Mengeksport...');
+
                           axios.post('/getExport', {
                                   start,
                                   end
@@ -67,6 +69,9 @@
                                       width: 400,
                                       timer: 3000
                                   });
+                                  setTimeout(() => {
+                                      $('#myModal').modal('hide');
+                                  }, 1600);
                               })
                               .catch(() => {
                                   Swal.fire({

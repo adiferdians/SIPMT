@@ -34,8 +34,8 @@
     <div class="container-scroller">
         <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
             <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
-                <a class="navbar-brand brand-logo me-5" href="index.html"><img src="assets/images/logo.png" class="me-2" alt="logo" /></a>
-                <a class="navbar-brand brand-logo-mini" href="index.html"><img src="assets/images/logo-mini.png" alt="logo" /></a>
+                <a class="navbar-brand brand-logo me-5" href="/dashboard">
+                    <img src="assets/images/logo.png" class="me-2" alt="logo" /></a>
             </div>
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end">
                 <ul class="navbar-nav navbar-nav-right">
@@ -80,12 +80,12 @@
                             <span class="menu-title">Anggota</span>
                         </a>
                     </li>
-                    <li class="nav-item @yield('Laporan')">
+                    <!-- <li class="nav-item @yield('Laporan')">
                         <a class="nav-link" href="/laporan-harian">
                             <i class="icon-paper menu-icon"></i>
                             <span class="menu-title">Laporan Harian</span>
                         </a>
-                    </li>
+                    </li> -->
                     @if (session('role') === 'admin')
                     <li class="nav-item @yield('Pendukung')">
                         <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">

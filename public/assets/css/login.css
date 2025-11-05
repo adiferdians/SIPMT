@@ -16,6 +16,11 @@ body {
     margin: 0;
     padding: 20px;
 }
+
+.submit{
+    cursor: pointer;
+}
+
 .page {
     background: #e2e2e5;
     display: flex;

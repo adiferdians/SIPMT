@@ -8,10 +8,10 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use Maatwebsite\Excel\Concerns\WithMapping;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 use PhpOffice\PhpSpreadsheet\Style\Fill;
-use Maatwebsite\Excel\Concerns\WithColumnWidths;
-use Soundasleep\Html2Text;
+use PhpOffice\PhpSpreadsheet\Style\Border;
 use Carbon\Carbon;
 
 class RisalahExport implements FromQuery, WithHeadings, WithMapping, WithStyles, WithColumnWidths
@@ -24,14 +24,22 @@ class RisalahExport implements FromQuery, WithHeadings, WithMapping, WithStyles,
     public function __construct($startDate, $endDate)
     {
         $this->startDate = $startDate;
-        $this->endDate = $endDate;
+        $this->endDate   = $endDate;
     }
 
+    /**
+     * Query utama
+     */
     public function query()
     {
-        return Risalah::query()->whereBetween('tgl', [$this->startDate, $this->endDate]);
+        return Risalah::query()
+            ->whereBetween('tgl', [$this->startDate, $this->endDate])
+            ->orderBy('tgl', 'asc');
     }
 
+    /**
+     * Heading tabel (bukan header besar laporan)
+     */
     public function headings(): array
     {
         return [
@@ -50,20 +58,49 @@ class RisalahExport implements FromQuery, WithHeadings, WithMapping, WithStyles,
         ];
     }
 
+    /**
+     * Konversi HTML ke teks rapi untuk kolom Agenda
+     */
+    private function cleanAgenda($html): string
+    {
+        if (empty($html)) return '';
+
+        // Ganti elemen HTML umum menjadi teks yang bisa dipahami Excel
+        $replacements = [
+            '<br>' => "\n",
+            '<br/>' => "\n",
+            '<br />' => "\n",
+            '</p>' => "\n",
+            '</li>' => "\n",
+            '<ul>' => "",
+            '</ul>' => "",
+            '<ol>' => "",
+            '</ol>' => "",
+            '<li>' => "• ",
+            '<p>' => "",
+        ];
+
+        $text = str_ireplace(array_keys($replacements), array_values($replacements), $html);
+
+        // Hapus tag HTML lain yang tersisa
+        $text = strip_tags($text);
+
+        // Bersihkan spasi ganda dan newline berlebih
+        $text = preg_replace("/\n\s*\n/", "\n", trim($text));
+
+        return $text;
+    }
+
+    /**
+     * Mapping data ke baris Excel
+     */
     public function map($row): array
     {
         static $no = 1;
 
-        $tgl = '';
-        if (!empty($row->tgl)) {
-            try {
-                $tgl = Carbon::parse($row->tgl)
-                    ->locale('id')
-                    ->translatedFormat('l, d-m-Y'); 
-            } catch (\Exception $e) {
-                $tgl = $row->tgl;
-            }
-        }
+        $tgl = $row->tgl ? Carbon::parse($row->tgl)
+            ->locale('id')
+            ->translatedFormat('l, d-m-Y') : '';
 
         return [
             $no++,
@@ -76,61 +113,146 @@ class RisalahExport implements FromQuery, WithHeadings, WithMapping, WithStyles,
             $row->transkrip,
             $row->editor,
             $row->rapat,
-            Html2Text::convert($row->agenda),
+            $this->cleanAgenda($row->agenda),
             $row->status,
         ];
     }
 
+    /**
+     * Styling Excel
+     */
     public function styles(Worksheet $sheet)
     {
-        $sheet->getStyle('A1:L1')->applyFromArray([
+        // === 1. Header laporan di atas tabel ===
+        $title = 'LAPORAN RISALAH RAPAT';
+        $period = 'Periode: ' . Carbon::parse($this->startDate)->translatedFormat('d F Y')
+            . ' s.d. ' . Carbon::parse($this->endDate)->translatedFormat('d F Y');
+
+        // Sisipkan dua baris di atas header tabel
+        $sheet->insertNewRowBefore(1, 2);
+
+        // Merge cell untuk judul dan periode
+        $sheet->mergeCells('A1:L1');
+        $sheet->mergeCells('A2:L2');
+
+        $sheet->setCellValue('A1', $title);
+        $sheet->setCellValue('A2', $period);
+
+        // Atur tinggi baris header laporan
+        $sheet->getRowDimension(3)->setRowHeight(30);
+
+        // Style judul besar
+        $sheet->getStyle('A1')->applyFromArray([
+            'font' => ['bold' => true, 'size' => 16],
+            'alignment' => ['horizontal' => 'center', 'vertical' => 'center'],
+        ]);
+
+        // Style periode
+        $sheet->getStyle('A2')->applyFromArray([
+            'font' => ['italic' => true, 'size' => 12],
+            'alignment' => ['horizontal' => 'center', 'vertical' => 'center'],
+        ]);
+
+        // === 2. Header tabel (baris ke-3 setelah insert) ===
+        $headerRow = 3;
+        $sheet->getStyle("A{$headerRow}:L{$headerRow}")->applyFromArray([
             'font' => [
+                'name' => 'Arial',
+                'size' => 11,
                 'bold' => true,
-                'size' => 12,
                 'color' => ['rgb' => 'FFFFFF'],
             ],
             'fill' => [
-                'fillType' => \PhpOffice\PhpSpreadsheet\Style\Fill::FILL_SOLID,
-                'startColor' => ['rgb' => '4472C4'],
+                'fillType' => Fill::FILL_SOLID,
+                'startColor' => ['rgb' => '305496'],
             ],
             'alignment' => [
                 'horizontal' => 'center',
                 'vertical' => 'center',
+                'wrapText' => true,
             ],
         ]);
 
+        // === 3. Warna selang-seling dan border ===
         $highestRow = $sheet->getHighestRow();
-        for ($i = 2; $i <= $highestRow; $i++) {
+
+        for ($i = $headerRow + 1; $i <= $highestRow; $i++) {
             if ($i % 2 == 0) {
-                $sheet->getStyle("A{$i}:L{$i}")->getFill()->setFillType(Fill::FILL_SOLID)
-                    ->getStartColor()->setRGB('D9E2F3');
+                $sheet->getStyle("A{$i}:L{$i}")
+                    ->getFill()
+                    ->setFillType(Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setRGB('E9EDF7');
+            } else {
+                $sheet->getStyle("A{$i}:L{$i}")
+                    ->getFill()
+                    ->setFillType(Fill::FILL_SOLID)
+                    ->getStartColor()
+                    ->setRGB('bdd6ee');
             }
         }
 
-        $sheet->getStyle('J')->getAlignment()->setWrapText(true);
-        $sheet->setAutoFilter('A1:L1');
+        // Tambahkan border pada semua sel
+        $sheet->getStyle("A{$headerRow}:L{$highestRow}")->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => Border::BORDER_THIN,
+                    'color' => ['rgb' => '808080'],
+                ],
+            ],
+        ]);
 
+        // === 4. Kolom K (Agenda) ===
+        $sheet->getColumnDimension('K')->setWidth(70); // ~500px
+        $sheet->getStyle('K')->getAlignment()->setWrapText(true);
+        $sheet->getStyle('K')->getAlignment()->setVertical('top');
+
+        // Autofilter
+        $sheet->setAutoFilter("A{$headerRow}:L{$headerRow}");
+
+        // Posisi teks tengah (horizontal & vertikal) untuk semua kolom kecuali Agenda (K)
         foreach (range('A', 'L') as $col) {
-            $sheet->getColumnDimension($col)->setAutoSize(true);
+            if ($col !== 'K') {
+                $sheet->getStyle($col)->getAlignment()->setHorizontal('center');
+                $sheet->getStyle($col)->getAlignment()->setVertical('center');
+            }
+        }
+
+        $sheet->getParent()->getProperties()
+            ->setCreator('Setjen DPD RI')
+            ->setTitle('Laporan Risalah Rapat')
+            ->setCategory('Laporan Resmi')
+            ->setCompany('Setjen DPD RI');
+
+
+        // Autosize kolom lain
+        foreach (range('A', 'L') as $col) {
+            if ($col !== 'K') {
+                $sheet->getColumnDimension($col)->setAutoSize(true);
+            }
         }
 
         return [];
     }
 
+    /**
+     * Lebar kolom
+     */
     public function columnWidths(): array
     {
         return [
-            'A' => 20, // Unit Kerja
-            'B' => 15, // Tanggal
-            'C' => 10, // Jam
-            'D' => 20, // Tempat
-            'E' => 15, // Perekam 1
-            'F' => 15, // Perekam 2
-            'G' => 20, // Transkrip
-            'H' => 15, // Editor
-            'I' => 20, // Rapat
-            'J' => 20, // Agenda (kolom wrap text)
-            'K' => 15, // Status
+            'A' => 5,   // No
+            'B' => 20,  // Unit Kerja
+            'C' => 20,  // Tanggal
+            'D' => 10,  // Jam
+            'E' => 20,  // Ruangan
+            'F' => 15,  // Perekam 1
+            'G' => 15,  // Perekam 2
+            'H' => 20,  // Transkrip
+            'I' => 15,  // Editor
+            'J' => 20,  // Rapat
+            'K' => 70,  // Agenda (wrap text)
+            'L' => 15,  // Status
         ];
     }
 }
