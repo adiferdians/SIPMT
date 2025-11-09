@@ -97,7 +97,7 @@
                 title: 'Success...',
                 position: 'top-end',
                 icon: 'success',
-                text: 'Success! Data added successfully.',
+                text: 'Berhasil! Data Anggota Berhasil Ditambahkan.',
                 showConfirmButton: false,
                 width: '400px',
                 timer: 3000

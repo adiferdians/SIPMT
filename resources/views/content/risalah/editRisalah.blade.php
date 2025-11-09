@@ -145,7 +145,7 @@
                 title: 'Success...',
                 position: 'top-end',
                 icon: 'success',
-                text: 'Success! Data Berhasil Diubah!',
+                text: 'Berhaisl! Data Risalah Berhasil Diubah!',
                 showConfirmButton: false,
                 width: '400px',
                 timer: 3000

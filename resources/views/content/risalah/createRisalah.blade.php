@@ -144,7 +144,7 @@
                 title: 'Success...',
                 position: 'top-end',
                 icon: 'success',
-                text: 'Success! Data added successfully.',
+                text: 'Berhasil! Data Risalah Berhasil Ditambahkan.',
                 showConfirmButton: false,
                 width: '400px',
                 timer: 3000

@@ -13,7 +13,9 @@
                          <h3 class="font-weight-bold">Data Unit Kerja</h3>
                      </div>
                      <div>
+                         @if (session('role') === 'admin')
                          <button type="button" id="addAnggota" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
+                         @endif
                      </div>
                  </div>
              </div>
@@ -35,13 +37,15 @@
                              <tbody>
                                  @foreach($unit as $item)
                                  <tr>
-                                     <td class="font-weight-bold">{{$item->id}}</td>
+                                     <td class="font-weight-bold">{{ $unit->firstItem() + $loop->index }}</td>
                                      <td class="font-weight-bold">{{$item->nama}}</td>
                                      <td class="font-weight-bold">{{$item->deskripsi}}</td>
+                                     @if (session('role') === 'admin')
                                      <td style="display: flex; justify-content: center;">
                                          <button type="button" class="btn btn-outline-info" onclick="editRuangRapat({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
                                          <button type="button" class="btn btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
+                                     @endif
                                  </tr>
                                  @endforeach
                              </tbody>

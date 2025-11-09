@@ -103,8 +103,11 @@
                         text: data.MESSAGE || 'Login berhasil!',
                         position: 'top-end',
                         icon: 'success',
+                        width: '300px',
                         showConfirmButton: false,
-                        timer: 1000,
+                        timer: 2000,
+                        background: '#18ba2a',
+                        color: '#ffff',
                         customClass: {
                             icon: 'my-custom-icon-class'
                         },

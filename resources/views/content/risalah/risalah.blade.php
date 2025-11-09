@@ -84,19 +84,20 @@
                                              <button type="button" class="btn btn-risalah btn-outline-secondary"
                                                  onclick="viewRisalah({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
                                          </div>
+                                         @if(session('role') === 'admin')
                                          <div>
                                              <button type="button" class="btn btn-risalah btn-outline-danger"
                                                  onclick="deleteRisalah({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                              <a href="whatsapp://send?text={{ 
                                                     urlencode(
                                                         'Teman-teman, menginformasikan kegiatan Perekaman ' . $item->rapat . " pada:\n\n" .
-                                                        'Hari/Tgl   : ' . \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName . 
+                                                        'Hari/Tgl'. "\t: " . \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName . 
                                                         ', ' . \Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM YYYY') . "\n" .
-                                                        'Perekam    : ' . $item->perekam_1 . 
+                                                        'Perekam'. "\t: " . $item->perekam_1 . 
                                                         (isset($item->perekam_2) ? ' & ' . $item->perekam_2 : '') . "\n" .
-                                                        'Pukul      : ' . $item->jam . ' WIB s.d. Selesai.' . "\n" .
-                                                        'Tempat     : Ruang Rapat ' . $item->tempat . ' Gd.'. $item->nama_gedung . "\n\n" .
-                                                        'Agenda     : ' . "\n" . $item->agenda
+                                                        'Pukul'. "\t: ". $item->jam . ' WIB s.d. Selesai.' . "\n" .
+                                                        'Tempat'. "\t: ".'Ruang Rapat ' . $item->tempat . $item->nama_gedung . "\n\n" .
+                                                        'Agenda:' . "\n" . $item->agenda
                                                     )
                                                     }}"
                                                  data-action="share/whatsapp/share"
@@ -104,12 +105,12 @@
                                                  class="btn-risalah btn-outline-success mx-1"
                                                  style="text-decoration: none;">
 
-                                                 {{-- Tombol di dalamnya --}}
                                                  <button type="button" class="btn btn-share btn-outline-success" style="padding: 10px;">
                                                      <i class="mdi mdi-share"></i>
                                                  </button>
                                              </a>
                                          </div>
+                                         @endif
                                      </td>
                                      <td class="table-text">{{ \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName }},
                                          {{ \Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM') }}
@@ -142,8 +143,10 @@
                                              <a class="dropdown-item center" onclick="changeStatus('Transkripsi', '{{$item->id}}')">Transkripsi</a>
                                              <div class="dropdown-divider"></div>
                                              <a class="dropdown-item center" onclick="changeStatus('Risalah Sementara', '{{$item->id}}')">Risalah Sementara</a>
+                                             @if(session('role') === 'admin')
                                              <div class="dropdown-divider"></div>
                                              <a class="dropdown-item center" onclick="changeStatus('Risalah Validasi', '{{$item->id}}')">Risalah Validasi</a>
+                                             @endif
                                          </div>
                                      </td>
                                  </tr>

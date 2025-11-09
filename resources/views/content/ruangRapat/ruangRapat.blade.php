@@ -13,7 +13,9 @@
                          <h3 class="font-weight-bold">Data Ruang Rapat</h3>
                      </div>
                      <div>
+                         @if (session('role') === 'admin')
                          <button type="button" id="addAnggota" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
+                         @endif
                      </div>
                  </div>
              </div>
@@ -27,23 +29,33 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
-                                     <th><h5 class="th-text">No</h5></th>
-                                     <th><h5 class="th-text">Nama</h5></th>
-                                     <th><h5 class="th-text">Gedung</h5></th>
-                                     <th><h5 class="th-text">Lantai</h5></th>
+                                     <th>
+                                         <h5 class="th-text">No</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Nama</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Gedung</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Lantai</h5>
+                                     </th>
                                  </tr>
                              </thead>
                              <tbody>
                                  @foreach($ruang as $item)
                                  <tr>
-                                     <td class="font-weight-bold">{{$item->id}}</td>
+                                     <td class="font-weight-bold">{{ $ruang->firstItem() + $loop->index }}</td>
                                      <td class="font-weight-bold">{{$item->nama}}</td>
                                      <td class="font-weight-bold">{{$item->gedung}}</td>
                                      <td class="font-weight-bold">{{$item->lantai}}</td>
+                                     @if (session('role') === 'admin')
                                      <td style="display: flex; justify-content: center;">
                                          <button type="button" class="btn btn-outline-info" onclick="editRuangRapat({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
                                          <button type="button" class="btn btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
+                                     @endif
                                  </tr>
                                  @endforeach
                              </tbody>
@@ -71,7 +83,7 @@
      })
 
      function viewAnggota(id) {
-         axios.get('/viewAnggota/' + id)    
+         axios.get('/viewAnggota/' + id)
              .then(function(response) {
                  $('.modal-title').html("Data Anggota");
                  $(".modal-dialog");

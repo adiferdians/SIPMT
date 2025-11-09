@@ -86,7 +86,6 @@
                             <span class="menu-title">Laporan Harian</span>
                         </a>
                     </li> -->
-                    @if (session('role') === 'admin')
                     <li class="nav-item @yield('Pendukung')">
                         <a class="nav-link" data-bs-toggle="collapse" href="#form-elements" aria-expanded="false" aria-controls="form-elements">
                             <i class="icon-columns menu-icon"></i>
@@ -100,7 +99,6 @@
                             </ul>
                         </div>
                     </li>
-                    @endif
                 </ul>
             </nav>
 

@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Factories;
+
 use App\Models\Anggota;
 use App\Models\RuangRapat;
 use App\Models\UnitKerja;
@@ -29,7 +30,15 @@ class RisalahFactory extends Factory
             'perekam_2' => Anggota::inRandomOrder()->value('nama'),
             'transkrip' => Anggota::inRandomOrder()->value('nama'),
             'editor' => Anggota::inRandomOrder()->value('nama'),
-            'rapat' => $this->faker->words(1, true),
+            'rapat' => $this->faker->randomElement([
+                'Rapat Gabungan',
+                'Pleno',
+                'Rapat Pimpinan',
+                'RDP',
+                'Sidang Bersama',
+                'Sidang Paripurna',
+                'Rakor'
+            ]),
             'agenda' => $this->faker->paragraph,
             'status' => $this->faker->randomElement(['Perekaman', 'Transkripsi', 'Risalah Sementara', 'Risalah Validasi', 'Belum Terlaksana']),
             'created_at' => now(),

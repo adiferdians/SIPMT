@@ -99,7 +99,7 @@
                                   title: 'Success...',
                                   position: 'top-end',
                                   icon: 'success',
-                                  text: 'Success! Data added successfully.',
+                                  text: 'Berhasil! Data Anggota Berhasil Diubah!',
                                   showConfirmButton: false,
                                   width: '400px',
                                   timer: 3000

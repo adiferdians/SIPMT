@@ -173,6 +173,15 @@ class RisalahExport implements FromQuery, WithHeadings, WithMapping, WithStyles,
             ],
         ]);
 
+        // Terapkan "border transparan" pada baris 4 dan seterusnya di kolom A–L
+        $sheet->getStyle('A4:L' . $sheet->getHighestRow())->applyFromArray([
+            'borders' => [
+                'allBorders' => [
+                    'borderStyle' => \PhpOffice\PhpSpreadsheet\Style\Border::BORDER_NONE,
+                ],
+            ],
+        ]);
+
         // === 3. Warna selang-seling dan border ===
         $highestRow = $sheet->getHighestRow();
 
@@ -191,16 +200,6 @@ class RisalahExport implements FromQuery, WithHeadings, WithMapping, WithStyles,
                     ->setRGB('bdd6ee');
             }
         }
-
-        // Tambahkan border pada semua sel
-        $sheet->getStyle("A{$headerRow}:L{$highestRow}")->applyFromArray([
-            'borders' => [
-                'allBorders' => [
-                    'borderStyle' => Border::BORDER_THIN,
-                    'color' => ['rgb' => '808080'],
-                ],
-            ],
-        ]);
 
         // === 4. Kolom K (Agenda) ===
         $sheet->getColumnDimension('K')->setWidth(70); // ~500px

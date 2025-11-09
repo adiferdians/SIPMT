@@ -26,6 +26,7 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
+                                     <th><h5 class="th-text">No</h5></th>
                                      <th><h5 class="th-text">Nama</h5></th>
                                      <th><h5 class="th-text">NIP</h5></th>
                                      <th><h5 class="th-text">Telepon</h5></th>
@@ -35,6 +36,7 @@
                              <tbody>
                                  @foreach($anggota as $item)
                                  <tr>
+                                     <td class="font-weight-bold">{{ $anggota->firstItem() + $loop->index }}</td>
                                      <td class="font-weight-bold">{{$item->nama}}</td>
                                      <td class="font-weight-bold">{{$item->nip}}</td>
                                      <td>{{$item->telepon}}</td>
@@ -68,7 +70,7 @@
                                                     btn-danger
                                                     @break
                                             @endswitch
-                                            view-btn statusA">
+                                            view-btn statusA" disabled>
                                              {{ $item->status }}
                                          </button>
                                      </td>
