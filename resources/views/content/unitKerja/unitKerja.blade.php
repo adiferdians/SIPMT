@@ -29,9 +29,15 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
-                                     <th><h5 class="th-text">No</h5></th>
-                                     <th><h5 class="th-text">Nama</h5></th>
-                                     <th><h5 class="th-text">Deskripsi</h5></th>
+                                     <th>
+                                         <h5 class="th-text">No</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Nama</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Deskripsi</h5>
+                                     </th>
                                  </tr>
                              </thead>
                              <tbody>
@@ -58,6 +64,8 @@
      </div>
  </div>
 
+ @endsection
+ @push('scripts')
  <script>
      $('#addAnggota').click(function() {
          axios.get('/create-unit-kerja')
@@ -126,5 +134,4 @@
          });
      }
  </script>
-
- @endsection
+ @endpush

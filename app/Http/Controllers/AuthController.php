@@ -3,11 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
-use App\Models\Anggota; // Pastikan Anda mengimpor Model Anggota Anda
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -24,21 +20,25 @@ class AuthController extends Controller
         ]);
 
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
+            $request->session()->regenerate(); // Bagus, ini sudah benar untuk mencegah session fixation saat login.
             $user = Auth::user();
 
+            // CATATAN: Menyimpan data ini secara manual ke session sebenarnya redundan 
+            // karena Anda bisa mengaksesnya langsung via Auth::user()->nama atau Auth::user()->role.
             session([
                 'id' => $user->id,
                 'nama' => $user->nama,
                 'role' => $user->role,
+                'jabatan' => $user->jabatan,
+                'nip' => $user->nip,
             ]);
 
             return response()->json([
                 'OUT_STAT' => true,
                 'MESSAGE' => 'Login berhasil!',
                 'USER' => [
-                    'name' => session('nama'),
-                    'role' => session('role'),
+                    'name' => $user->nama,
+                    'role' => $user->role,
                 ],
             ]);
         }
@@ -46,12 +46,19 @@ class AuthController extends Controller
         return response()->json([
             'OUT_STAT' => false,
             'MESSAGE' => 'Email atau password salah!',
-        ]);
+        ], 401); // Direkomendasikan menambahkan HTTP status code 401 Unauthorized
     }
 
-    public function logout()
+    public function logout(Request $request)
     {
         Auth::logout();
+
+        // WAJIB: Hancurkan sesi dan hapus semua data session (termasuk id, nama, role manual Anda)
+        $request->session()->invalidate();
+
+        // WAJIB: Buat ulang token CSRF baru agar token lama tidak bisa disalahgunakan
+        $request->session()->regenerateToken();
+
         return response()->json([
             'OUT_STAT' => true,
             'MESSAGE' => 'Anda berhasil Log Out.',

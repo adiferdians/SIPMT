@@ -26,7 +26,7 @@
                 <div class="col-md-6 mb-4 stretch-card transparent">
                     <div class="card card-dark-blue">
                         <div class="card-body">
-                            <p class="mb-4">Risalah Hari Ini</p>
+                            <p class="mb-4">Rapat Hari Ini</p>
                             <p class="fs-30 mb-2">{{$akanDatang}} Risalah</p>
                             <p> </p>
                         </div>
@@ -66,19 +66,19 @@
             events: '{{ route("kalender.agenda") }}',
             selectable: true,
             dateClick: function(info) {
-                const tgl = info.dateStr;
-                axios.get('/createRisalah', {
-                        params: {
-                            tgl_agenda: tgl
-                        }
-                    }).then(function(response) {
+                const tgl = info.dateStr; // Sudah bagus, menggunakan const
+
+                // Perbaikan: Gunakan axios.get yang lebih ringkas
+                axios.get(`/createRisalah?tgl_agenda=${tgl}`)
+                    // atau tetap menggunakan params:
+                    // axios.get('/createRisalah', { params: { tgl_agenda: tgl } }) 
+                    .then(function(response) {
                         $('.modal-title').html("Tambahkan Risalah");
-                        $(".modal-dialog");
                         $('.modal-body').html(response.data);
                         $('#myModal').modal('show');
                     })
                     .catch(function(error) {
-                        console.log(error);
+                        console.error("Gagal memuat formulir risalah:", error); // Gunakan console.error
                     });
             },
             eventClick: function(info) {
@@ -88,12 +88,11 @@
                 axios.get('/viewRisalah/' + risalahId)
                     .then(function(response) {
                         $('.modal-title').html("Data Risalah");
-                        $(".modal-dialog");
                         $('.modal-body').html(response.data);
                         $('#myModal').modal('show');
                     })
                     .catch(function(error) {
-                        console.log(error);
+                        console.error("Gagal memuat data risalah:", error); // Gunakan console.error
                     });
             }
         });

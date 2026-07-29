@@ -1,140 +1,157 @@
-/* login page */
-
-@import url("https://rsms.me/inter/inter-ui.css");
-::selection {
-    background: #2d2f36;
-}
-::-webkit-selection {
-    background: #2d2f36;
-}
-::-moz-selection {
-    background: #2d2f36;
-}
-body {
-    background: white;
-    font-family: "Inter UI", sans-serif;
+* {
+    overflow: hidden;
+    box-sizing: border-box;
     margin: 0;
-    padding: 20px;
+    padding: 0;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
 
-.submit{
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #ffffff;
+}
+
+.login-container {
+    display: flex;
+    width: 100%;
+}
+
+/* Bagian Kiri - Form Login */
+.login-left {
+    background-color: #4057a6; /* Warna biru sesuai gambar */
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 10%;
+}
+
+.login-left h1 {
+    font-size: 2.5rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.welcome-text {
+    font-size: 1rem;
+    margin-bottom: 40px;
+}
+
+.welcome-text a {
+    color: #ffffff;
+    text-decoration: underline;
+    margin-left: 5px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+}
+
+.form-group input[type="email"],
+.form-group input[type="password"] {
+    width: 100%;
+    padding: 12px 15px;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    outline: none;
+}
+
+.checkbox-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    font-size: 0.85rem;
+}
+
+.checkbox-group input {
+    margin-right: 8px;
     cursor: pointer;
 }
 
-.page {
-    background: #e2e2e5;
-    display: flex;
-    flex-direction: column;
-    height: calc(100% - 40px);
-    position: absolute;
-    place-content: center;
-    width: calc(100% - 40px);
-}
-@media (max-width: 767px) {
-    .page {
-        height: auto;
-        margin-bottom: 20px;
-        padding-bottom: 20px;
-    }
-}
-.container {
-    display: flex;
-    height: 320px;
-    margin: 0 auto;
-    width: 640px;
-}
-@media (max-width: 767px) {
-    .container {
-        flex-direction: column;
-        height: 630px;
-        width: 320px;
-    }
-}
-.left {
-    background: white;
-    height: calc(100% - 70px);
-    top: 20px;
-    position: relative;
-    width: 50%;
-}
-@media (max-width: 767px) {
-    .left {
-        height: 100%;
-        left: 20px;
-        width: calc(100% - 40px);
-        max-height: 270px;
-    }
-}
-.login {
-    font-size: 50px;
-    font-weight: 900;
-    margin: 50px 40px 40px;
-}
-.eula {
-    color: #535353;
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 40px;
-    text-align: justify;
-}
-.right {
-    background: #474a59;
-    box-shadow: 0px 0px 40px 16px rgba(0, 0, 0, 0.22);
-    color: #f1f1f2;
-    position: relative;
-    width: 50%;
-}
-@media (max-width: 767px) {
-    .right {
-        flex-shrink: 0;
-        height: 100%;
-        width: 100%;
-        max-height: 350px;
-    }
-}
-svg {
-    position: absolute;
-    width: 320px;
-}
-path {
-    fill: none;
-    stroke: url(#linearGradient);
-    stroke-width: 4;
-    stroke-dasharray: 240 1386;
-}
-.form {
-    margin: 40px;
-    position: absolute;
-}
-label {
-    color: #c2c2c5;
-    display: block;
-    font-size: 14px;
-    height: 16px;
-    margin-top: 20px;
-    margin-bottom: 5px;
-}
-input {
-    background: transparent;
-    border: 0;
-    color: #f2f2f2;
-    font-size: 20px;
-    height: 30px;
-    line-height: 30px;
-    outline: none !important;
+.btn-submit {
     width: 100%;
+    padding: 12px;
+    background-color: #7b94d4; /* Warna tombol biru muda */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin-bottom: 15px;
+    transition: background-color 0.3s;
 }
-input::-moz-focus-inner {
-    border: 0;
+
+.btn-submit:hover {
+    background-color: #6a82bf;
 }
-#submit {
-    color: #707075;
-    margin-top: 40px;
-    transition: color 300ms;
+
+.btn-submit:disabled {
+    background-color: #a0b2e3;
+    cursor: not-allowed;
 }
-#submit:focus {
-    color: #f2f2f2;
+
+.btn-secondary {
+    width: 100%;
+    padding: 12px;
+    background-color: #93a5d8;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s;
 }
-#submit:active {
-    color: #d0d0d2;
+
+.btn-secondary i {
+    margin-right: 10px;
+}
+
+.btn-secondary:hover {
+    background-color: #8295c9;
+}
+
+/* Bagian Kanan - Ilustrasi */
+.login-right {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 20px;
+}
+
+.login-right img {
+    max-width: 80%;
+    height: auto;
+}
+
+/* Responsivitas untuk Mobile */
+@media (max-width: 768px) {
+    .login-container {
+        flex-direction: column;
+    }
+    .login-left,
+    .login-right {
+        flex: none;
+        width: 100%;
+        min-height: 50vh;
+    }
+    .login-right {
+        order: -1; /* Pindahkan gambar ke atas saat di mobile */
+    }
+    .login-left {
+        padding: 10% 8%;
+    }
 }

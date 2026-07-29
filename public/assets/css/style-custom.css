@@ -1,15 +1,82 @@
-.btn-share {
-    margin: -17px;
-    border-radius: 5px;
-    padding: 15px !important;
+/* =========================================================
+   1. KOMPONEN UMUM & FORM
+   ========================================================= */
+.fc-event,
+.fc-event-main,
+.fc-event-title {
+    cursor: pointer;
 }
+
+.btn {
+    border-radius: 5px;
+}
+
+.btn-share {
+    margin: -12px;
+    padding: 10px;
+    border-radius: 5px;
+}
+
 .btn-risalah {
     margin: 2px;
-    padding: 15px;
+    padding: 10px;
     border-radius: 5px;
 }
-.txt-bold {
+
+.btn-modal {
+    display: flex;
+    justify-content: center;
+}
+
+.btn-action {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 10px;
+    padding: 0;
+    transition: transform 0.2s ease;
+}
+
+.btn-action i {
+    font-size: 18px;
+}
+
+.btn-action:hover {
+    transform: translateY(-1px);
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #2d2f36;
+}
+
+.ql-toolbar,
+.ql-container {
+    position: relative !important;
+}
+
+/* Utilitas Teks & Layout */
+.txt-bold,
+.th-text {
     font-weight: bold;
+}
+
+.table-text {
+    font-weight: 500;
+}
+
+.center {
+    text-align: center;
+}
+
+.separasi {
+    padding-right: 10px;
+}
+
+.export {
+    color: #ffffff;
 }
 
 .tugas {
@@ -22,33 +89,12 @@
 .statusA {
     width: 80px;
     border-radius: 7px;
-    color: white !important;
+    color: #ffffff !important;
     opacity: 1 !important;
 }
 
-.export {
-    color: white;
-}
-
-.ql-toolbar,
-.ql-container {
-    position: relative !important;
-}
-
-.form-group label {
-    font-weight: 600;
-    color: #2d2f36;
-}
-
-.form-control {
-    border: 2px solid #636363;
-}
-
-select.form-select {
-    outline: 2px solid #636363;
-}
-
-.table-title {
+.table-title,
+.titleRisalah {
     display: flex;
     justify-content: space-between;
 }
@@ -58,59 +104,61 @@ select.form-select {
     align-items: center;
 }
 
-.btn-modal {
-    display: flex;
-    justify-content: center;
-}
-
-.separasi {
-    padding-right: 10px;
-}
-
-.title-card {
-    background-color: darkgrey;
-    color: white;
-}
-
 .split {
     display: flex;
     margin: 0;
 }
 
+/* =========================================================
+   2. MODAL & DROPDOWN
+   ========================================================= */
 .modal-header {
+    color: #ffffff;
+    background-color: #548f12 !important;
+}
+
+.title-card {
     background-color: darkgrey;
+    color: #ffffff;
 }
 
-.center {
-    text-align: center;
+.dropdown-menu {
+    min-width: unset;
+    width: max-content;
+    white-space: nowrap;
+    border-radius: 12px;
+    padding: 0.5rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
 }
 
-.dropdown-text {
-    color: white;
+.dropdown-item {
+    border-radius: 8px;
+    padding: 0.65rem 0.8rem;
+    font-size: 14px;
+}
+
+.dropdown-item:hover {
+    background: #f8fafc;
+}
+
+.dropdown-divider {
+    margin: 0.4rem 0;
+}
+
+.dropdown-text,
+.view-btn {
+    color: #ffffff;
     padding: 12px;
     font-weight: bold;
-}
-
-.view-btn {
-    font-weight: 700;
-    color: white;
-    padding: 12px;
 }
 
 .dropdown-text:hover {
-    color: black;
+    color: #000000;
 }
 
-.table-text {
-    font-weight: 500;
-}
-
-.th-text {
-    font-weight: bold;
-}
-
-/* toogle switch */
-
+/* =========================================================
+   3. TOGGLE SWITCH (FLIPSWITCH)
+   ========================================================= */
 .flipswitch {
     position: relative;
     width: 86px;
@@ -140,10 +188,8 @@ select.form-select {
     float: left;
     width: 50%;
     height: 24px;
-    padding: 0;
     line-height: 24px;
     font-size: 15px;
-    color: white;
     font-family: Trebuchet, Arial, sans-serif;
     font-weight: bold;
     box-sizing: border-box;
@@ -185,4 +231,177 @@ select.form-select {
     right: 0;
 }
 
-/* calender css */
+/* =========================================================
+   4. HANDSONTABLE (GRID / CALENDAR)
+   ========================================================= */
+.handsontable tbody tr td.kolom-agenda {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    max-height: 30px !important;
+    line-height: 21px !important;
+}
+
+.handsontable tbody tr td.kolom-agenda.agenda-expanded {
+    white-space: normal !important;
+    overflow: visible !important;
+    position: absolute !important;
+    height: auto !important;
+    max-height: 300px !important;
+    width: 350px !important;
+    z-index: 999 !important;
+    background-color: #ffffff !important;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15) !important;
+    border: 1px solid #0ea5e9 !important;
+}
+
+.handsontable table.htCore thead tr th,
+.handsontable th.colHeader {
+    background-color: #ababac !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+.handsontable table.htCore tbody tr th,
+.handsontable th.rowHeader,
+.handsontable table.htCore thead tr th:first-child,
+.handsontable th:empty {
+    background-color: #787879 !important;
+    color: #ffffff !important;
+    font-weight: bold !important;
+}
+
+/* =========================================================
+   5. SIDEBAR & SUBMENU (DEFAULT STATE)
+   ========================================================= */
+.sidebar .nav:not(.sub-menu) > .nav-item.active {
+    background: #84c43c;
+}
+
+.sidebar .nav .sub-menu,
+.sidebar .nav #form-elements,
+.sidebar .nav .collapse {
+    background: #6b9e38 !important;
+    border: none !important;
+    border-radius: 8px !important;
+    box-shadow: none !important;
+    overflow: hidden !important;
+}
+
+.sidebar .nav .sub-menu .nav-item {
+    border: none !important;
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+.sidebar .nav .sub-menu .nav-item .nav-link {
+    color: #ffffff !important;
+}
+
+.sidebar .nav .sub-menu .nav-item .nav-link:hover {
+    color: #2b490d !important;
+    border-radius: 8px !important;
+}
+
+.sidebar .nav .sub-menu .nav-item:first-child .nav-link {
+    border-top-left-radius: 8px !important;
+    border-top-right-radius: 8px !important;
+}
+
+.sidebar .nav .sub-menu .nav-item:last-child .nav-link {
+    border-bottom-left-radius: 8px !important;
+    border-bottom-right-radius: 8px !important;
+}
+
+.sidebar .nav .menu-standalone-sub {
+    display: none !important;
+}
+
+/* =========================================================
+   6. SIDEBAR TERTUTUP (body.sidebar-icon-only)
+   ========================================================= */
+body.sidebar-icon-only .sidebar .nav .nav-item,
+body.sidebar-icon-only .sidebar .nav .nav-item:not(.active) .nav-link {
+    background: transparent !important;
+    box-shadow: none !important;
+}
+
+body.sidebar-icon-only .sidebar .nav .nav-item.active > .nav-link,
+body.sidebar-icon-only .sidebar .nav .nav-item.active {
+    background: #6b9e38 !important;
+    border-radius: 12px !important;
+    overflow: hidden !important;
+}
+
+body.sidebar-icon-only .sidebar .nav .nav-item:not(.active) .nav-link:hover {
+    background-color: rgba(107, 158, 56, 0.1) !important;
+    border-radius: 8px !important;
+}
+
+body.sidebar-icon-only .sidebar .nav .nav-item:not(.active) .nav-link:hover i,
+body.sidebar-icon-only
+    .sidebar
+    .nav
+    .nav-item:not(.active)
+    .nav-link:hover
+    .menu-icon {
+    color: #6b9e38 !important;
+}
+
+/* Switch Menu Data Pendukung ke Standalone */
+body.sidebar-icon-only .sidebar .nav .menu-data-pendukung {
+    display: none !important;
+}
+
+body.sidebar-icon-only .sidebar .nav .menu-standalone-sub {
+    display: block !important;
+}
+
+/* =========================================================
+   SIDEBAR FIXED / ABSOLUT (TIDAK DAPAT DI-SCROLL)
+   ========================================================= */
+
+/* 1. Kunci posisi sidebar di layar */
+.sidebar {
+    position: fixed !important;
+    top: 60px !important; /* Sesuaikan dengan tinggi navbar utama Anda */
+    bottom: 0 !important;
+    left: 0 !important;
+    z-index: 999 !important;
+    height: calc(
+        100vh - 60px
+    ) !important; /* Penuhi tinggi layar minus navbar */
+    overflow: hidden !important; /* Hilangkan scrollbar pada sidebar */
+}
+
+/* 2. Matikan scroll pada list menu di dalam sidebar */
+.sidebar .nav {
+    overflow-y: hidden !important;
+    max-height: 100% !important;
+}
+
+/* 3. Geser area konten utama agar tidak tertimpa oleh sidebar yang posisinya fixed */
+.main-panel {
+    margin-left: 235px !important; /* Lebar default sidebar terbuka */
+    width: calc(100% - 235px) !important;
+    transition: all 0.25s ease !important;
+}
+
+/* 4. Penyesuaian margin konten saat sidebar TERTUTUP (mode: sidebar-icon-only) */
+body.sidebar-icon-only .main-panel {
+    margin-left: 70px !important; /* Lebar sidebar saat dikuncupkan */
+    width: calc(100% - 70px) !important;
+}
+
+.brand-logo-mini{
+    width: auto;
+    object-fit: contain; 
+    max-width: 100%; 
+    height: auto; 
+    max-height: 40px;
+}
+
+/* Sembunyikan panel profil saat sidebar ditutup (icon-only) */
+body.sidebar-icon-only .profile-panel-item {
+    display: none !important;
+}

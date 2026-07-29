@@ -5,6 +5,7 @@ use App\Http\Controllers\IndexController;
 use App\Http\Controllers\RisalahController;
 use App\Http\Controllers\AnggotaController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\JadwalController;
 use App\Http\Controllers\LaporanController;
 use App\Http\Controllers\RuangRapatController;
 use App\Http\Controllers\UnitKerjaController;
@@ -55,6 +56,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/deleteRisalah/{id}', [RisalahController::class, 'destroyRisalah']);
     Route::get('/exportRisalah', [RisalahController::class, 'export']);
     Route::post('/getExport', [RisalahController::class, 'exportExcel'])->name('risalah.export');
+
+    Route::get('/allData', [JadwalController::class, 'viewAllData']);
+    Route::get('/dataJadwal', [JadwalController::class, 'allData']);
 
     Route::get('/laporan-harian', [LaporanController::class, 'index'])->name('laporan.index');
 

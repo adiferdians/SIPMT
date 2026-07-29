@@ -26,11 +26,24 @@
                          <table class="table table-striped table-borderless">
                              <thead>
                                  <tr>
-                                     <th><h5 class="th-text">No</h5></th>
-                                     <th><h5 class="th-text">Nama</h5></th>
-                                     <th><h5 class="th-text">NIP</h5></th>
-                                     <th><h5 class="th-text">Telepon</h5></th>
-                                     <th><h5 class="th-text">Status</h5></th>
+                                     <th>
+                                         <h5 class="th-text">No</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Nama</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">NIP</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Jataban</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Telepon</h5>
+                                     </th>
+                                     <th>
+                                         <h5 class="th-text">Status</h5>
+                                     </th>
                                  </tr>
                              </thead>
                              <tbody>
@@ -39,7 +52,8 @@
                                      <td class="font-weight-bold">{{ $anggota->firstItem() + $loop->index }}</td>
                                      <td class="font-weight-bold">{{$item->nama}}</td>
                                      <td class="font-weight-bold">{{$item->nip}}</td>
-                                     <td>{{$item->telepon}}</td>
+                                     <td class="font-weight-bold">{{$item->jabatan}}</td>
+                                     <td>{{$item->telepon}} </td>
                                      @if (session('role') === 'admin')
                                      <td class="font-weight-medium">
                                          @php
@@ -96,6 +110,9 @@
      </div>
  </div>
 
+ @endsection
+
+ @push('scripts')
  <script>
      $('#addAnggota').click(function() {
          axios.get('/createAnggota')
@@ -229,5 +246,4 @@
          });
      });
  </script>
-
- @endsection
+ @endpush

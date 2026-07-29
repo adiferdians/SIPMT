@@ -3,43 +3,37 @@
  @section('Risalah', 'active')
  @section('title', 'Risalah')
  <div class="content-wrapper">
-     <div class="row">
+     <div class="row" style="padding-bottom: 10px;">
          <div class="col-md-12 grid-margin stretch-card">
-             <div class="card title-card">
-                 <div class="card-body table-title">
-                     <div class="judul">
-                         <h3 class="font-weight-bold">Data Risalah</h3>
-                     </div>
-                     <div>
-                         <button type="button" id="exportRisalah" class="btn btn-success export"><i class="mdi mdi-file-excel"></i> Export Data</button>
-                         <button type="button" id="addRisalah" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
-                     </div>
+             <div class="card-body table-title">
+                 <div class="judul">
+                     <h3 class="font-weight-bold">Data Risalah</h3>
+                     <h5 class="font-weight-bold">Kelola Data Risalah Setjen DPD RI</h5>
+                 </div>
+                 <div>
+                     <button type="button" id="exportRisalah" class="btn btn-outline-success"><i class="mdi mdi-file-excel"></i> Export Data</button>
+                     <button type="button" id="addRisalah" class="btn btn-info export"><i class="mdi mdi-account-plus"></i> Input Data</button>
                  </div>
              </div>
          </div>
      </div>
      <div class="row">
          <div class="col-md-12 grid-margin stretch-card">
-             <div class="card title-card" style="background-color: #cfcfcf;">
-                 <div class="card-body table-title" style="padding: 10px 20px 0px 20px;">
-                     <div class="judul">
-                         <h3 class="font-weight-bold">Filter Data</h3>
-                     </div>
+             <div class="card">
+                 <div class="card-body" style="padding: 15px 20px 0px 20px;">
                      <form method="GET" action="{{ route('risalah.index') }}" class="mb-3 d-flex gap-2 align-items-center">
                          <input type="text" name="search" value="{{ request('search') }}"
-                             class="form-control" placeholder="Cari rapat atau perekam..." style="max-width: 250px;">
-
-                         <select name="status" class="form-select" style="max-width: 180px;">
-                             <option value="">-- Semua Status --</option>
+                             class="form-control" placeholder="Cari rapat atau perekam..." style="min-width: 500px; height:10px">
+                         <select name="status" class="form-select filter" style="min-width: 200px;">
+                             <option value="">Semua Status</option>
                              <option value="Belum Terlaksana" {{ request('status')=='Belum Terlaksana' ? 'selected' : '' }}>Belum Terlaksana</option>
                              <option value="Perekaman" {{ request('status')=='Perekaman' ? 'selected' : '' }}>Perekaman</option>
                              <option value="Transkripsi" {{ request('status')=='Transkripsi' ? 'selected' : '' }}>Transkripsi</option>
                              <option value="Risalah Sementara" {{ request('status')=='Risalah Sementara' ? 'selected' : '' }}>Risalah Sementara</option>
                              <option value="Risalah Validasi" {{ request('status')=='Risalah Validasi' ? 'selected' : '' }}>Risalah Validasi</option>
                          </select>
-
-                         <button type="submit" class="btn btn-primary">Filter</button>
-                         <a href="{{ route('risalah.index') }}" class="btn btn-warning">Reset</a>
+                         <button type="submit" class="btn btn-outline-info"><i class="mdi mdi-filter-outline" style="display: flex;"> Filter</i></button>
+                         <a href="{{ route('risalah.index') }}" class="btn btn-outline-primary"><i class="mdi mdi-undo-variant" style="display: flex;"> Reset</i></a>
                      </form>
                  </div>
              </div>
@@ -77,40 +71,76 @@
                              <tbody>
                                  @foreach($risalah as $item)
                                  <tr>
-                                     <td style="display: grid; justify-content: center;">
-                                         <div>
-                                             <button type="button" class="btn btn-risalah btn-outline-info"
-                                                 onclick="editRisalah({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
-                                             <button type="button" class="btn btn-risalah btn-outline-secondary"
-                                                 onclick="viewRisalah({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
-                                         </div>
-                                         @if(session('role') === 'admin')
-                                         <div>
-                                             <button type="button" class="btn btn-risalah btn-outline-danger"
-                                                 onclick="deleteRisalah({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
-                                             <a href="whatsapp://send?text={{ 
-                                                    urlencode(
-                                                        'Teman-teman, menginformasikan kegiatan Perekaman ' . $item->rapat . " pada:\n\n" .
-                                                        'Hari/Tgl'. "\t: " . \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName . 
-                                                        ', ' . \Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM YYYY') . "\n" .
-                                                        'Perekam'. "\t: " . $item->perekam_1 . 
-                                                        (isset($item->perekam_2) ? ' & ' . $item->perekam_2 : '') . "\n" .
-                                                        'Pukul'. "\t: ". $item->jam . ' WIB s.d. Selesai.' . "\n" .
-                                                        'Tempat'. "\t: ".'Ruang Rapat ' . $item->tempat . $item->nama_gedung . "\n\n" .
-                                                        'Agenda:' . "\n" . $item->agenda
-                                                    )
-                                                    }}"
-                                                 data-action="share/whatsapp/share"
-                                                 target="_blank"
-                                                 class="btn-risalah btn-outline-success mx-1"
-                                                 style="text-decoration: none;">
+                                     <td class="text-center align-middle">
+                                         <div class="d-flex justify-content-center align-items-center">
 
-                                                 <button type="button" class="btn btn-share btn-outline-success" style="padding: 10px;">
-                                                     <i class="mdi mdi-share"></i>
+                                             {{-- Edit --}}
+                                             <button
+                                                 type="button"
+                                                 class="btn btn-action btn-outline-primary mr-2"
+                                                 onclick="editRisalah({{ $item->id }})"
+                                                 title="Edit">
+                                                 <i class="mdi mdi-pencil-outline"></i>
+                                             </button>
+
+                                             {{-- More --}}
+                                             <div class="dropdown">
+                                                 <button
+                                                     class="btn btn-action btn-outline-secondary"
+                                                     type="button"
+                                                     data-toggle="dropdown"
+                                                     aria-haspopup="true"
+                                                     aria-expanded="false">
+                                                     <i class="mdi mdi-dots-vertical"></i>
                                                  </button>
-                                             </a>
+
+                                                 <div class="dropdown-menu dropdown-menu-right shadow-sm">
+
+                                                     {{-- Detail --}}
+                                                     <a class="dropdown-item"
+                                                         href="javascript:void(0)"
+                                                         onclick="viewRisalah({{ $item->id }})">
+                                                         <i class="mdi mdi-eye-outline mr-2 text-secondary"></i>
+                                                         Lihat Detail
+                                                     </a>
+
+                                                     @if(session('role') === 'admin')
+
+                                                     {{-- Share --}}
+                                                     <a class="dropdown-item"
+                                                         target="_blank"
+                                                         href="https://api.whatsapp.com/send?text={{ 
+                                                                urlencode(
+                                                                    'Teman-teman, menginformasikan kegiatan Perekaman *'.$item->rapat."* pada:\n\n".
+                                                                    'Hari/Tgl : '.\Carbon\Carbon::parse($item->tgl)->locale('id')->dayName.
+                                                                    ', '.\Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM YYYY')."\n".
+                                                                    'Perekam : '.$item->perekam_1.
+                                                                    (isset($item->perekam_2) ? ' & '.$item->perekam_2 : '')."\n".
+                                                                    'Pukul : '.$item->jam." WIB s.d. Selesai.\n".
+                                                                    'Tempat : Ruang Rapat '.$item->tempat.' '.$item->nama_gedung."\n\n".
+                                                                    'Agenda : '."\n".strip_tags($item->agenda)
+                                                                )
+                                                            }}">
+                                                         <i class="mdi mdi-share-variant-outline mr-2 text-success"></i>
+                                                         Bagikan
+                                                     </a>
+
+                                                     <div class="dropdown-divider"></div>
+
+                                                     {{-- Delete --}}
+                                                     <a class="dropdown-item text-danger"
+                                                         href="javascript:void(0)"
+                                                         onclick="deleteRisalah({{ $item->id }})">
+                                                         <i class="mdi mdi-delete-outline mr-2"></i>
+                                                         Hapus
+                                                     </a>
+
+                                                     @endif
+
+                                                 </div>
+                                             </div>
+
                                          </div>
-                                         @endif
                                      </td>
                                      <td class="table-text">{{ \Carbon\Carbon::parse($item->tgl)->locale('id')->dayName }},
                                          {{ \Carbon\Carbon::parse($item->tgl)->locale('id')->isoFormat('DD MMM') }}
@@ -125,27 +155,23 @@
                                      </td>
                                      <td class="table-text">{{$item->rapat}}</td>
                                      <td>{{$item->unit_kerja}}</td>
-                                     <td class="center table-text">
+                                     <td>
                                          <button type="button" class="btn 
-                                         {{$item->status == 'Risalah Validasi' ? 'btn-success' : 
-                                            ($item->status == 'Risalah Sementara' ? 'btn-info' : 
-                                            ($item->status == 'Transkripsi' ? 'btn-warning' : 
-                                            ($item->status == 'Perekaman' ? 'btn-primary' : 
-                                            'btn-secondary')))
-                                            }} dropdown-toggle dropdown-text"
+                                         {{$item->status == 'Risalah Validasi' ? 'btn btn-outline-success' : 
+                                            ($item->status == 'Risalah Sementara' ? 'btn btn-outline-info' : 
+                                            ($item->status == 'Transkripsi' ? 'btn btn-outline-warning' : 
+                                            ($item->status == 'Perekaman' ? 'btn btn-outline-primary' : 
+                                            'btn btn-outline-secondary')))
+                                            }} dropdown-toggle"
                                              type="button" data-bs-toggle="dropdown" aria-expanded="false">{{$item->status}}
                                          </button>
                                          <div class="dropdown-menu" aria-labelledby="dropdownMenuSplitButton1">
-                                             <a class="dropdown-item center" onclick="changeStatus('Belum Terlaksana', '{{$item->id}}')">Belum Terlaksana</a>
-                                             <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" onclick="changeStatus('Perekaman', '{{$item->id}}')">Perekaman</a>
-                                             <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" onclick="changeStatus('Transkripsi', '{{$item->id}}')">Transkripsi</a>
-                                             <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" onclick="changeStatus('Risalah Sementara', '{{$item->id}}')">Risalah Sementara</a>
+                                             <a class="dropdown-item" onclick="changeStatus('Belum Terlaksana', '{{$item->id}}')">Belum Terlaksana</a>
+                                             <a class="dropdown-item" onclick="changeStatus('Perekaman', '{{$item->id}}')">Perekaman</a>
+                                             <a class="dropdown-item" onclick="changeStatus('Transkripsi', '{{$item->id}}')">Transkripsi</a>
+                                             <a class="dropdown-item" onclick="changeStatus('Risalah Sementara', '{{$item->id}}')">Risalah Sementara</a>
                                              @if(session('role') === 'admin')
-                                             <div class="dropdown-divider"></div>
-                                             <a class="dropdown-item center" onclick="changeStatus('Risalah Validasi', '{{$item->id}}')">Risalah Validasi</a>
+                                             <a class="dropdown-item" onclick="changeStatus('Risalah Validasi', '{{$item->id}}')">Risalah Validasi</a>
                                              @endif
                                          </div>
                                      </td>
@@ -161,142 +187,136 @@
      </div>
  </div>
 
+@endsection <!-- Pastikan ini penutup dari @section('content') -->
 
- <script>
-     $('#addRisalah').click(function() {
-         axios.get('/createRisalah')
-             .then(function(response) {
-                 $('.modal-title').html("Tambahkan Risalah");
-                 $(".modal-dialog");
-                 $('.modal-body').html(response.data);
-                 $('#myModal').modal('show');
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     })
+@push('scripts')
+<script>
+    // 1. EVENT LISTENER: Harus di dalam $(function() {}) agar menunggu jQuery dimuat
+    $(function() {
+        $('#addRisalah').click(function() {
+            axios.get('/createRisalah')
+                .then(function(response) {
+                    $('.modal-title').html("Tambahkan Risalah");
+                    $('.modal-body').html(response.data);
+                    $('#myModal').modal('show');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        });
 
-     $('#exportRisalah').click(function() {
-         axios.get('/exportRisalah')
-             .then(function(response) {
-                 $('.modal-title').html("Export Data Risalah");
-                 $(".modal-dialog");
-                 $('.modal-body').html(response.data);
-                 $('#myModal').modal('show');
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     })
+        $('#exportRisalah').click(function() {
+            axios.get('/exportRisalah')
+                .then(function(response) {
+                    $('.modal-title').html("Export Data Risalah");
+                    $('.modal-body').html(response.data);
+                    $('#myModal').modal('show');
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        });
+    });
 
-     function viewRisalah(id) {
-         axios.get('/viewRisalah/' + id)
-             .then(function(response) {
-                 $('.modal-title').html("Data Risalah");
-                 $(".modal-dialog");
-                 $('.modal-body').html(response.data);
-                 $('#myModal').modal('show');
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     }
+    // 2. FUNGSI GLOBAL: HARUS DI LUAR $(function() {}) agar bisa dipanggil oleh atribut onclick="" di HTML
+    function viewRisalah(id) {
+        axios.get('/viewRisalah/' + id)
+            .then(function(response) {
+                $('.modal-title').html("Data Risalah");
+                $('.modal-body').html(response.data);
+                $('#myModal').modal('show');
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
 
-     function editRisalah(id) {
-         axios.get('/editRisalah/' + id)
-             .then(function(response) {
-                 $('.modal-title').html("Data Risalah");
-                 $(".modal-dialog");
-                 $('.modal-body').html(response.data);
-                 $('#myModal').modal('show');
-             })
-             .catch(function(error) {
-                 console.log(error);
-             });
-     }
+    function editRisalah(id) {
+        axios.get('/editRisalah/' + id)
+            .then(function(response) {
+                $('.modal-title').html("Data Risalah");
+                $('.modal-body').html(response.data);
+                $('#myModal').modal('show');
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
 
-     function changeStatus(status, id) {
-         console.log(status, id);
+    function changeStatus(status, id) {
+        Swal.fire({
+            title: 'Ubah status Risalah?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Ubah'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('/risalah/changeStatus/' + id, { status })
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Success',
+                            position: 'top-end',
+                            icon: 'success',
+                            text: 'Status Risalah Diubah!',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                        setTimeout(() => location.reload(), 1600);
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            title: 'Error',
+                            position: 'top-end',
+                            icon: 'error',
+                            text: err,
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    });
+            }
+        });
+    }
 
-         Swal.fire({
-             title: 'Ubah status Risalah?',
-             icon: 'warning',
-             showCancelButton: true,
-             confirmButtonColor: '#3085d6',
-             cancelButtonColor: '#d33',
-             confirmButtonText: 'Ubah'
-         }).then((result) => {
-             if (result.isConfirmed) {
-                 if (result.isConfirmed) {
-                     axios.post('/risalah/changeStatus/' + id, {
-                             status,
-                         }).then(() => {
-                             Swal.fire({
-                                 title: 'Success',
-                                 position: 'top-end',
-                                 icon: 'success',
-                                 text: 'Status Risalah Diubah!',
-                                 showConfirmButton: false,
-                                 timer: 1500
-                             });
-                             setTimeout(() => {
-                                 location.reload();
-                             }, 1600);
-                         })
-                         .catch((err) => {
-                             Swal.fire({
-                                 title: 'Error',
-                                 position: 'top-end',
-                                 icon: 'error',
-                                 text: err,
-                                 showConfirmButton: false,
-                                 timer: 1500
-                             });
-                         });
-                 }
-             }
-         })
-     };
-
-     function deleteRisalah(id) {
-         Swal.fire({
-             title: 'Apa anda yakin?',
-             text: "Data yang dihapus tidak dapat dipulihkan!",
-             icon: 'warning',
-             showCancelButton: true,
-             confirmButtonText: 'Hapus',
-             cancelButtonText: 'Batal',
-             reverseButtons: true
-         }).then((result) => {
-             if (result.isConfirmed) {
-                 axios.post('deleteRisalah/' + id)
-                     .then(() => {
-                         Swal.fire({
-                             title: 'Success',
-                             position: 'top-end',
-                             icon: 'success',
-                             text: 'Data berhasil dihapus!',
-                             showConfirmButton: false,
-                             width: '400px',
-                             timer: 3000
-                         });
-                         setTimeout(() => {
-                             location.reload();
-                         }, 1600);
-                     })
-                     .catch((err) => {
-                         Swal.fire({
-                             title: 'Error',
-                             position: 'top-end',
-                             icon: 'error',
-                             text: err,
-                             showConfirmButton: false,
-                             width: '400px',
-                             timer: 3000
-                         });
-                     });
-             }
-         });
-     }
- </script>
+    function deleteRisalah(id) {
+        Swal.fire({
+            title: 'Apa anda yakin?',
+            text: "Data yang dihapus tidak dapat dipulihkan!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Hapus',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axios.post('deleteRisalah/' + id)
+                    .then(() => {
+                        Swal.fire({
+                            title: 'Success',
+                            position: 'top-end',
+                            icon: 'success',
+                            text: 'Data berhasil dihapus!',
+                            showConfirmButton: false,
+                            width: '400px',
+                            timer: 3000
+                        });
+                        setTimeout(() => location.reload(), 1600);
+                    })
+                    .catch((err) => {
+                        Swal.fire({
+                            title: 'Error',
+                            position: 'top-end',
+                            icon: 'error',
+                            text: err,
+                            showConfirmButton: false,
+                            width: '400px',
+                            timer: 3000
+                        });
+                    });
+            }
+        });
+    }
+</script>
+@endpush
  @endsection

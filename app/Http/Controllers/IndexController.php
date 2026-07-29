@@ -37,28 +37,22 @@ class IndexController extends Controller
 
         foreach ($data as $risalah) {
 
-            // 2. Tentukan warna berdasarkan status (sesuai kartu statistik Anda)
-            $color = '#777777'; // Warna default (abu-abu)
-            $textColor = '#fff'; // Teks putih
+            $color = '#777777';
+            $textColor = '#fff';
 
             if ($risalah->status == 'Belum Terlaksana') {
-                // Biru (dari card-dark-blue)
                 $color = '#0d6efd';
             } elseif (in_array($risalah->status, ['Perekaman', 'Risalah Sementara', 'Transkripsi'])) {
-                // Kuning (dari card-warning)
                 $color = '#ffc107';
-                $textColor = '#000'; // Teks hitam agar terbaca di kuning
+                $textColor = '#000';
             } elseif ($risalah->status == 'Risalah Validasi') {
-                // Hijau (dari card-success)
                 $color = '#198754';
             }
 
             $events[] = [
-                // TAMBAHKAN 'id' DI SINI
                 'id'    => $risalah->id,
-
-                'title' => $risalah->rapat, // Asumsi nama kolom
-                'start' => $risalah->tgl, // Asumsi nama kolom
+                'title' => $risalah->rapat,
+                'start' => $risalah->tgl,
 
                 'backgroundColor' => $color,
                 'borderColor' => $color,

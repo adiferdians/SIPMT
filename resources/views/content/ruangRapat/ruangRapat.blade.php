@@ -68,6 +68,9 @@
      </div>
  </div>
 
+ @endsection
+
+ @push('scripts')
  <script>
      $('#addAnggota').click(function() {
          axios.get('/create-ruang-rapat')
@@ -149,5 +152,4 @@
          });
      }
  </script>
-
- @endsection
+ @endpush
