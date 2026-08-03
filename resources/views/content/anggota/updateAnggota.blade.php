@@ -5,19 +5,19 @@
                                   <input type="text" id="idAnggota" value="{{$anggota[0]->id}}" hidden>
                                   <div class="form-group">
                                       <label for="nama">Nama</label>
-                                      <input type="text" class="form-control" id="nama" placeholder="Nama" value="{{$anggota[0]->nama}}">
+                                      <input type="text" class="form-control form-control-sm" id="nama" placeholder="Nama" value="{{$anggota[0]->nama}}">
                                   </div>
                                   <div class="form-group">
                                       <label for="nip">NIP</label>
-                                      <input type="email" class="form-control" id="nip" placeholder="NIP" value="{{$anggota[0]->nip}}">
+                                      <input type="email" class="form-control form-control-sm" id="nip" placeholder="NIP" value="{{$anggota[0]->nip}}">
                                   </div>
                                   <div class="form-group">
                                       <label for="Telepon">Telepon</label>
-                                      <input type="text" class="form-control" id="telepon" placeholder="Telepon" value="{{$anggota[0]->telepon}}">
+                                      <input type="text" class="form-control form-control-sm" id="telepon" placeholder="Telepon" value="{{$anggota[0]->telepon}}">
                                   </div>
                                   <div class="form-group">
                                       <label for="email">Email</label>
-                                      <input type="email" class="form-control" id="email" placeholder="Email" value="{{$anggota[0]->email}}">
+                                      <input type="email" class="form-control form-control-sm" id="email" placeholder="Email" value="{{$anggota[0]->email}}">
                                   </div>
                               </div>
                           </div>
@@ -25,11 +25,11 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="Pangkat">Pangkat</label>
-                                      <input type="text" class="form-control" id="pangkat" placeholder="Pangkat" value="{{$anggota[0]->pangkat_golongan}}">
+                                      <input type="text" class="form-control form-control-sm" id="pangkat" placeholder="Pangkat" value="{{$anggota[0]->pangkat_golongan}}">
                                   </div>
                                   <div class="form-group">
                                       <label for="jabatan">Jabatan</label>
-                                      <input type="text" class="form-control" id="jabatan" placeholder="Jabatan" value="{{$anggota[0]->jabatan}}">
+                                      <input type="text" class="form-control form-control-sm" id="jabatan" placeholder="Jabatan" value="{{$anggota[0]->jabatan}}">
                                   </div>
                                   <div class="form-group" style="display: flex;">
                                       <div class="col-md-6 grid-margin separasi">

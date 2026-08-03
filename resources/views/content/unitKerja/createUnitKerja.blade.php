@@ -4,7 +4,7 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="nama">Nama Unit Kerja</label>
-                                      <input type="text" class="form-control" id="nama" placeholder="Nama Unit Kerja">
+                                      <input type="text" class="form-control form-control-sm" id="nama" placeholder="Nama Unit Kerja">
                                   </div>
                               </div>
                           </div>
@@ -12,7 +12,7 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="Pangkat">Deskripsi</label>
-                                      <input type="text" class="form-control" id="deskripsi" placeholder="Deskripsi">
+                                      <input type="text" class="form-control form-control-sm" id="deskripsi" placeholder="Deskripsi">
                                   </div>
                               </div>
                           </div>
@@ -28,7 +28,7 @@
                           $('#myModal').modal('hide');
                       })
 
-                      $('#store').click(function() {
+ form-control-sm                      $('#store').click(function() {
                           const nama = $('#nama').val();
                           const deskripsi = $('#deskripsi').val();
 

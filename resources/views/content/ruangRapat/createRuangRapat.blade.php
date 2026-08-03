@@ -4,7 +4,7 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="nama">Nama Ruangan</label>
-                                      <input type="text" class="form-control" id="nama" placeholder="Nama Ruangan">
+                                      <input type="text" class="form-control form-control-sm" id="nama" placeholder="Nama Ruangan">
                                   </div>
                               </div>
                           </div>
@@ -12,7 +12,7 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="Pangkat">Lantai</label>
-                                      <input type="text" class="form-control" id="lantai" placeholder="Lantai">
+                                      <input type="text" class="form-control form-control-sm" id="lantai" placeholder="Lantai">
                                   </div>
                               </div>
                           </div>
@@ -21,7 +21,7 @@
                                   <div class="form-group">
                                       <label for="gedung">Lokasi</label>
                                       <input
-                                          class="form-control"
+                                          class="form-control form-control-sm"
                                           list="gedung_options"
                                           id="gedung"
                                           placeholder="Pilih atau ketik gedung...">

@@ -36,6 +36,7 @@
     justify-content: center;
     border-radius: 10px;
     padding: 0;
+    margin: 2px;
     transition: transform 0.2s ease;
 }
 
@@ -65,6 +66,14 @@
 
 .table-text {
     font-weight: 500;
+}
+
+.table th,
+.table td {
+    padding-top: 1.125rem;
+    padding-right: 1rem;
+    padding-bottom: 1.125rem;
+    padding-left: 1rem;
 }
 
 .center {
@@ -180,7 +189,7 @@
 .flipswitch-inner {
     width: 200%;
     margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
+    transition: margin 0.1s ease-in 0s;
 }
 
 .flipswitch-inner:before,
@@ -220,7 +229,7 @@
     top: 0;
     bottom: 0;
     right: 59px;
-    transition: all 0.3s ease-in 0s;
+    transition: all 0.1s ease-in 0s;
 }
 
 .flipswitch-cb:checked + .flipswitch-label .flipswitch-inner {
@@ -393,15 +402,66 @@ body.sidebar-icon-only .main-panel {
     width: calc(100% - 70px) !important;
 }
 
-.brand-logo-mini{
+.brand-logo-mini {
     width: auto;
-    object-fit: contain; 
-    max-width: 100%; 
-    height: auto; 
+    object-fit: contain;
+    max-width: 100%;
+    height: auto;
     max-height: 40px;
 }
 
 /* Sembunyikan panel profil saat sidebar ditutup (icon-only) */
 body.sidebar-icon-only .profile-panel-item {
     display: none !important;
+}
+
+.footer {
+    font-size: 12px;
+    padding-top: 15px;
+    padding-right: 1.45rem;
+    padding-bottom: 15px;
+    padding-left: 1.45rem;
+    background: none;
+}
+
+/* Sembunyikan footer copyright saat sidebar tertutup */
+body.sidebar-icon-only .footer {
+    display: none !important;
+}
+
+/* 1. Membatasi lebar agar tidak keluar batas ke kanan */
+.ql-toolbar.ql-snow,
+.ql-container.ql-snow {
+    box-sizing: border-box;
+    width: 100%;
+}
+
+/* 2. Membatasi tinggi editor dan mengaktifkan scrollbar di dalam */
+.ql-container.ql-snow {
+    height: 130px; /* Atur tinggi awal (silakan disesuaikan) */
+}
+
+/* 3. Memastikan area ketik memenuhi container dan bisa di-scroll */
+.ql-editor {
+    min-height: 100%;
+    max-height: 250px; /* Batas maksimal tinggi sebelum scroll bar muncul */
+    overflow-y: auto;
+}
+
+.button-end {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-info {
+    color: white;
+}
+
+.dm-risalah{
+    transform: translate3d(2px, 45px, 0px) !important;
+    padding: 5px 0px 5px 0px;
+}
+
+.di-risalah{
+    padding: 0.5rem 1rem 0.5rem 1rem !important;
 }

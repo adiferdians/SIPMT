@@ -17,13 +17,13 @@
                     <div class="col-md-6 grid-margin separasi">
                         <div class="form-group">
                             <label for="tgl">Tanggal</label>
-                            <input type="date" class="form-control" id="tgl" value="{{ date('Y-m-d', strtotime($risalah[0]->tgl)) }}">
+                            <input type="date" class="form-control form-control-sm" id="tgl" value="{{ date('Y-m-d', strtotime($risalah[0]->tgl)) }}">
                         </div>
                     </div>
                     <div class="col-md-6 grid-margin separasi">
                         <div class="form-group">
                             <label for="jam">Jam</label>
-                            <input type="time" class="form-control" id="jam" value="{{$risalah[0]->jam}}">
+                            <input type="time" class="form-control form-control-sm" id="jam" value="{{$risalah[0]->jam}}">
                         </div>
                     </div>
                 </div>
@@ -90,7 +90,7 @@
                 </div>
                 <div class="form-group">
                     <label for="rapat">Rapat</label>
-                    <input type="text" class="form-control" id="rapat" placeholder="Rapat" value="{{ $risalah[0]->rapat }}">
+                    <input type="text" class="form-control form-control-sm" id="rapat" placeholder="Rapat" value="{{ $risalah[0]->rapat }}">
                 </div>
                 <div class="form-group">
                     <label for="agenda">Agenda</label>

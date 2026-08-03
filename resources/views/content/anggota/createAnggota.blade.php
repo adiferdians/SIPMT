@@ -4,19 +4,19 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="nama">Nama</label>
-                    <input type="text" class="form-control" id="nama" placeholder="Nama">
+                    <input type="text" class="form-control form-control-sm" id="nama" placeholder="Nama">
                 </div>
                 <div class="form-group">
                     <label for="nip">NIP</label>
-                    <input type="email" class="form-control" id="nip" placeholder="NIP">
+                    <input type="email" class="form-control form-control-sm" id="nip" placeholder="NIP">
                 </div>
                 <div class="form-group">
                     <label for="Telepon">Telepon</label>
-                    <input type="text" class="form-control" id="telepon" placeholder="Telepon">
+                    <input type="text" class="form-control form-control-sm" id="telepon" placeholder="Telepon">
                 </div>
                 <div class="form-group">
                     <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" placeholder="Email">
+                    <input type="email" class="form-control form-control-sm" id="email" placeholder="Email">
                 </div>
 
             </div>
@@ -25,11 +25,11 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="Pangkat">Pangkat</label>
-                    <input type="text" class="form-control" id="pangkat" placeholder="Pangkat">
+                    <input type="text" class="form-control form-control-sm" id="pangkat" placeholder="Pangkat">
                 </div>
                 <div class="form-group">
                     <label for="jabatan">Jabatan</label>
-                    <input type="text" class="form-control" id="jabatan" placeholder="Jabatan">
+                    <input type="text" class="form-control form-control-sm" aria-label="Small" aria-describedby="inputGroup-sizing-sm" id="jabatan" placeholder="Jabatan">
                 </div>
                 <div class="form-group" style="display: flex;">
                     <div class="col-md-6 grid-margin separasi">

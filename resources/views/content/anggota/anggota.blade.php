@@ -6,13 +6,13 @@
  <div class="content-wrapper">
      <div class="row">
          <div class="col-md-12 grid-margin stretch-card">
-             <div class="card title-card">
+             <div class="card">
                  <div class="card-body table-title">
                      <div class="judul">
                          <h3 class="font-weight-bold">Data Anggota</h3>
                      </div>
                      <div>
-                         <button type="button" id="addAnggota" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
+                         <button type="button" id="addAnggota" class="btn btn-info"><i class="mdi mdi-account-plus"></i> Input Data</button>
                      </div>
                  </div>
              </div>
@@ -91,11 +91,11 @@
                                      @endif
                                      <td style="display: flex; justify-content: center;">
                                          @if (session('role') === 'admin')
-                                         <button type="button" class="btn btn-outline-info" onclick="editAnggota({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
+                                         <button type="button" class="btn btn-action btn-outline-info" onclick="editAnggota({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
                                          @endif
-                                         <button type="button" class="btn btn-outline-secondary" onclick="viewAnggota({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
+                                         <button type="button" class="btn btn-action btn-outline-secondary" onclick="viewAnggota({{$item->id}})"><i class="mdi mdi-book-open-variant"></i></button>
                                          @if (session('role') === 'admin')
-                                         <button type="button" class="btn btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
+                                         <button type="button" class="btn btn-action btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                          @endif
                                      </td>
                                  </tr>

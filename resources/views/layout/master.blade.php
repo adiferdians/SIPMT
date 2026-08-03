@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SIPMT - @yield('title')</title>
+    <title>SIMAPAN - @yield('title')</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <!-- Favicon -->
@@ -82,7 +82,7 @@
                         <div class="sidebar-profile-panel text-center w-100">
                             <!-- Foto Profil & Status -->
                             <div class="profile-avatar-wrapper mb-1 mx-auto">
-                                <img src="assets/images/faces/user.png" alt="Profile" class="profile-avatar rounded-circle">
+                                <img src="assets/images/faces/profil.jpg" alt="Profile" class="profile-avatar rounded-circle">
                             </div>
 
                             <!-- Role & Identitas -->
@@ -151,6 +151,9 @@
                         </a>
                     </li>
                 </ul>
+                <span class="text-muted text-center text-sm-left d-block d-sm-inline-block footer">
+                    © 2026 Risalah - Setjen DPD RI
+                </span>
             </nav>
 
             <!-- Modal -->
@@ -168,17 +171,6 @@
             <!-- Content -->
             <div class="main-panel">
                 @yield('content')
-
-                <!-- Footer -->
-                @if(!Request::is('allData'))
-                <footer class="footer">
-                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
-                        <span class="text-muted text-center text-sm-left d-block d-sm-inline-block">
-                            Copyright © 2025. Bagian Perisalah Sekretariat Jendral DPD RI
-                        </span>
-                    </div>
-                </footer>
-                @endif
             </div>
         </div>
     </div>

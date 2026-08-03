@@ -94,10 +94,10 @@
                                                      <i class="mdi mdi-dots-vertical"></i>
                                                  </button>
 
-                                                 <div class="dropdown-menu dropdown-menu-right shadow-sm">
+                                                 <div class="dropdown-menu dm-risalah dropdown-menu-right shadow-sm">
 
                                                      {{-- Detail --}}
-                                                     <a class="dropdown-item"
+                                                     <a class="dropdown-item di-risalah"
                                                          href="javascript:void(0)"
                                                          onclick="viewRisalah({{ $item->id }})">
                                                          <i class="mdi mdi-eye-outline mr-2 text-secondary"></i>

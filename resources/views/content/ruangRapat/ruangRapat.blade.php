@@ -7,14 +7,14 @@
  <div class="content-wrapper">
      <div class="row">
          <div class="col-md-12 grid-margin stretch-card">
-             <div class="card title-card">
+             <div class="card">
                  <div class="card-body table-title">
                      <div class="judul">
                          <h3 class="font-weight-bold">Data Ruang Rapat</h3>
                      </div>
                      <div>
                          @if (session('role') === 'admin')
-                         <button type="button" id="addAnggota" class="btn btn-light"><i class="mdi mdi-account-plus"></i> Input Data</button>
+                         <button type="button" id="addAnggota" class="btn btn-info"><i class="mdi mdi-account-plus"></i> Input Data</button>
                          @endif
                      </div>
                  </div>
@@ -52,8 +52,8 @@
                                      <td class="font-weight-bold">{{$item->lantai}}</td>
                                      @if (session('role') === 'admin')
                                      <td style="display: flex; justify-content: center;">
-                                         <button type="button" class="btn btn-outline-info" onclick="editRuangRapat({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
-                                         <button type="button" class="btn btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
+                                         <button type="button" class="btn btn-action btn-outline-info" onclick="editRuangRapat({{$item->id}})"><i class="mdi mdi-pencil"></i></button>
+                                         <button type="button" class="btn btn-action btn-outline-danger" onclick="deleteAnggota({{$item->id}})"><i class="mdi mdi-delete-forever"></i></button>
                                      </td>
                                      @endif
                                  </tr>

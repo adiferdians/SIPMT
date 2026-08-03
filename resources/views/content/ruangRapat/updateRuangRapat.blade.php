@@ -5,7 +5,7 @@
                                   <div class="form-group">
                                       <label for="nama">Nama Ruangan</label>
                                       <input type="text" id="id" value="{{$ruang[0]->id}}" hidden>
-                                      <input type="text" class="form-control" id="nama" placeholder="Nama Ruangan" value="{{$ruang[0]->nama}}">
+                                      <input type="text" class="form-control form-control-sm" id="nama" placeholder="Nama Ruangan" value="{{$ruang[0]->nama}}">
                                   </div>
                               </div>
                           </div>
@@ -13,7 +13,7 @@
                               <div class="card-body">
                                   <div class="form-group">
                                       <label for="Pangkat">Lantai</label>
-                                      <input type="text" class="form-control" id="lantai" placeholder="Lantai" value="{{$ruang[0]->lantai}}">
+                                      <input type="text" class="form-control form-control-sm" id="lantai" placeholder="Lantai" value="{{$ruang[0]->lantai}}">
                                   </div>
                               </div>
                           </div>
@@ -22,7 +22,7 @@
                                   <div class="form-group">
                                       <label for="tempat">Lokasi</label>
                                       <input
-                                          class="form-control"
+                                          class="form-control form-control-sm"
                                           list="gedung_options"
                                           id="gedung"
                                           placeholder="Pilih atau ketik gedung..."

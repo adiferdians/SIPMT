@@ -20,15 +20,15 @@
                  <div class="card-body">
                      <div class="form-group">
                          <label for="lama">Password Lama</label>
-                         <input type="password" class="form-control" name="lama" id="lama" placeholder="Password Lama">
+                         <input type="password" class="form-control form-control-sm" name="lama" id="lama" placeholder="Password Lama">
                      </div>
                      <div class="form-group">
                          <label for="baru">Password Baru</label>
-                         <input type="password" class="form-control" name="passwordBaru" id="baru" placeholder="Password Baru">
+                         <input type="password" class="form-control form-control-sm" name="passwordBaru" id="baru" placeholder="Password Baru">
                      </div>
                      <div class="form-group">
                          <label for="konfirmasi">Konfirmasi Password Baru</label>
-                         <input type="password" class="form-control" name="passwordBaru_confirmation" id="konfirmasi" placeholder="Konfirmasi Password Baru">
+                         <input type="password" class="form-control form-control-sm" name="passwordBaru_confirmation" id="konfirmasi" placeholder="Konfirmasi Password Baru">
                      </div>
                      <div class="btn-modal">
                          <button type="submit" id="change" class="btn btn-primary me-2">Ubah Password</button>

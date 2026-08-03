@@ -7,6 +7,8 @@
     <title>Sign In - SIMAPAN</title>
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+    <link rel="shortcut icon" href="assets/images/favicon.png" />
+
     <link rel="stylesheet" href="assets/css/login.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
